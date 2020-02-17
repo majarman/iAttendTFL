@@ -17,7 +17,7 @@ Thanks for checking in! The team will post the timetable once confirmed and fina
 
 EDIT (02-17-2020): Check out our [press release](./iAttendPressRelease1.pdf), courtesy of Matthew Dutt!
 
-!(./programmer.jpg)
+![programmer.jpg](./programmer.jpg)
 
 ## Birth of a Blog!
 ### 02/08/2020
