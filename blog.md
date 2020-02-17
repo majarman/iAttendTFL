@@ -15,6 +15,8 @@ The GitHub has also moved to allow for a fresh start, considering the new workfl
 
 Thanks for checking in! The team will post the timetable once confirmed and finalized here. Make sure to check back next week to see the initial development!
 
+EDIT (02-17-2020): Check out our [press release](./iAttendPressRelease1.pdf), courtesy of Matthew Dutt!
+
 ## Birth of a Blog!
 ### 02/08/2020
 Thank you for your interest in our development of the iAttend project! This page will be dedicated to blog posts concerning the development progress of the project. There will be a weekly post live every Monday describing the progress that is being made, along with any news or changes.

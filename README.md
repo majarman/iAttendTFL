@@ -1,5 +1,7 @@
 # iAttend
 
+[See our press release!](./iAttendPressRelease1.pdf)
+
 [System Requirements Specification](./SRS-ThreeFuriousLocomotives.pdf)
 
 [Our Development Blog](./blog.md)
