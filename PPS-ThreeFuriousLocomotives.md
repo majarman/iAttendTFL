@@ -37,4 +37,4 @@ Project Due|04/29/2020
 
 ### Gannt Chart for Development
 
-[gantt.jpg](./gantt.jpg)
+![gantt.jpg](./gantt.jpg)
