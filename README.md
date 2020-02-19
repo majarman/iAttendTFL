@@ -1,5 +1,7 @@
 # iAttend
 
+![gantt.jpg](./gantt.jpg)
+
 [See our press release!](./iAttendPressRelease1.pdf)
 
 [System Requirements Specification](./SRS-ThreeFuriousLocomotives.pdf)
