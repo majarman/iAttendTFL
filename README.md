@@ -1,7 +1,5 @@
 # iAttend
 
-[System Requirements Specification](./SRS-ThreeFuriousLocomotives.pdf)
-
 [Our Development Website](https://majarman.github.io/iAttendTFL)
 
 ## Description
