@@ -1,7 +1,5 @@
 # iAttend
 
-![gantt.jpg](./gantt.jpg)
-
 [Our preliminary schedule.](./PPS-ThreeFuriousLocomotives.pdf)
 
 [See our press release!](./iAttendPressRelease1.pdf)
