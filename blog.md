@@ -3,6 +3,14 @@
 
 [Home](./README.md)
 
+## Planning, planning, planning
+### 02/26/2020
+This week has been a week of setup and scheduling. Not the most exciting thing in the world, as development has not started yet. This, however, is due to the fact that the week has been dedicated to creating a Gantt chart for our development work, and integrating a new Kanban board on GitHub Projects! This setup will allow us to easily view our schedule, and assign issues and track them accordingly. The Preliminary Project Schedule has been posted, and is accessible [here](./PPS-ThreeFuriousLocomotives.pdf).
+
+All the IDE's have been set up and configured to synchronize with GitHub. The Azure web app service is spun up, as is the PostgreSQL server. A test PostgreSQL server has been deployed as well, so that we have a database environment to test with. We are now finally ready for development.... here we go.
+
+See you on the other side!
+
 ## Setup progress
 ### 02/17/2020
 This week, the TFL team has made some significant progress with the iAttend planning and structing phases. The Software Requirements Specification has been finalized, and the schedule for development has been completed, along with the specific tasks and timetables.
