@@ -9,7 +9,7 @@ It has been extremely helpful having the development infrastructure set up. As a
 
 We are also designing the database! The tables are being created in pgAdmin4, the database management system for PostgreSQL that we have connected to our database in the cloud. All the connectivity is something that has been difficult to wrap our heads around, but a great learning experience and something that will pay off in the finished product.
 
-We also have the rough draft of our Design Document 1 [here](./DD1-ThreeFuriousLocomotives.pdf)
+We also have the rough draft of our Design Document 1 [here](./DD1_ThreeFuriousLocomotives.pdf)
 
 ## Planning, planning, planning
 ### 02/26/2020
