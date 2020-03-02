@@ -6,7 +6,7 @@
 
 [See our press release!](./iAttendPressRelease1.pdf)
 
-[System Requirements Specification](./SRS-ThreeFuriousLocomotives.pdf)
+[System Requirements Specification](./SRS_ThreeFuriousLocomotives.pdf)
 
 [Our Development Blog](./blog.md)
 
