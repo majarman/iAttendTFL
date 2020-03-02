@@ -3,6 +3,14 @@
 
 [Home](./README.md)
 
+## Documentation and Training
+### 03/02/2020
+It has been extremely helpful having the development infrastructure set up. As a team, we have been able to learn about the tools and environment we are using. The design implementation for the web app, for example, is a Model View Controller template from Visual Studio. We have spent time setting up a test environment to practice web development in an MVC model, and it has been incredibly informative.
+
+We are also designing the database! The tables are being created in pgAdmin4, the database management system for PostgreSQL that we have connected to our database in the cloud. All the connectivity is something that has been difficult to wrap our heads around, but a great learning experience and something that will pay off in the finished product.
+
+We also have the rough draft of our Design Document 1 [here](./DD1-ThreeFuriousLocomotives.pdf)
+
 ## Planning, planning, planning
 ### 02/26/2020
 This week has been a week of setup and scheduling. Not the most exciting thing in the world, as development has not started yet. This, however, is due to the fact that the week has been dedicated to creating a Gantt chart for our development work, and integrating a new Kanban board on GitHub Projects! This setup will allow us to easily view our schedule, and assign issues and track them accordingly. The Preliminary Project Schedule has been posted, and is accessible [here](./PPS-ThreeFuriousLocomotives.pdf).
