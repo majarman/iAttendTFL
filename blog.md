@@ -3,6 +3,12 @@
 
 [Home](./README.md)
 
+## Highly Unlikely Risk Actually Happens
+### 03/18/2020
+In the midst of Spring Break for UMU students, COVID-19 has devasted social norms and life as the world knows it, at least temporarily. This has caused class restructuring and rescheduling for everything related to the University, including transitioning to entirely online sans face-to-face communication for coursework and, yes, development. While there are significant advantages to working together in the same space, the TFL team is ready to take on the challenge of remote work. None of the project depends on being on campus, so the team is ready to get back into the project post - Spring Break and this starts with the design! The database is the next part of the project, and it is the goal to have this done as soon as possible. There is also work being done to complete the CSS and design of the web portal, so stay tuned for mock-ups! 
+
+![DFD.jpg](./DFD.jpg)
+
 ## Documentation and Training
 ### 03/02/2020
 It has been extremely helpful having the development infrastructure set up. As a team, we have been able to learn about the tools and environment we are using. The design implementation for the web app, for example, is a Model View Controller template from Visual Studio. We have spent time setting up a test environment to practice web development in an MVC model, and it has been incredibly informative.
