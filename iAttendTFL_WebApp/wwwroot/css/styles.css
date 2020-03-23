@@ -5,19 +5,34 @@
 
 body {
     margin: 0;
-    min-height: 100vh;
+}
+
+main {
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 /*************
     Navbar
 *************/
 
+header {
+    position: sticky;
+    position: -webkit-sticky; /* Safari */
+    top: 0;
+}
+
 .navbar {
     background-color: #343a40;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 .navbar a {
     text-decoration: none;
+    color: #fff;
 }
 
 .navbar-logo {
@@ -33,7 +48,6 @@ body {
     font-family: 'Baloo 2', sans-serif;
     font-size: 25pt;
     letter-spacing: -2px;
-    color: #fff;
 }
 #navbar-logo-image,
 #navbar-logo-text {
@@ -41,21 +55,19 @@ body {
 }
 
 .navbar-links {
-    margin: 0;
-    list-style: none;
     font-family: 'Montserrat', sans-serif;
+    align-items: center;
 }
-.navbar-links li a {
-    color: #fff;
+.navbar-links a {
+    padding-left: 20px;
 }
-.navbar-links li a:hover {
+.navbar-links a:hover {
     color: #ababab;
 }
 
-.navbar-logo a,
-.navbar-links a {
-    text-align: center;
-    display: block;
+.navbar,
+.navbar-links {
+    display: flex;
 }
 
 
@@ -64,7 +76,7 @@ body {
   Media Queries
 ==================================== */
 
-@media (min-width: 769px) {
+@media (max-width: 1025px) {
     .navbar,
     .navbar-links {
         display: flex;
@@ -74,26 +86,15 @@ body {
         flex-direction: column;
         align-items: center;
         margin: 0 auto;
+        padding-bottom: 10px;
     }
 
     .navbar-links li a {
         padding-left: 10px;
     }
-}
-@media (min-width: 1025px) {
-    .navbar {
-        flex-direction: row;
-        justify-content: space-between;
-        padding-left: 100px;
-        padding-right: 100px;
-    }
-
-    .navbar-links li a {
-        padding-left: 20px;
-    }
 
     main {
-        padding-left: 100px;
-        padding-right: 100px;
+        padding-left: 75px;
+        padding-right: 75px;
     }
 }
