@@ -1,6 +1,8 @@
 # iAttend
 
-[Our first draft design document.](./DD1_ThreeFuriousLocomotives.pdf)
+[Design Document 2.](./DD2_ThreeFuriousLocomotives.pdf)
+
+[Design Document 1.](./DD1_ThreeFuriousLocomotives.pdf)
 
 [Our preliminary schedule.](./PPS-ThreeFuriousLocomotives.pdf)
 
