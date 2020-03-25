@@ -3,6 +3,12 @@
 
 [Home](./README.md)
 
+## Working through it
+### 03/25/2020
+The pandemic has struck, and both states of residence for our team are on lockdown. This poses no threat to the team, however, who has been meeting via Discord and collaborating using all the tools at their disposal! Web development has begun, with diagrams and issues created and branches being created and worked on remotely. The MVC model is the choice for the team, as it allows finer control over the interaction of the web site and data components. It also provides a learning experience for the team, allowing us to all learn some enterprise level development skills and paradigms.
+
+Design document 2 has been created, and can be accessed [here](./DD2_ThreeFuriousLocomotives.pdf)!
+
 ## Highly Unlikely Risk Actually Happens
 ### 03/18/2020
 In the midst of Spring Break for UMU students, COVID-19 has devasted social norms and life as the world knows it, at least temporarily. This has caused class restructuring and rescheduling for everything related to the University, including transitioning to entirely online sans face-to-face communication for coursework and, yes, development. While there are significant advantages to working together in the same space, the TFL team is ready to take on the challenge of remote work. None of the project depends on being on campus, so the team is ready to get back into the project post - Spring Break and this starts with the design! The database is the next part of the project, and it is the goal to have this done as soon as possible. There is also work being done to complete the CSS and design of the web portal, so stay tuned for mock-ups! 
