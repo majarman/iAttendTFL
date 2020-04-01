@@ -1,0 +1,183 @@
+﻿* {
+    box-sizing: border-box; /* Includes borders and padding when specifying element size */
+}
+
+body {
+    margin: 0;
+    background-color: #fafafa;
+}
+
+main {
+    padding-left: 20%;
+    padding-right: 20%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 135%;
+    color: #454545;
+    text-align: justify;
+    text-align-last: left;
+}
+
+/* =================================
+    Navbar
+==================================== */
+
+header {
+    position: sticky;
+    position: -webkit-sticky; /* Safari */
+    top: 0;
+}
+
+.navbar {
+    background-color: #2b2b2b;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+    .navbar a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+.navbar-logo {
+    padding-top: 3px;
+}
+
+#navbar-logo-image {
+    width: 40px;
+    height: 40px;
+}
+
+#navbar-logo-text {
+    padding-top: 5px;
+    padding-left: 5px;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 200%;
+    letter-spacing: -2px;
+}
+
+#navbar-logo-image,
+#navbar-logo-text {
+    vertical-align: middle;
+}
+
+.navbar-links {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 135%;
+    align-items: center;
+}
+
+    .navbar-links a {
+        padding-left: 20px;
+    }
+
+        .navbar-links a:hover {
+            color: #c9c9c9;
+        }
+
+.navbar,
+.navbar-links {
+    display: flex;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Vollkorn Bold', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    color: #1a1a1a;
+}
+
+h1 {
+    font-size: 300%;
+}
+
+h2 {
+    font-size: 250%;
+}
+
+h3 {
+    font-size: 200%;
+}
+
+h4 {
+    font-size: 150%;
+}
+
+h5 {
+    font-size: 100%;
+}
+
+h6 {
+    margin-top: 7px;
+    font-size: 50%;
+}
+
+
+
+/* =================================
+    Media Queries
+==================================== */
+
+@media (max-width: 1500px) {
+    .navbar {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+
+    main {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .navbar {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    .navbar-links li a {
+        padding-left: 10px;
+    }
+
+    main {
+        padding-left: 10%;
+        padding-right: 10%;
+        font-size: 125%;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    main {
+        padding-left: 5%;
+        padding-right: 5%;
+        font-size: 110%;
+    }
+}
+
+
+
+/* =================================
+    Fonts
+==================================== */
+
+@font-face {
+    font-family: 'Baloo 2';
+    src: url('../resources/fonts/Baloo 2/Baloo2-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../resources/fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Vollkorn Bold';
+    src: url('../resources/fonts/Vollkorn/Vollkorn-Bold.ttf');
+}
