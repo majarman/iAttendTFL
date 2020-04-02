@@ -23,6 +23,11 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
 
+        public IActionResult StudentAttendance()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
