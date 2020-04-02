@@ -31,6 +31,7 @@ namespace iAttendTFL_WebApp.Controllers
         public IActionResult Login()
         {
             return View();
+            /*this is a test change*/
         }
 
         public IActionResult ChangePassword()
