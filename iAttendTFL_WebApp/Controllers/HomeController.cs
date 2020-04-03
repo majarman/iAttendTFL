@@ -23,12 +23,19 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
 
-        public IActionResult StudentAttendance()
+        public IActionResult Privacy()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Attendance(string accountType) =>
+            RedirectToAction(
+                accountType.Equals("m") ||
+                accountType.Equals("a")
+                    ? nameof(FacultyAttendance)
+                    : nameof(StudentAttendance));
+
+        public IActionResult StudentAttendance()
         {
             return View();
         }

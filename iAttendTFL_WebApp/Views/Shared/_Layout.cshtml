@@ -10,13 +10,13 @@
     <header>
         <nav class="navbar">
             <div class="navbar-logo">
-                <a class="navbar-logo-link" asp-area="" asp-controller="Home" asp-action="Index">
+                <a class="navbar-logo-link" asp-controller="Home" asp-action="Index">
                     <img id="navbar-logo-image" src="~/resources/images/navbar-logo.png" />
                     <span id="navbar-logo-text">iAttend</span>
                 </a>
             </div>
             <div class="navbar-links">
-                <a href="#">Home</a>
+                <a href="<%: @Url.Action("Attendance", "HomeController", new {accountType = "m"}) %>">Attendance</a>
                 <a>Menu Item 2</a>
             </div>
         </nav>
