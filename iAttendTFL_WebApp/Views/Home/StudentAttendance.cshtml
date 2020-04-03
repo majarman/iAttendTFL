@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewData["Title"] = "Attendance";
+}
+
+<h3>John Doe</h3>
+<br />
+<form id="time-frame-form">
+    <label for="time-frame-dropdown">Time Frame:&nbsp;&nbsp;</label>
+    <select id="time-frame-dropdown">
+        <option value="0">Spring 2020</option>
+        <option value="1">Fall 2019</option>
+        <option value="2">Spring 2019</option>
+    </select>
+</form>
+<br />
+<h5 class="inline">Track:&nbsp;&nbsp;</h5>
+<span class="inline">Music Major</span>
+<table class="student-requirements-table">
+    <tr>
+        <th>Requirement Type</th>
+        <th>Attendance Points Needed</th>
+        <th>Attendance Points Fulfilled</th>
+        <th>Progress</th>
+    </tr>
+    <tr>
+        <td>Music Recital</td>
+        <td class="hor-center">3</td>
+        <td class="hor-center">1</td>
+        <td class="hor-center">33%</td>
+    </tr>
+    <tr>
+        <td>Theater Performance</td>
+        <td class="hor-center">1</td>
+        <td class="hor-center">1</td>
+        <td class="hor-center">100%</td>
+    </tr>
+    <tr>
+        <td>Concert</td>
+        <td class="hor-center">3</td>
+        <td class="hor-center">2</td>
+        <td class="hor-center">66%</td>
+    </tr>
+</table>
+<br />
+<h5>Attended Events:</h5>
+<table class="student-attendance-table">
+    <tr>
+        <th>Event Name</th>
+        <th>Requirement Type</th>
+        <th>Event Start Time</th>
+        <th>Event End Time</th>
+        <th>Time of Attendance</th>
+    </tr>
+    <tr>
+        <td>Jane Doe Recital</td>
+        <td>Music Recital</td>
+        <td>4/1/2020 10:00am</td>
+        <td>4/1/2020 12:00pm</td>
+        <td>4/1/2020 9:57am</td>
+    </tr>
+    <tr>
+        <td>Steel Band Concert</td>
+        <td>Concert</td>
+        <td>4/2/2020 6:30pm</td>
+        <td>4/2/2020 7:30pm</td>
+        <td>4/2/2020 6:29pm</td>
+    </tr>
+    <tr>
+        <td>Hamlet</td>
+        <td>Theater Performance</td>
+        <td>4/2/2020 4:30pm</td>
+        <td>4/2/2020 6:00pm</td>
+        <td>4/2/2020 4:41pm</td>
+    </tr>
+    <tr>
+        <td>Steel Band Concert 2: Electric Boogaloo</td>
+        <td>Concert</td>
+        <td>4/3/2020 6:30pm</td>
+        <td>4/3/2020 7:30pm</td>
+        <td>4/3/2020 9:12pm</td>
+    </tr>
+</table>
