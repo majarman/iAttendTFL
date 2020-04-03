@@ -44,6 +44,21 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
 
+        public IActionResult MyAccount()
+        {
+            return View();
+        }
+
+        public IActionResult EditAccount()
+        {
+            return View();
+        }
+
+        public IActionResult HomePage()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
