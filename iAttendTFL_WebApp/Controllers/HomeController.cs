@@ -33,6 +33,11 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
 
+        public IActionResult FacultyAttendance()
+        {
+            return View();
+        }
+
         public IActionResult Login()
         {
             return View();

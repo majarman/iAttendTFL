@@ -19,7 +19,13 @@ main {
     display: inline;
 }
 
-p, span, label, select, table tr td {
+.select-user-button,
+.edit-user-button {
+    width: 100%;
+    min-width: 80px;
+}
+
+p, span, label, select, table tr td, input, button {
     font-family: 'Montserrat', sans-serif;
     font-size: 16pt;
     color: #454545;
@@ -150,6 +156,10 @@ select {
     text-overflow: ellipsis;
 }
 
+    select:hover {
+        color: #c9c9c9;
+    }
+
     select option {
         background-color: #fafafa;
         font-family: inherit;
@@ -162,12 +172,44 @@ select {
         }
 
 /* =================================
+    Input Textboxes
+==================================== */
+
+input {
+    border-radius: 6px;
+}
+
+/* =================================
+    Buttons
+==================================== */
+
+button {
+    background-color: #8e18c9;
+    color: #fafafa;
+    border: 0;
+}
+
+    button:hover {
+        color: #c9c9c9;
+    }
+
+/* =================================
     Paragraphs
 ==================================== */
 
 p {
     text-align: justify;
     text-align-last: left;
+}
+
+/* =================================
+    Horizontal Rules
+==================================== */
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid #dedede;
 }
 
 /* =================================
