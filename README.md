@@ -3,12 +3,12 @@
 [Our Development Website](https://majarman.github.io/iAttendTFL)
 
 ## Description
-iAttend will serve as a more efficient means of taking and keeping record of attendance for the music department at the University of Mount Union. The system will use QR codes to identify students, and professors will be able to scan the QR codes to track student attendance for events and recitals. iAttend will allow students to receive credit for their attendance and to view their own attendance records. The best part of this product will not only be its security, but also its simplicity and ease of use for those who are technologically apprehensive.
+iAttend will serve as a more efficient means of taking and keeping record of attendance for the music department at the University of Mount Union. The system will use barcodes to identify students, and professors will be able to scan the barcodes to track student attendance for events and recitals. iAttend will allow students to receive credit for their attendance and to view their own attendance records. The best part of this product will not only be its security, but also its simplicity and ease of use for those who are technologically apprehensive.
 
 ## Features
 ### User Interfaces
 iAttend will feature the following user interfaces:
-- A mobile app that consists of a QR code scanner and settings to select the correct course
+- A mobile app that consists of a barcode scanner and settings to select the correct course
 - A website that consists of tables displaying student attendance and the ability for professors to edit their courses and the student attendance for each course
 
 The mobile and web interfaces will work seamlessly to provide a quick and easy method for department chairs and professors to create a course, set its rules and the course roster, and alter attendance records.
