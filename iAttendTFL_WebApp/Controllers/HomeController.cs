@@ -18,32 +18,6 @@ namespace iAttendTFL_WebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult StudentAttendance()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult FacultyAttendance()
-        {
-            return View();
-        }
-
-        public IActionResult Login()
-        {
-            return View();
-            /*this is a test change*/
-        }
-
         public IActionResult ChangePassword()
         {
             return View();
@@ -54,17 +28,58 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
 
+        public IActionResult EditAnAccount()
+        {
+            return View();
+        }
+
+        public IActionResult EditMyAdminAccount()
+        {
+            return View();
+        }
+
+        public IActionResult FacultyAttendance()
+        {
+            return View();
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+            /*this is a test change*/
+        }
+        
+        public IActionResult ManageAccounts()
+        {
+            return View();
+        }
+
         public IActionResult MyAccount()
         {
             return View();
         }
 
-        public IActionResult EditAccount()
+        public IActionResult Privacy()
         {
             return View();
         }
 
-        public IActionResult HomePage()
+        public IActionResult RequestNewPassword()
+        {
+            return View();
+        }
+        
+        public IActionResult StudentAttendance()
+        {
+            return View();
+        }
+        
+        public IActionResult TransferAdmin()
         {
             return View();
         }

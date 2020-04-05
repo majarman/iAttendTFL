@@ -22,6 +22,15 @@
         </nav>
     </header>
     <main role="main">
+
+        <span>Nav Bar Stand-In</span>
+        <span>
+            <a asp-controller="Home" asp-action="HomePage">HomePage</a>
+            <a asp-controller="Home" asp-action="Attendance">Attendance</a>
+            <a asp-controller="Home" asp-action="MyAccount">My Account</a>
+            <a asp-controller="Home" asp-action="Login">Logout</a>
+        </span>
+
         @RenderBody()
     </main>
     <footer class="border-top footer text-muted">
