@@ -16,8 +16,8 @@
                 </a>
             </div>
             <div class="navbar-links">
-                <a href="<%: @Url.Action("Attendance", "HomeController", new {accountType = "m"}) %>">Attendance</a>
-                <a>Menu Item 2</a>
+                <a asp-controller="Home" asp-action="Attendance" asp-route-accountType='A'>Attendance</a>
+                <a asp-controller="Home" asp-action="MyAccount">My Account</a>
             </div>
         </nav>
     </header>
@@ -26,7 +26,7 @@
     </main>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - iAttend - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - iAttend - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 </body>
