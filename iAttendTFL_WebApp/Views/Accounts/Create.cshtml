@@ -1,0 +1,73 @@
+﻿@model iAttendTFL_WebApp.Models.Account
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Account</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="First_Name" class="control-label"></label>
+                <input asp-for="First_Name" class="form-control" />
+                <span asp-validation-for="First_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Last_Name" class="control-label"></label>
+                <input asp-for="Last_Name" class="form-control" />
+                <span asp-validation-for="Last_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salt" class="control-label"></label>
+                <input asp-for="Salt" class="form-control" />
+                <span asp-validation-for="Salt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password_Hash" class="control-label"></label>
+                <input asp-for="Password_Hash" class="form-control" />
+                <span asp-validation-for="Password_Hash" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Account_Type" class="control-label"></label>
+                <input asp-for="Account_Type" class="form-control" />
+                <span asp-validation-for="Account_Type" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Email_Verified" /> @Html.DisplayNameFor(model => model.Email_Verified)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Expected_Graduation_Date" class="control-label"></label>
+                <input asp-for="Expected_Graduation_Date" class="form-control" />
+                <span asp-validation-for="Expected_Graduation_Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Track_Id" class="control-label"></label>
+                <input asp-for="Track_Id" class="form-control" />
+                <span asp-validation-for="Track_Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
