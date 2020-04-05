@@ -13,31 +13,31 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.First_Name)
+                @Html.DisplayNameFor(model => model.first_name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Last_Name)
+                @Html.DisplayNameFor(model => model.last_name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Salt)
+                @Html.DisplayNameFor(model => model.salt)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Password_Hash)
+                @Html.DisplayNameFor(model => model.password_hash)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Account_Type)
+                @Html.DisplayNameFor(model => model.account_type)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email_Verified)
+                @Html.DisplayNameFor(model => model.email_verified)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Expected_Graduation_Date)
+                @Html.DisplayNameFor(model => model.expected_graduation_date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Track_Id)
+                @Html.DisplayNameFor(model => model.track_id)
             </th>
             <th></th>
         </tr>
@@ -46,36 +46,36 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.First_Name)
+                @Html.DisplayFor(modelItem => item.first_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Last_Name)
+                @Html.DisplayFor(modelItem => item.last_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => item.email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Salt)
+                @Html.DisplayFor(modelItem => item.salt)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Password_Hash)
+                @Html.DisplayFor(modelItem => item.password_hash)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Account_Type)
+                @Html.DisplayFor(modelItem => item.account_type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email_Verified)
+                @Html.DisplayFor(modelItem => item.email_verified)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Expected_Graduation_Date)
+                @Html.DisplayFor(modelItem => item.expected_graduation_date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Track_Id)
+                @Html.DisplayFor(modelItem => item.track_id)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
             </td>
         </tr>
 }

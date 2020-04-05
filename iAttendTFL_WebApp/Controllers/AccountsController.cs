@@ -34,7 +34,7 @@ namespace iAttendTFL_WebApp.Controllers
             }
 
             var account = await _context.Account
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (account == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace iAttendTFL_WebApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,First_Name,Last_Name,Email,Salt,Password_Hash,Account_Type,Email_Verified,Expected_Graduation_Date,Track_Id")] Account account)
+        public async Task<IActionResult> Create([Bind("id,first_name,last_name,email,salt,password_hash,account_type,email_verified,expected_graduation_date,track_id")] Account account)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace iAttendTFL_WebApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,First_Name,Last_Name,Email,Salt,Password_Hash,Account_Type,Email_Verified,Expected_Graduation_Date,Track_Id")] Account account)
+        public async Task<IActionResult> Edit(int id, [Bind("id,first_name,last_name,email,salt,password_hash,account_type,email_verified,expected_graduation_date,track_id")] Account account)
         {
-            if (id != account.Id)
+            if (id != account.id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace iAttendTFL_WebApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AccountExists(account.Id))
+                    if (!AccountExists(account.id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace iAttendTFL_WebApp.Controllers
             }
 
             var account = await _context.Account
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (account == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace iAttendTFL_WebApp.Controllers
 
         private bool AccountExists(int id)
         {
-            return _context.Account.Any(e => e.Id == id);
+            return _context.Account.Any(e => e.id == id);
         }
     }
 }
