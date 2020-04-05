@@ -29,5 +29,9 @@
             &copy; 2020 - iAttend - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    @if (IsSectionDefined("scripts"))
+    {
+        RenderSection("scripts");
+    }
 </body>
 </html>

@@ -13,7 +13,8 @@ namespace iAttendTFL_WebApp.Data
             : base(options)
         {
         }
+        public DbSet<iAttendTFL_WebApp.Models.account> account { get; set; }
 
-        public DbSet<iAttendTFL_WebApp.Models.Account> Account { get; set; }
+        
     }
 }
