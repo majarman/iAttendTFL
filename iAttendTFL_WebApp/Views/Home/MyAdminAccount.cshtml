@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "MyAccount";
+}
+<div style="text-align:center">
+    <h2>My Account</h2>
+    <br />
+    <br />
+    <label id="labelAccountPermissionLevel">Admin</label>
+    <p>
+        Administrator info: With your Administrator account, you have additional access that Users (Students) and Moderators (Professprs) do not have.
+        <ul>
+            <li>This is the MyAccount page. There is nothing additional here.</li>
+            <li>On the Homepage, there is also nothing additional.</li>
+            <li>On the Attendance page, you can see the attendance records for all accounts. You an also edit the attendance records in their entirety.
+            That includes the information about each event themselves: the name, description, credit value, start time, and end time.</li>
+            <li>On the Manage Accounts page, you can view all of the accounts currently in the system. This is the information about the accounts, 
+            whereas the previously mentioned Attendance page showed the attendance records of the accounts. You can select an account from this 
+            Manage Accounts page and edit it on the Edit An Account page.</li>
+            <li>The Edit An Account page allows you to edit informaton about the account you selected on the previous page. Here, you can make 
+            changes requested by a student. These changes include their names, graduation date, departmental track, and their permissions level.</li>
+            <li>This is the My Account page. It shows your account information. You can also select the option to edit your account from here.</li>
+            <li>The Edit My Account page is accessed from the previous page. Here, you can edit your account information. You can also transfer your 
+            Admin privileges to a successor.</li>
+            <li>The Logout button securely logs you out.</li>
+        </ul>
+    </p>
+    <br />
+    <br />
+    <label id="labelMyAdminAccountTFLCode">TFL Code: </label><br />
+    <!--This is the barcode, wanted to give it a catchy name. A professor saying "we will scan your barcodes" isn't catchy. Students aren't groceries.-->
+    <label id="labelMyAdminAccountFirstName">First Name: </label><br />
+    <label id="labelMyAdminAccountLastName">Last Name: </label><br />
+    <label id="labelMyAdminAccountExpectedGraduationDate">Expected Graduation Date: </label><br />
+    <label id="labelMyAdminAccountTrack">Track: </label><br />
+    <label id="labelMyAdminAccountEmail">Email: </label><br />
+    <br />
+    <br />
+    <p>To change your password, <a asp-controller="Home" asp-action="RequestNewPassword">click here</a>.</p>
+    <p>To edit your account, <a asp-controller="Home" asp-action="EditMyAdminAccount">click here</a>.</p>
+</div>

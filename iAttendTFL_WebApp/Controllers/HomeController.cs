@@ -65,11 +65,18 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
         
-        public IActionResult MyAccount()
+        public IActionResult Account(char accountType)
         {
-            return View();
+            if (Char.ToLower(accountType).Equals('a'))
+            {
+                return RedirectToAction("MyAdminAccount");
+            }
+            else
+            {
+                return RedirectToAction("MyAccount");
+            }
         }
-        
+
         public IActionResult Privacy()
         {
             return View();
