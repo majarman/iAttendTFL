@@ -10,14 +10,14 @@
     <header>
         <nav class="navbar">
             <div class="navbar-logo">
-                <a class="navbar-logo-link" asp-area="" asp-controller="Home" asp-action="Index">
+                <a class="navbar-logo-link" asp-controller="Home" asp-action="Index">
                     <img id="navbar-logo-image" src="~/resources/images/navbar-logo.png" />
                     <span id="navbar-logo-text">iAttend</span>
                 </a>
             </div>
             <div class="navbar-links">
-                <a href="#">Home</a>
-                <a>Menu Item 2</a>
+                <a asp-controller="Home" asp-action="Attendance" asp-route-accountType='A'>Attendance</a>
+                <a asp-controller="Home" asp-action="MyAccount">My Account</a>
             </div>
         </nav>
     </header>
@@ -35,7 +35,7 @@
     </main>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - iAttend - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - iAttend - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 </body>

@@ -27,54 +27,55 @@ namespace iAttendTFL_WebApp.Controllers
         {
             return View();
         }
-
+        
         public IActionResult EditAnAccount()
         {
             return View();
         }
-
+        
         public IActionResult EditMyAdminAccount()
         {
             return View();
         }
-
-        public IActionResult FacultyAttendance()
+        
+        public IActionResult Attendance(char accountType)
         {
-            return View();
+            if (Char.ToLower(accountType).Equals('m') || Char.ToLower(accountType).Equals('a'))
+            {
+                return RedirectToAction("FacultyAttendance");
+            }
+            else
+            {
+                return RedirectToAction("StudentAttendance");
+            }
         }
-
+        
         public IActionResult Index()
         {
             return View();
         }
-
+        
         public IActionResult Login()
         {
             return View();
-            /*this is a test change*/
         }
         
         public IActionResult ManageAccounts()
         {
             return View();
         }
-
+        
         public IActionResult MyAccount()
         {
             return View();
         }
-
+        
         public IActionResult Privacy()
         {
             return View();
         }
-
-        public IActionResult RequestNewPassword()
-        {
-            return View();
-        }
         
-        public IActionResult StudentAttendance()
+        public IActionResult RequestNewPassword()
         {
             return View();
         }
@@ -83,6 +84,7 @@ namespace iAttendTFL_WebApp.Controllers
         {
             return View();
         }
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
