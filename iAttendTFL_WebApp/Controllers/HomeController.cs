@@ -23,12 +23,24 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
 
-        public IActionResult StudentAttendance()
+        public IActionResult Privacy()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Attendance(char accountType)
+        {
+            if (Char.ToLower(accountType).Equals('m') || Char.ToLower(accountType).Equals('a'))
+            {
+                return RedirectToAction("FacultyAttendance");
+            }
+            else
+            {
+                return RedirectToAction("StudentAttendance");
+            }
+        }
+
+        public IActionResult StudentAttendance()
         {
             return View();
         }
@@ -41,7 +53,6 @@ namespace iAttendTFL_WebApp.Controllers
         public IActionResult Login()
         {
             return View();
-            /*this is a test change*/
         }
 
         public IActionResult ChangePassword()
