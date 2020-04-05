@@ -18,6 +18,7 @@
             <div class="navbar-links">
                 <a asp-controller="Home" asp-action="Attendance" asp-route-accountType='A'>Attendance</a>
                 <a asp-controller="Home" asp-action="MyAccount">My Account</a>
+                <a href="/accounts">Accounts Controller (for michael's testing)</a>
             </div>
         </nav>
     </header>
@@ -38,5 +39,9 @@
             &copy; 2020 - iAttend - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    @if (IsSectionDefined("scripts"))
+    {
+        RenderSection("scripts");
+    }
 </body>
 </html>
