@@ -26,15 +26,6 @@
     </header>
     <main role="main">
 
-        <span>Nav Bar Stand-In</span>
-        <span>
-            <a asp-controller="Home" asp-action="Index">HomePage</a>
-            <a asp-controller="Home" asp-action="Attendance" asp-route-accountType='A'>Attendance</a>
-            <a asp-controller="Home" asp-action="Account" asp-route-accountType='A'>My Account</a>
-            <a asp-controller="Home" asp-action="Login">Logout</a>
-            <a href="/accounts">Accounts Controller (for michael's testing)</a>
-        </span>
-
         @RenderBody()
     </main>
     <footer class="border-top footer text-muted">
