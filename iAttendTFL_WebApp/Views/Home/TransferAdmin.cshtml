@@ -4,11 +4,11 @@
 
 <br />
 <br />
-<div style="text-align:center">
-    <h2>Transfer Admin Privileges</h2>
+<div>
+    <h2 class="hor-center">Transfer Admin Privileges</h2>
     <br />
     <br />
-    <span>Steps to transfer Admin privilege to another user.</span>
+    <span>Steps to transfer Admin privilege to another user.</span><br />
     <span class="subText"><strong>Note:</strong> This will lower the privilege level of your current account to the Moderator (professor) level.</span>
     <ol>
         <li>Make sure the person you are transferring Admin privilages to already has an iAttend account that is Moderator status.</li>
@@ -20,19 +20,21 @@
     <br />
     <br />
     <form id="formTransferAdmin">
-        <p>
-            Edit the information you wish to change. To change your password, <a asp-controller="Home" asp-action="RequestNewPassword">click here</a>.
-            You can also use this process to transfer the owner privilege.
-        </p>
-        <span class="subText">To transfer the admin privilege to another user, follow the steps at the bottom of the page.</span>
 
-
-        <p>First Name: <input id="inputTransferAdminFirstName" placeholder="Current FirstName" required /></p>
-
-        <p>Last Name: <input id="inputTransferAdminLastName" placeholder="Current LastName" required /></p>
-
-        <span>Email: <input id="inputTransferAdminEmail" placeholder="Current Email" required /></span>
-        <span class="subText">You must use their Mount Union email.</span>
+        <table>
+            <tr>
+                <td>First Name: </td>
+                <td><input id="inputTransferAdminFirstName" placeholder="Current FirstName" required /></td>
+            </tr>
+            <tr>
+                <td>Last Name: </td>
+                <td><input id="inputTransferAdminLastName" placeholder="Current LastName" required /></td>
+            </tr>
+            <tr>
+                <td>Email: </td>
+                <td><input id="inputTransferAdminEmail" placeholder="Current Email" required /></td>
+            </tr>
+        </table>
 
         <input id="submitTransferAdminAccount" type="submit" value="Transfer Admin Privileges" />
         <!--<button onclick="TransferAdmin();">Edit Account</button>-->
