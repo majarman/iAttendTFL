@@ -42,11 +42,11 @@ namespace iAttendTFL_WebApp.Controllers
         {
             if (Char.ToLower(accountType).Equals('m') || Char.ToLower(accountType).Equals('a'))
             {
-                return RedirectToAction("FacultyAttendance");
+                return View("FacultyAttendance");
             }
             else
             {
-                return RedirectToAction("StudentAttendance");
+                return View("StudentAttendance");
             }
         }
         
@@ -64,16 +64,26 @@ namespace iAttendTFL_WebApp.Controllers
         {
             return View();
         }
-        
+
+        public IActionResult MyAccount()
+        {
+            return View();
+        }
+
+        public IActionResult MyAdminAccount()
+        {
+            return View();
+        }
+
         public IActionResult Account(char accountType)
         {
             if (Char.ToLower(accountType).Equals('a'))
             {
-                return RedirectToAction("MyAdminAccount");
+                return View("MyAdminAccount");
             }
             else
             {
-                return RedirectToAction("MyAccount");
+                return View("MyAccount");
             }
         }
 
