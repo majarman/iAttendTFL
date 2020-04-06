@@ -16,21 +16,15 @@
                 </a>
             </div>
             <div class="navbar-links">
+                <a asp-controller="Home" asp-action="Index">HomePage</a>
                 <a asp-controller="Home" asp-action="Attendance" asp-route-accountType='A'>Attendance</a>
                 <a asp-controller="Home" asp-action="Account" asp-route-accountType='A'>My Account</a>
-                <a href="/accounts">Accounts Controller (for michael's testing)</a>
+                <a asp-controller="Accounts" asp-action="Index">Accounts in the DB</a>
+                <a asp-controller="Home" asp-action="Login">Logout</a>
             </div>
         </nav>
     </header>
     <main role="main">
-
-        <span>Nav Bar Stand-In</span>
-        <span>
-            <a asp-controller="Home" asp-action="HomePage">HomePage</a>
-            <a asp-controller="Home" asp-action="Attendance" asp-route-accountType='A'>Attendance</a>
-            <a asp-controller="Home" asp-action="Account" asp-route-accountType='A'>My Account</a>
-            <a asp-controller="Home" asp-action="Login">Logout</a>
-        </span>
 
         @RenderBody()
     </main>
