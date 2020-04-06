@@ -1,39 +1,49 @@
 ﻿@{
-    ViewData["Title"] = "EditAnAccount";
+    ViewData["Title"] = "Edit a User's Account";
 }
 <br />
 <br />
-<div style="text-align:center">
-    <h2>Create An Account</h2>
+<div>
+    <h2 class="hor-center">Edit a User's Account</h2>
     <br />
     <br />
     <form id="formEditUser">
-
-        <p>First Name: <input id="inputEditUserFirstName" placeholder="Current FirstName" /></p>
-
-        <p>Last Name: <input id="inputEditUserLastName" placeholder="Current LastName" /></p>
-
-        <p>Expected Graduation Date: <input id="inputEditUserExpectedGraduationDate" placeholder="Current ExpectedGraduationDate" /></p>
-
-        <label for="selectEditUserTrack">Select your track:</label>
+        <table class="no-design-table">
+            <tr>
+                <td width="30%">First Name:</td>
+                <td><input id="inputFirstName" style="width: 100%;" placeholder="Example: Matthew" required /></td>
+            </tr>
+            <tr>
+                <td width="30%">Last Name:</td>
+                <td><input id="inputLastName" style="width: 100%;" placeholder="Example: Dutt" required /></td>
+            </tr>
+            <tr>
+                <td width="30%">Expected Graduation Data:</td>
+                <td><input id="inputExpectedGraduationDate" style="width: 100%;" placeholder="Example: 2020" required /></td>
+            </tr>
+         </table>
+        <br />
+        <label for="selectEditUserTrack">Select user's track:</label>
         <select id="selectEditUserTrack" required>
             <option value="musicEducation">Music Education</option>
             <option value="musicBA">Music BA</option>
             <option value="musicMinor">Music Minor</option>
         </select>
-
-        <label for="selectEditUserPermissions">Select your track:</label>
+        <br />
+        <br />
+        <label for="selectEditUserPermissions">Select user's account type:</label>
         <select id="selectEditUserPermissions" required>
             <option value="User">Student - User</option>
             <option value="Moderator">Professor - Moderator</option>
             <!--Notice that Admin is not an option. We will allow for transfer of admin privileges to successors only to prevent
-        the scenario where all professors would have unnecessary Admin permissions.-->
+    the scenario where all professors would have unnecessary Admin permissions.-->
         </select>
-
+        <br />
+        <br />
         <input id="submitEditUser" type="submit" value="Confirm Changes" />
         <!--<button onclick="submitEditUser();">Confirm Changes</button>-->
 
-        <br /><br /><br /><br />
+        <br /><br />
 
         <input id="submitDeleteAccount" type="submit" value="Delete Account" />
         <!--<button onclick="submitDeleteAccount();">Delete Account</button>-->

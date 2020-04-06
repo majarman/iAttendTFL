@@ -1,37 +1,52 @@
 ﻿@{
     ViewData["Title"] = "CreateAccount";
 }
-<br />
-<br />
-<div style="text-align:center">
-    <h2>Create An Account</h2>
-    <br />
-    <br />
+<div>
+    <h2 class="hor-center">Create An Account</h2>
+    <p>Enter the following infromation to create your iAttend account. Once you submit the information, you will receive a confirmation email.</p>
     <form id="formCreateAccount">
-        <p>Enter the following infromation to create your iAttend account. Once you submit the information, you will recieve a confirmation email.</p>
-        
-        <p>First Name: <input id="inputFirstName" placeholder="Example: Matthew" required /></p>
-        
-        <p>Last Name: <input id="inputLastName" placeholder="Example: Dutt" required /></p>
-        
-        <p>Expected Graduation Date: <input id="inputExpectedGraduationDate" placeholder="Example: 2020" required /></p>
-
+        <table class="no-design-table">
+            <tr>
+                <td>Email:</td>
+                <td><input id="inputEmail" style="width: 100%;" placeholder="Example: someone@email.edu" required /></td>
+            </tr>
+            <tr>
+                <td>First Name:</td>
+                <td><input id="inputFirstName" style="width: 100%;" placeholder="Example: Matthew" required /></td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td><input id="inputLastName" style="width: 100%;" placeholder="Example: Dutt" required /></td>
+            </tr>
+            <tr>
+                <td>Expected Graduation Data:</td>
+                <td><input id="inputExpectedGraduationDate" style="width: 100%;" placeholder="Example: 2020" required /></td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    Password:
+                    <br />
+                    <span class="subtext">Passwords must be at least 8 characters, with one captial, one special character, and one number.</span>
+                </td>
+                <td><input id="inputPassword" style="width: 100%;" type="password" required /></td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    Confirm Password
+                    <br />
+                    <span class="subtext">Make sure to type out your new password the exact same way as in the "Confirm Password" box.</span>
+                </td>
+                <td><input id="inputConfirmPassword" style="width: 100%;" type="password" required /></td>
+            </tr>
+        </table>
         <label for="selectTrack">Select your track:</label>
         <select id="selectTrack" required>
             <option value="musicEducation">Music Education</option>
             <option value="musicBA">Music BA</option>
             <option value="musicMinor">Music Minor</option>
         </select>
-       
-        <span>Email: <input id="inputEmail" placeholder="Example: someone@email.edu" required /></span>
-            <span class="subText">You must use your Mount Union email.</span>
-        
-        <span>Password: <input id="inputPassword" type="password" required /></span>
-            <span class="subText">Passwords must be at least 8 characters, with one captial, one special character, and one number.</span>
-        
-        <span>Confirm Password: <input id="inputConfirmPassword" type="password" required /></span>
-            <span class="subText">Make sure to type out your new password the exact same way in the "Confirm Password" box.</span>
-        
+        <br />
+        <br />
         <input id="submitCreateAccount" type="submit" value="Create Account" />
         <!--<button onclick="createAccount();">Create Account</button>-->
     </form>
