@@ -25,6 +25,10 @@ main {
     min-width: 80px;
 }
 
+.subtext {
+    font-size: 12pt;
+}
+
 p, span, label, select, table tr td, input, button {
     font-family: 'Montserrat', sans-serif;
     font-size: 16pt;
@@ -172,12 +176,18 @@ select {
         }
 
 /* =================================
-    Input Textboxes
+    Input
 ==================================== */
 
 input {
     border-radius: 6px;
 }
+
+    input[type=submit] {
+        background-color: #8e18c9;
+        border: none;
+        color: #fafafa;
+    }
 
 /* =================================
     Buttons
@@ -287,6 +297,15 @@ table {
     table tr td {
         padding: 1%;
         font-size: 12pt;
+    }
+
+table.no-design-table tr td {
+    font-size: 16pt;
+    border: none;
+}
+
+    table.no-design-table tr:nth-child(even) td {
+        background-color: #fafafa;
     }
 
 /* =================================
