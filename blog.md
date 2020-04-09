@@ -3,6 +3,10 @@
 
 [Home](./README.md)
 
+## Making Connections
+### 04/09/2020
+Remote work is challenging, but when it comes right down to it, a little Discord here, a little fixing merge conflicts there, and the team has made significant progress on iAttend. Development work has focused on the website, with designing the website pages that the web app will use! Matthew and Alec have done an excellent job in creating a look and feel, including a logo, for the website which runs very smoothly. The team is adapting well to the MVC model, creating new controllers for different functions and taking advantage of the modularity. The team has also established a connection to the PostgreSQL database, allowing the web app to create, read, update, and delete from any table needed by simply adding new data models and scaffolding accordingly. The web app is really solidifying, and the team looks forward to a functioning web application very soon!
+
 ## Working through it
 ### 03/25/2020
 The pandemic has struck, and both states of residence for our team are on lockdown. This poses no threat to the team, however, who has been meeting via Discord and collaborating using all the tools at their disposal! Web development has begun, with diagrams and issues created and branches being created and worked on remotely. The MVC model is the choice for the team, as it allows finer control over the interaction of the web site and data components. It also provides a learning experience for the team, allowing us to all learn some enterprise level development skills and paradigms.
