@@ -49,7 +49,17 @@ namespace iAttendTFL_WebApp.Controllers
                 return View("StudentAttendance");
             }
         }
-        
+
+        public IActionResult FacultyAttendance()
+        {
+            return View();
+        }
+
+        public IActionResult StudentAttendance()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
