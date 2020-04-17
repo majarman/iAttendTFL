@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using iAttendTFL_WebApp.Data;
 using iAttendTFL_WebApp.Models;
+using Microsoft.AspNetCore.Http;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Text;
 
 namespace iAttendTFL_WebApp.Controllers
 {
@@ -17,6 +21,46 @@ namespace iAttendTFL_WebApp.Controllers
         public accountsController(iAttendTFL_WebAppContext context)
         {
             _context = context;
+        }
+
+        [HttpPost]
+        public IActionResult AttemptLogin(string email, string password)
+        {
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                return RedirectToAction("AlreadyLoggedIn", "Home");
+            }
+
+            account a1 = _context.account.SingleOrDefault(account => account.email == email);
+
+            if (a1 != null)
+            {
+                char accountType = a1.account_type;
+
+                string hashedPassword = a1.password_hash;
+                /*
+                byte[] hashedPassword = Encoding.ASCII.GetBytes(a1.password_hash);
+                byte[] salt = Encoding.ASCII.GetBytes(a1.salt);
+
+                byte[] hashedInput = KeyDerivation.Pbkdf2(
+                    password: password.ToLower(),
+                    salt: salt,
+                    prf: KeyDerivationPrf.HMACSHA1,
+                    iterationCount: 10000,
+                    numBytesRequested: 256 / 8);
+                */
+                string hashedInput = password;
+
+                if (hashedInput == hashedPassword)
+                {
+                    HttpContext.Session.SetString("Email", email);
+                    HttpContext.Session.SetString("AccountType", Convert.ToString(accountType));
+
+                    return RedirectToAction("Attendance", "Home");
+                }
+            }
+
+            return RedirectToAction("Login", "Home", new { error = true });
         }
 
         // GET: accounts

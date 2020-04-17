@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using iAttendTFL_WebApp.Models;
-using System.Security.Cryptography;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Session;
 
 namespace iAttendTFL_WebApp.Controllers
 {
@@ -44,38 +38,6 @@ namespace iAttendTFL_WebApp.Controllers
             }
 
             return View();
-        }
-
-        [HttpPost]
-        public IActionResult AttemptLogin(string email, string password)
-        {
-            if (HttpContext.Session.GetString("Email") != null)
-            {
-                return RedirectToAction("AlreadyLoggedIn");
-            }
-            // else if (email is in database)
-            // {
-                char accountType = '~';             // GET ACCOUNT TYPE FROM DB
-                byte[] hashedPassword = null;       // GET HASHED PASSWORD FROM DB
-                byte[] salt = null;                 // GET SALT FROM DB
-
-                byte[] hashedInput = KeyDerivation.Pbkdf2(
-                    password: password.ToLower(),
-                    salt: salt,
-                    prf: KeyDerivationPrf.HMACSHA1,
-                    iterationCount: 10000,
-                    numBytesRequested: 256 / 8);
-
-                if (hashedInput == hashedPassword)
-                {
-                    HttpContext.Session.SetString("Email", email);
-                    HttpContext.Session.SetString("AccountType", Convert.ToString(accountType));
-
-                    return RedirectToAction("Attendance");
-                }
-            // }
-
-            return RedirectToAction("Login", new { error = true });
         }
 
         public IActionResult Attendance()
@@ -289,29 +251,6 @@ namespace iAttendTFL_WebApp.Controllers
             }
 
             return View();
-        }
-
-        [HttpPost]
-        public IActionResult TestAttemptLogin(string email, string password)
-        {
-            if (HttpContext.Session.GetString("Email") != null)
-            {
-                return RedirectToAction("AlreadyLoggedIn");
-            }
-
-            string hashedInput = password;
-            string hashedPassword = "Password";
-            char accountType = 's';
-
-            if (hashedInput == hashedPassword)
-            {
-                HttpContext.Session.SetString("Email", email);
-                HttpContext.Session.SetString("AccountType", Convert.ToString(accountType));
-
-                return RedirectToAction("Attendance");
-            }
-
-            return RedirectToAction("Login", new { error = true });
         }
 
         public IActionResult TransferAdmin()
