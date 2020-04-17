@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using iAttendTFL_WebApp.Models;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Session;
 
 namespace iAttendTFL_WebApp.Controllers
 {
@@ -16,6 +20,49 @@ namespace iAttendTFL_WebApp.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+        }
+
+        [HttpPost]
+        public IActionResult AttemptLogin(string email, string password)
+        {
+            char accountType = '~';             // GET ACCOUNT TYPE FROM DB
+            byte[] hashedPassword = null;       // GET HASHED PASSWORD FROM DB
+            byte[] salt = null;                 // GET SALT FROM DB
+
+            byte[] hashedInput = KeyDerivation.Pbkdf2(
+                password: password.ToLower(),
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8);
+
+            if (hashedInput == hashedPassword)
+            {
+                HttpContext.Session.SetString("Email", email);
+                HttpContext.Session.SetString("AccountType", Convert.ToString(accountType));
+
+                return RedirectToAction("Attendance");
+            }
+
+            return RedirectToAction("Login", new { error = true });
+        }
+
+        [HttpPost]
+        public IActionResult TestAttemptLogin(string email, string password)
+        {
+            string hashedInput = password;
+            string hashedPassword = "Password";
+            char accountType = 's';
+
+            if (hashedInput == hashedPassword)
+            {
+                HttpContext.Session.SetString("Email", email);
+                HttpContext.Session.SetString("AccountType", Convert.ToString(accountType));
+
+                return RedirectToAction("Attendance");
+            }
+
+            return RedirectToAction("Login", new { error = true });
         }
 
         public IActionResult ChangePassword()
@@ -38,15 +85,16 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
         
-        public IActionResult Attendance(char accountType)
+        public IActionResult Attendance()
         {
-            if (Char.ToLower(accountType).Equals('m') || Char.ToLower(accountType).Equals('a'))
+            if (Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('m') ||
+                Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
             {
-                return View("FacultyAttendance");
+                return RedirectToAction("FacultyAttendance");
             }
             else
             {
-                return View("StudentAttendance");
+                return RedirectToAction("StudentAttendance");
             }
         }
 
@@ -64,12 +112,16 @@ namespace iAttendTFL_WebApp.Controllers
         {
             return View();
         }
-        
-        public IActionResult Login()
+
+        public IActionResult Login(bool error = false)
         {
+            if (error)
+            {
+                ViewData["Error"] = "Either the username or password was incorrect";
+            }
             return View();
         }
-        
+
         public IActionResult ManageAccounts()
         {
             return View();
@@ -85,15 +137,15 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
 
-        public IActionResult Account(char accountType)
+        public IActionResult Account()
         {
-            if (Char.ToLower(accountType).Equals('a'))
+            if (Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
             {
-                return View("MyAdminAccount");
+                return RedirectToAction("MyAdminAccount");
             }
             else
             {
-                return View("MyAccount");
+                return RedirectToAction("MyAccount");
             }
         }
 
@@ -106,7 +158,7 @@ namespace iAttendTFL_WebApp.Controllers
         {
             return View();
         }
-        
+
         public IActionResult TransferAdmin()
         {
             return View();

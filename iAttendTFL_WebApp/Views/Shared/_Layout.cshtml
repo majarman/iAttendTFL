@@ -27,13 +27,23 @@
                 </a>
             </div>
             <div class="navbar-links">
-                <a asp-controller="Home" asp-action="Attendance" asp-route-accountType='A'>Attendance</a>
-                <a asp-controller="Home" asp-action="Account" asp-route-accountType='A'>My Account</a>
+                @{
+                    var sessionName = new Byte[20];
+                    if (!Context.Session.TryGetValue("Email", out sessionName))
+                    {
+                        <a asp-controller="Home" asp-action="Login">Login</a>
+                        <a asp-controller="Home" asp-action="CreateAccount">Register</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Home" asp-action="Attendance">Attendance</a>
+                        <a asp-controller="Home" asp-action="Account" asp-route-accountType='A'>My Account</a>
+                    }
+                }
             </div>
         </nav>
     </header>
     <main role="main">
-
         @RenderBody()
     </main>
     <footer class="border-top footer text-muted">
