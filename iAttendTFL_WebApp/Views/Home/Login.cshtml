@@ -2,8 +2,9 @@
     ViewData["Title"] = "Login";
 }
 
-<h2 class="hor-center">iAttend Login</h2>
-<div class="small-div">
+<div class="border-div small-div">
+    <h2 class="hor-center">Log In</h2>
+    <br />
     @using (Html.BeginForm("TestAttemptLogin", "Home", FormMethod.Post))
     {
         <table class="no-design-table">
@@ -16,7 +17,7 @@
                 <td><input type="password" style="width: 100%;" name="password" id="password" required /></td>
             </tr>
         </table>
-        <input style="padding: 5px 25px 5px 25px; display: block; margin: auto;" type="submit" value="Login" />
+        <input type="submit" value="Login" style="display: block; margin: auto;" />
     }
     <br />
     @if (ViewData["Error"] != null)
@@ -24,8 +25,8 @@
         <span class="subtext" style="color: darkred; text-align: center; display: block;">@ViewData["Error"]</span>
         <br />
     }
-    <span class="subtext">Forgot your password? <a asp-controller="Home" asp-action="RequestNewPassword">Click here to reset your password.</a></span>
+    <span class="subtext"><a asp-controller="Home" asp-action="RequestNewPassword">Forgot your password?</a></span>
     <br />
     <br />
-    <span class="subtext">New user? <a asp-controller="Home" asp-action="CreateAccount">Click here to create an account.</a></span>
+    <span class="subtext"><a asp-controller="Home" asp-action="CreateAccount">Create an account.</a></span>
 </div>

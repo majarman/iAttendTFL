@@ -29,16 +29,19 @@ main {
     font-size: 12pt;
 }
 
-div.small-div {
-    width: 50%;
+div.border-div {
     margin: auto;
-    padding: 75px 20px 75px 20px;
     background-color: white;
     border: 1px solid #c9c9c9;
     border-radius: 6px;
 }
 
-p, span, label, select, table tr td, input, button {
+div.small-div {
+    width: 50%;
+    padding: 75px 20px 75px 20px;
+}
+
+p, span, label, select, table tr td, input, button, ul, ol {
     font-family: 'Montserrat', sans-serif;
     font-size: 16pt;
     color: #454545;
@@ -192,14 +195,16 @@ input {
     border-radius: 6px;
 }
 
-    input[type=submit] {
+    input[type=submit], input[type=button] {
         background-color: #8e18c9;
         border: none;
         color: #fafafa;
+        padding: 5px 25px 5px 25px;
     }
 
-        input[type=submit]:hover {
+        input[type=submit]:hover, input[type=button]:hover {
             color: #c9c9c9;
+            cursor: pointer;
         }
 
 /* =================================
@@ -210,6 +215,8 @@ button {
     background-color: #8e18c9;
     color: #fafafa;
     border: 0;
+    border-radius: 6px;
+    padding: 5px 25px 5px 25px;
 }
 
     button:hover {
@@ -365,6 +372,11 @@ table.no-design-table tr td {
         padding-left: initial;
         padding-right: initial;
     }
+
+    div.small-div {
+        width: 75%;
+        padding: 50px 15px 50px 15px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -377,6 +389,11 @@ table.no-design-table tr td {
         padding-left: 5%;
         padding-right: 5%;
         font-size: 12pt;
+    }
+
+    div.small-div {
+        width: 100%;
+        padding: 25px 5px 25px 5px;
     }
 }
 

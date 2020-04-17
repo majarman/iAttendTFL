@@ -22,34 +22,283 @@ namespace iAttendTFL_WebApp.Controllers
             _logger = logger;
         }
 
+        public IActionResult Account()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+            else if (Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
+            {
+                return RedirectToAction("MyAdminAccount");
+            }
+
+            return RedirectToAction("MyAccount");
+        }
+
+        public IActionResult AlreadyLoggedIn()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+
+            return View();
+        }
+
         [HttpPost]
         public IActionResult AttemptLogin(string email, string password)
         {
-            char accountType = '~';             // GET ACCOUNT TYPE FROM DB
-            byte[] hashedPassword = null;       // GET HASHED PASSWORD FROM DB
-            byte[] salt = null;                 // GET SALT FROM DB
-
-            byte[] hashedInput = KeyDerivation.Pbkdf2(
-                password: password.ToLower(),
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA1,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8);
-
-            if (hashedInput == hashedPassword)
+            if (HttpContext.Session.GetString("Email") != null)
             {
-                HttpContext.Session.SetString("Email", email);
-                HttpContext.Session.SetString("AccountType", Convert.ToString(accountType));
-
-                return RedirectToAction("Attendance");
+                return RedirectToAction("AlreadyLoggedIn");
             }
+            // else if (email is in database)
+            // {
+                char accountType = '~';             // GET ACCOUNT TYPE FROM DB
+                byte[] hashedPassword = null;       // GET HASHED PASSWORD FROM DB
+                byte[] salt = null;                 // GET SALT FROM DB
+
+                byte[] hashedInput = KeyDerivation.Pbkdf2(
+                    password: password.ToLower(),
+                    salt: salt,
+                    prf: KeyDerivationPrf.HMACSHA1,
+                    iterationCount: 10000,
+                    numBytesRequested: 256 / 8);
+
+                if (hashedInput == hashedPassword)
+                {
+                    HttpContext.Session.SetString("Email", email);
+                    HttpContext.Session.SetString("AccountType", Convert.ToString(accountType));
+
+                    return RedirectToAction("Attendance");
+                }
+            // }
 
             return RedirectToAction("Login", new { error = true });
+        }
+
+        public IActionResult Attendance()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+            else if (Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('m') ||
+                     Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
+            {
+                return RedirectToAction("FacultyAttendance");
+            }
+
+            return RedirectToAction("StudentAttendance");
+        }
+
+        public IActionResult ChangePassword()
+        {
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                foreach (var cookie in Request.Cookies.Keys)
+                {
+                    if (cookie == ".AspNetCore.Session")
+                    {
+                        Response.Cookies.Delete(cookie);
+                    }
+                }
+            }
+
+            return View();
+        }
+
+        public IActionResult CreateAccount()
+        {
+            return View();
+        }
+
+        public IActionResult DoesNotHavePermission(bool requiresMod)
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+
+            ViewData["RequiresMod"] = requiresMod;
+
+            return View();
+        }
+
+        public IActionResult EditAnAccount()
+        {
+            if(HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
+            {
+                return RedirectToAction("DoesNotHavePermission", new { requiresMod = false });
+            }
+
+            return View();
+        }
+        
+        public IActionResult EditMyAdminAccount()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
+            {
+                return RedirectToAction("DoesNotHavePermission", new { requiresMod = false });
+            }
+
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult FacultyAttendance()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a') &&
+                     !Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('m'))
+            {
+                return RedirectToAction("DoesNotHavePermission", new { requiresMod = true });
+            }
+
+            return View();
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Login(bool error = false)
+        {
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                return RedirectToAction("AlreadyLoggedIn");
+            }
+            else if (error)
+            {
+                ViewData["Error"] = "Either the username or password was incorrect.";
+            }
+
+            return View();
+        }
+
+        public IActionResult Logout()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                if (cookie == ".AspNetCore.Session")
+                {
+                    Response.Cookies.Delete(cookie);
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult ManageAccounts()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
+            {
+                return RedirectToAction("DoesNotHavePermission", new { requiresMod = false });
+            }
+
+            return View();
+        }
+
+        public IActionResult MyAccount()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+
+            return View();
+        }
+
+        public IActionResult MyAdminAccount()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
+            {
+                return RedirectToAction("DoesNotHavePermission", new { requiresMod = false });
+            }
+
+            return View();
+        }
+
+        public IActionResult NotLoggedIn()
+        {
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                return RedirectToAction("AlreadyLoggedIn");
+            }
+
+            return View();
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+        
+        public IActionResult RequestNewPassword()
+        {
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                foreach (var cookie in Request.Cookies.Keys)
+                {
+                    if (cookie == ".AspNetCore.Session")
+                    {
+                        Response.Cookies.Delete(cookie);
+                    }
+                }
+            }
+
+            return View();
+        }
+
+        public IActionResult StudentAttendance()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+
+            return View();
         }
 
         [HttpPost]
         public IActionResult TestAttemptLogin(string email, string password)
         {
+            if (HttpContext.Session.GetString("Email") != null)
+            {
+                return RedirectToAction("AlreadyLoggedIn");
+            }
+
             string hashedInput = password;
             string hashedPassword = "Password";
             char accountType = 's';
@@ -65,110 +314,18 @@ namespace iAttendTFL_WebApp.Controllers
             return RedirectToAction("Login", new { error = true });
         }
 
-        public IActionResult ChangePassword()
-        {
-            return View();
-        }
-
-        public IActionResult CreateAccount()
-        {
-            return View();
-        }
-        
-        public IActionResult EditAnAccount()
-        {
-            return View();
-        }
-        
-        public IActionResult EditMyAdminAccount()
-        {
-            return View();
-        }
-        
-        public IActionResult Attendance()
-        {
-            if (Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('m') ||
-                Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
-            {
-                return RedirectToAction("FacultyAttendance");
-            }
-            else
-            {
-                return RedirectToAction("StudentAttendance");
-            }
-        }
-
-        public IActionResult FacultyAttendance()
-        {
-            return View();
-        }
-
-        public IActionResult StudentAttendance()
-        {
-            return View();
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Login(bool error = false)
-        {
-            if (error)
-            {
-                ViewData["Error"] = "Either the username or password was incorrect";
-            }
-            return View();
-        }
-
-        public IActionResult ManageAccounts()
-        {
-            return View();
-        }
-
-        public IActionResult MyAccount()
-        {
-            return View();
-        }
-
-        public IActionResult MyAdminAccount()
-        {
-            return View();
-        }
-
-        public IActionResult Account()
-        {
-            if (Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
-            {
-                return RedirectToAction("MyAdminAccount");
-            }
-            else
-            {
-                return RedirectToAction("MyAccount");
-            }
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-        
-        public IActionResult RequestNewPassword()
-        {
-            return View();
-        }
-
         public IActionResult TransferAdmin()
         {
-            return View();
-        }
-       
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
+            {
+                return RedirectToAction("DoesNotHavePermission", new { requiresMod = false });
+            }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }
