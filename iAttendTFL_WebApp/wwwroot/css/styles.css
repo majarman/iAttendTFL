@@ -29,6 +29,15 @@ main {
     font-size: 12pt;
 }
 
+div.small-div {
+    width: 50%;
+    margin: auto;
+    padding: 75px 20px 75px 20px;
+    background-color: white;
+    border: 1px solid #c9c9c9;
+    border-radius: 6px;
+}
+
 p, span, label, select, table tr td, input, button {
     font-family: 'Montserrat', sans-serif;
     font-size: 16pt;
@@ -85,7 +94,7 @@ header {
     }
 
         .navbar .navbar-links a {
-            padding-left: 20px;
+            margin-left: 20px;
             font-family: 'Montserrat', sans-serif;
             font-size: 16pt;
             color: #fafafa;
@@ -188,6 +197,10 @@ input {
         border: none;
         color: #fafafa;
     }
+
+        input[type=submit]:hover {
+            color: #c9c9c9;
+        }
 
 /* =================================
     Buttons
@@ -302,6 +315,8 @@ table {
 table.no-design-table tr td {
     font-size: 16pt;
     border: none;
+    padding-left: 0;
+    padding-right: 0;
 }
 
     table.no-design-table tr:nth-child(even) td {

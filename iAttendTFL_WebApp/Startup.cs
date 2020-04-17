@@ -25,6 +25,12 @@ namespace iAttendTFL_WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+            
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(1); // Session Timeout
+            });
+
             services.AddControllersWithViews();
 
             services.AddDbContext<iAttendTFL_WebAppContext>(options =>
@@ -50,6 +56,7 @@ namespace iAttendTFL_WebApp
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
