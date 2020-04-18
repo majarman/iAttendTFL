@@ -31,7 +31,7 @@
                     var sessionName = new Byte[20];
                     if (!Context.Session.TryGetValue("Email", out sessionName))
                     {
-                        <a asp-controller="Home" asp-action="Login">Login</a>
+                        <a asp-controller="Home" asp-action="Login">Log In</a>
                         <a asp-controller="Home" asp-action="CreateAccount">Register</a>
                     }
                     else
@@ -66,7 +66,7 @@
             <a asp-controller="Home" asp-action="StudentAttendance">StudentAttendance</a>
             <a asp-controller="Home" asp-action="TransferAdmin">TransferAdmin</a>
             <a asp-controller="Accounts" asp-action="Index">Accounts in the DB</a>
-            <a asp-controller="Home" asp-action="Login">Logout</a>
+            <a asp-controller="Home" asp-action="Logout">Logout</a>
         </div>
     </footer>
     @if (IsSectionDefined("scripts"))

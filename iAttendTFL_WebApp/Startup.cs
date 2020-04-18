@@ -28,7 +28,7 @@ namespace iAttendTFL_WebApp
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             
             services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(1); // Session Timeout
+                options.IdleTimeout = TimeSpan.FromMinutes(20); // Session Timeout
             });
 
             services.AddControllersWithViews();
