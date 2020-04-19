@@ -11,7 +11,7 @@ namespace iAttendTFL_WebApp.Models
         public string first_name { get; set; }
         public string last_name { get; set; }
         public string email { get; set; }
-        public string salt { get; set; }
+        public string salt { get; set; } ="demosalt";
         public string password_hash { get; set; }
         public char account_type { get; set; }
         public bool email_verified { get; set; }
