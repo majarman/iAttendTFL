@@ -14,42 +14,44 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="id" />
             <div class="form-group">
-                <label asp-for="first_name" class="control-label"></label>
+                <label asp-for="first_name" class="control-label">First Name</label>
                 <input asp-for="first_name" class="form-control" />
                 <span asp-validation-for="first_name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="last_name" class="control-label"></label>
+                <label asp-for="last_name" class="control-label">Last Name</label>
                 <input asp-for="last_name" class="form-control" />
                 <span asp-validation-for="last_name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="email" class="control-label"></label>
+                <label asp-for="email" class="control-label">Email</label>
                 <input asp-for="email" class="form-control" />
                 <span asp-validation-for="email" class="text-danger"></span>
             </div>
+
+            @* <div class="form-group">
+            <label asp-for="salt" class="control-label"></label>
+            <input asp-for="salt" class="form-control" />
+            <span asp-validation-for="salt" class="text-danger"></span>
+        </div> *@
+
             <div class="form-group">
-                <label asp-for="salt" class="control-label"></label>
-                <input asp-for="salt" class="form-control" />
-                <span asp-validation-for="salt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="password_hash" class="control-label"></label>
+                <label asp-for="password_hash" class="control-label">Password</label>
                 <input asp-for="password_hash" class="form-control" />
                 <span asp-validation-for="password_hash" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="account_type" class="control-label"></label>
+                <label asp-for="account_type" class="control-label">Account Type</label>
                 <input asp-for="account_type" class="form-control" />
                 <span asp-validation-for="account_type" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="email_verified" /> @Html.DisplayNameFor(model => model.email_verified)
-                </label>
-            </div>
+            @*<div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="email_verified" /> @Html.DisplayNameFor(model => model.email_verified)
+            </label>
+        </div>*@
             <div class="form-group">
-                <label asp-for="expected_graduation_date" class="control-label"></label>
+                <label asp-for="expected_graduation_date" class="control-label">Expected Graduation Date (dd-mm-yyyy):</label>
                 <input asp-for="expected_graduation_date" class="form-control" />
                 <span asp-validation-for="expected_graduation_date" class="text-danger"></span>
             </div>
@@ -59,7 +61,7 @@
                 <span asp-validation-for="track_id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
