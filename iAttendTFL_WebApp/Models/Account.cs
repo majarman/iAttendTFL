@@ -14,7 +14,7 @@ namespace iAttendTFL_WebApp.Models
         public string salt { get; set; } ="demosalt";
         public string password_hash { get; set; }
         public char account_type { get; set; }
-        public bool email_verified { get; set; }
+        public bool email_verified { get; set; } = false;
         public DateTime expected_graduation_date { get; set; }
         public int track_id { get; set; }
     }
