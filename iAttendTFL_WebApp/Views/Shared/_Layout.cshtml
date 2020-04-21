@@ -1,4 +1,22 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    string email = null;
+    var e = new Byte[32];
+    bool isLoggedIn = Context.Session.TryGetValue("Email", out e);
+    if (isLoggedIn)
+    {
+        email = System.Text.Encoding.UTF8.GetString(e);
+    }
+
+    char accountType = '\0';
+    var at = new Byte[1];
+    bool hasAccountType = Context.Session.TryGetValue("AccountType", out at);
+    if (hasAccountType)
+    {
+        accountType = Convert.ToChar(System.Text.Encoding.UTF8.GetString(at));
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -18,56 +36,94 @@
     <meta name="theme-color" content="#333333">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="navbar-logo">
-                <a class="navbar-logo-link" asp-controller="Home" asp-action="Index">
-                    <img id="navbar-logo-image" src="~/resources/images/iAttend-Logo-White.svg" />
-                    <span id="navbar-logo-text">iAttend</span>
-                </a>
+    <div id="navbar-and-content">
+        <header>
+            <nav class="navbar">
+                <div class="navbar-logo">
+                    <a class="navbar-logo-link" asp-controller="Home" asp-action="Index">
+                        <img id="navbar-logo-image" src="~/resources/images/iAttend-Logo-White.svg" />
+                        <span id="navbar-logo-text">iAttend</span>
+                    </a>
+                </div>
+                <div class="navbar-links">
+                    @{
+                        if (isLoggedIn == false)
+                        {
+                            <a asp-controller="Home" asp-action="Login">Log In</a>
+                            <a asp-controller="Home" asp-action="CreateAccount">Register</a>
+                        }
+                        else
+                        {
+                            if (accountType == 'a')
+                            {
+                                <a asp-controller="Home" asp-action="AdminActions">Admin Actions</a>
+                            }
+                            <a asp-controller="Home" asp-action="Attendance">Attendance</a>
+                            <a asp-controller="Home" asp-action="Events">Events</a>
+                            <a asp-controller="Home" asp-action="MyAccount">My Account</a>
+                        }
+                    }
+                </div>
+            </nav>
+        </header>
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    <footer>
+        <div class="flex-container">
+            <div>
+                <strong>iAttend</strong>
+                <br />
+                <a asp-controller="Home" asp-action="Index">Home</a>
             </div>
-            <div class="navbar-links">
-                @{
-                    var sessionName = new Byte[20];
-                    if (!Context.Session.TryGetValue("Email", out sessionName))
-                    {
-                        <a asp-controller="Home" asp-action="Login">Log In</a>
-                        <a asp-controller="Home" asp-action="CreateAccount">Register</a>
-                    }
-                    else
-                    {
-                        <a asp-controller="Home" asp-action="Attendance">Attendance</a>
-                        <a asp-controller="Home" asp-action="Account" asp-route-accountType='A'>My Account</a>
-                    }
+            <div>
+                <strong>Account</strong>
+                @if (isLoggedIn)
+                {
+                    <br />
+                    <a asp-controller="Home" asp-action="Logout">Log Out</a>
+                    <br />
+                    <a asp-controller="Home" asp-action="MyAccount">My Account</a>
                 }
+                else
+                {
+                    <br />
+                    <a asp-controller="Home" asp-action="Login">Log In</a>
+                    <br />
+                    <a asp-controller="Home" asp-action="CreateAccount">Register</a>
+                }
+                <br />
+                <a asp-controller="Home" asp-action="RequestNewPassword">Reset Password</a>
             </div>
-        </nav>
-    </header>
-    <main role="main">
-        @RenderBody()
-    </main>
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - iAttend - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+            @if (isLoggedIn)
+            {
+                <div>
+                    <strong>Records</strong>
+                    <br />
+                    <a asp-controller="Home" asp-action="Attendance">Attendance</a>
+                    <br />
+                    <a asp-controller="Home" asp-action="Events">Events</a>
+                </div>
+            }
+            @if (isLoggedIn && accountType == 'a')
+            {
+            <div>
+                <strong>Admin</strong>
+                <br />
+                <a asp-controller="Home" asp-action="AdminActions">Admin Actions</a>
+                <br />
+                <a asp-controller="Home" asp-action="ManageTracks">Education Tracks</a>
+                <br />
+                <a asp-controller="Home" asp-action="ManageAccounts">Manage Accounts</a>
+                <br />
+                <a asp-controller="Home" asp-action="ManageTimeFrames">Time Frames</a>
+            </div>
+            }
         </div>
-        <div class="navbar-links">
-            <span>Demo Navigation</span>
-            <a asp-controller="Home" asp-action="ChangePassword">ChangePassword</a>
-            <a asp-controller="Home" asp-action="CreateAccount">CreateAccount</a>
-            <a asp-controller="Home" asp-action="EditAnAccount">EditAnAccount</a>
-            <a asp-controller="Home" asp-action="EditMyAdminAccount">EditMyAdminAccount</a>
-            <a asp-controller="Home" asp-action="FacultyAttendance">FacultyAttendance</a>
-            <a asp-controller="Home" asp-action="Index">Index</a>
-            <a asp-controller="Home" asp-action="Login">Login</a>
-            <a asp-controller="Home" asp-action="ManageAccounts">ManageAccounts</a>
-            <a asp-controller="Home" asp-action="MyAccount">MyAccount</a>
-            <a asp-controller="Home" asp-action="MyAdminAccount">MyAdminAccount</a>
-            <a asp-controller="Home" asp-action="RequestNewPassword">RequestNewPassword</a>
-            <a asp-controller="Home" asp-action="StudentAttendance">StudentAttendance</a>
-            <a asp-controller="Home" asp-action="TransferAdmin">TransferAdmin</a>
-            <a asp-controller="Accounts" asp-action="Index">Accounts in the DB</a>
-            <a asp-controller="Home" asp-action="Logout">Logout</a>
-        </div>
+        <a href="mailto:threefuriouslocomotives@gmail.com">threefuriouslocomotives@gmail.com</a>
+        <br />
+        Copyright &copy; 2020 Three Furious Locomotives. All Rights Reserved.
     </footer>
     @if (IsSectionDefined("scripts"))
     {

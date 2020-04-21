@@ -1,49 +1,39 @@
 ﻿@{
-    ViewData["Title"] = "ManageAccounts";
+    ViewData["Title"] = "Manage Accounts";
 }
 
-<br />
-<br />
-<div style="text-align:center">
-    <h2>Manage Accounts</h2>
-    <br />
-    <br />
-
-    <p>
-        This page is viewable by the admin only. This page should display all of the existing user accounts.
-        The admin can select an account and be taken to the "EditAnAccount" page.
-    </p>
-
-    <table>
-        <tr>
-            <th>More Info</th>
-            <th>Name</th>
-            <th>Attendance Points Needed</th>
-            <th>Attendance Points Fulfilled</th>
-            <th>Progress</th>
-        </tr>
-        <tr>
-            <td><button class="select-user-button">Select</button></td>
-            <td>John Doe</td>
-            <td class="hor-center">7</td>
-            <td class="hor-center">4</td>
-            <td class="hor-center">57%</td>
-        </tr>
-        <tr>
-            <td><button class="select-user-button">Select</button></td>
-            <td>Jane Doe</td>
-            <td class="hor-center">5</td>
-            <td class="hor-center">5</td>
-            <td class="hor-center">100%</td>
-        </tr>
-        <tr>
-            <td><button class="select-user-button">Select</button></td>
-            <td>Sally Student</td>
-            <td class="hor-center">7</td>
-            <td class="hor-center">6</td>
-            <td class="hor-center">85%</td>
-        </tr>
-    </table>
-
-    <br><br>
-</div>
+<h1 class="hor-center-text">Manage Accounts</h1>
+<table>
+    <tr>
+        <th style="width: 1%;">Edit</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Account Type</th>
+        <th>Education Track</th>
+        <th>Expected Graduation</th>
+    </tr>
+    <tr>
+        <td><input type="button" class="select-user-button" onclick="location.href='@Url.Action("EditAnAccount", "Home")'" value="Select"></td>
+        <td>John Doe</td>
+        <td>johndoe@email.com</td>
+        <td>Student</td>
+        <td>Music Major</td>
+        <td>May 2020</td>
+    </tr>
+    <tr>
+        <td><input type="button" class="select-user-button" value="Select"></td>
+        <td>Jane Doe</td>
+        <td>janedoe@email.com</td>
+        <td>Moderator</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="button" class="select-user-button" value="Select"></td>
+        <td>Sally Student</td>
+        <td>salstu@awebsite.com</td>
+        <td>Student</td>
+        <td>Music Minor</td>
+        <td>December 2022</td>
+    </tr>
+</table>

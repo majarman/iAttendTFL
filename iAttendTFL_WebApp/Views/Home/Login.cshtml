@@ -1,32 +1,34 @@
 ﻿@{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Log In";
 }
 
-<div class="border-div small-div">
-    <h2 class="hor-center">Log In</h2>
-    <br />
-    @using (Html.BeginForm("AttemptLogin", "Accounts", FormMethod.Post))
-    {
-        <table class="no-design-table">
-            <tr>
-                <td>Email:</td>
-                <td><input type="text" style="width: 100%;" name="email" id="email" placeholder="someone@email.edu" required /></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type="password" style="width: 100%;" name="password" id="password" required /></td>
-            </tr>
-        </table>
-        <input type="submit" value="Login" style="display: block; margin: auto;" />
-    }
-    <br />
-    @if (ViewData["Error"] != null)
-    {
-        <span class="subtext" style="color: darkred; text-align: center; display: block;">@ViewData["Error"]</span>
+<div class="center-contents-on-screen">
+    <div class="border-div small-div">
+        <h2 class="hor-center-text">Log In</h2>
         <br />
-    }
-    <span class="subtext"><a asp-controller="Home" asp-action="RequestNewPassword">Forgot your password?</a></span>
-    <br />
-    <br />
-    <span class="subtext"><a asp-controller="Home" asp-action="CreateAccount">Create an account.</a></span>
+        @using (Html.BeginForm("AttemptLogin", "Accounts", FormMethod.Post))
+        {
+            <table class="no-design-table">
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" style="width: 100%;" name="email" id="email" required /></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" style="width: 100%;" name="password" id="password" required /></td>
+                </tr>
+            </table>
+            <input type="submit" value="Login" class="hor-center-element" />
+        }
+        <br />
+        @if (ViewData["Error"] != null)
+        {
+            <span class="subtext" style="color: darkred; text-align: center; display: block;">@ViewData["Error"]</span>
+            <br />
+        }
+        <span class="subtext"><a asp-controller="Home" asp-action="RequestNewPassword">Forgot your password?</a></span>
+        <br />
+        <br />
+        <span class="subtext"><a asp-controller="Home" asp-action="CreateAccount">Create an account.</a></span>
+    </div>
 </div>

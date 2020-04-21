@@ -1,61 +1,85 @@
 ﻿@{
     ViewData["Title"] = "Edit a User's Account";
 }
-<br />
-<br />
-<div>
-    <h2 class="hor-center">Edit a User's Account</h2>
-    <br />
-    <br />
-    <form id="formEditUser">
-        <table class="no-design-table">
-            <tr>
-                <td width="30%">First Name:</td>
-                <td><input id="inputFirstName" style="width: 100%;" placeholder="Example: Matthew" required /></td>
-            </tr>
-            <tr>
-                <td width="30%">Last Name:</td>
-                <td><input id="inputLastName" style="width: 100%;" placeholder="Example: Dutt" required /></td>
-            </tr>
-            <tr>
-                <td width="30%">Expected Graduation Data:</td>
-                <td><input id="inputExpectedGraduationDate" style="width: 100%;" placeholder="Example: 2020" required /></td>
-            </tr>
-         </table>
+
+<div class="center-contents-on-screen">
+    <div class="border-div medium-div">
+        <h1 class="hor-center-text">Edit a User's Account</h1>
         <br />
-        <label for="selectEditUserTrack">Select user's track:</label>
-        <select id="selectEditUserTrack" required>
-            <option value="musicEducation">Music Education</option>
-            <option value="musicBA">Music BA</option>
-            <option value="musicMinor">Music Minor</option>
-        </select>
+        <form id="formEditUser">
+            <table class="no-design-table">
+                <tr>
+                    <td>First Name:</td>
+                    <td><input id="inputFirstName" style="width: 100%;" required /></td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td><input id="inputLastName" style="width: 100%;" required /></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>NON-CHANGEABLE EMAIL</td>
+                </tr>
+                <tr>
+                    <td>Account Type:</td>
+                    <td>
+                        <select class="hor-center-text" style="width: 100%;" id="selectEditUserPermissions" required>
+                            <option selected style="display: none;">-- Select Account Type --</option>
+                            <option value="User">Student</option>
+                            <option value="Moderator">Professor - Moderator</option>
+                            <option value="Administrator">Department Chair - Administrator</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Select Education Track:</td>
+                    <td>
+                        <select class="hor-center-text" id="selectTrack" style="width: 48%;" required>
+                            <option selected style="display: none;">-- Select Track --</option>
+                            <option value="musicEducation">Music Education</option>
+                            <option value="musicBA">Music BA</option>
+                            <option value="musicMinor">Music Minor</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Expected Graduation Date:</td>
+                    <td>
+                        <select class="hor-center-text" id="selectMonth" style="width: 48%;" required>
+                            <option selected style="display: none;">-- Select Month --</option>
+                            <option value="january">January</option>
+                            <option value="february">February</option>
+                            <option value="march">March</option>
+                            <option value="june">June</option>
+                            <option value="july">July</option>
+                            <option value="august">August</option>
+                            <option value="september">September</option>
+                            <option value="october">October</option>
+                            <option value="november">November</option>
+                            <option value="december">December</option>
+                        </select>
+                        <select class="hor-center-text" id="selectYear" style="width: 48%; float: right;" required>
+                            <option selected style="display: none;">-- Select Year --</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <input class="hor-center-element" id="submitEditUser" type="submit" value="Confirm Changes" />
+        </form>
+
+        <!--After the information is processed and changed, this page will be reloaded, with this message unhidden and the form hidden.-->
+        <h4 hidden>Account Edited Successfully</h4>
+
+        <!--After the account is properly deleted, this page will be reloaded, with this message unhidden and the form hidden.-->
+        <h4 hidden>Account Removed Successfully</h4>
+
         <br />
         <br />
-        <label for="selectEditUserPermissions">Select user's account type:</label>
-        <select id="selectEditUserPermissions" required>
-            <option value="User">Student - User</option>
-            <option value="Moderator">Professor - Moderator</option>
-            <!--Notice that Admin is not an option. We will allow for transfer of admin privileges to successors only to prevent
-    the scenario where all professors would have unnecessary Admin permissions.-->
-        </select>
-        <br />
-        <br />
-        <input id="submitEditUser" type="submit" value="Confirm Changes" />
-        <!--<button onclick="submitEditUser();">Confirm Changes</button>-->
-
-        <br /><br />
-
-        <input id="submitDeleteAccount" type="submit" value="Delete Account" />
-        <!--<button onclick="submitDeleteAccount();">Delete Account</button>-->
-
-    </form>
-
-    <!--After the information is processed and changed, this page will be reloaded, with this message unhidden and the form hidden.-->
-    <h4 hidden>Account Edited Successfully</h4>
-
-    <!--After the account is properly deleted, this page will be reloaded, with this message unhidden and the form hidden.-->
-    <h4 hidden>Account Removed Successfully</h4>
-
-    <br />
-    <br />
+    </div>
 </div>
