@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Education Tracks";
+}
+
+<div class="medium-div hor-center-element">
+    <h1 class="hor-center-text">Education Tracks</h1>
+    <input type="button" class="hor-center-element" value="Create Education Track" />
+    <br />
+    <table>
+        <tr>
+            <th style="width: 1%;">Edit</th>
+            <th>Track</th>
+            <th>Type</th>
+            <th style="width: 1%;">Requirements</th>
+        </tr>
+        <tr>
+            <td><input type="button" value="Select" /></td>
+            <td>Music Major</td>
+            <td>Major</td>
+            <td><input type="button" onclick="location.href='@Url.Action("TrackRequirements", "Home")'" class="hor-center-element" value="View" /></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="Select" /></td>
+            <td>Music Minor</td>
+            <td>Minor</td>
+            <td><input type="button" class="hor-center-element" value="View" /></td>
+        </tr>
+    </table>
+</div>

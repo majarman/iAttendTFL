@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Time Frames";
+}
+
+<div class="medium-div hor-center-element">
+    <h1 class="hor-center-text">Time Frames</h1>
+    <input type="button" class="hor-center-element" value="Create Time Frame" />
+    <br />
+    <table>
+        <tr>
+            <th style="width: 1%;">Edit</th>
+            <th>Time Frame</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th style="width: 1%;">Tracks in Time Frame</th>
+        </tr>
+        <tr>
+            <td><input type="button" value="Select" /></td>
+            <td>Spring 2020</td>
+            <td>01/01/2020</td>
+            <td>05/15/2020</td>
+            <td><input type="button" onclick="location.href='@Url.Action("TimeFrameTracks", "Home")'" class="hor-center-element" value="View" /></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="Select" /></td>
+            <td>Fall 2020</td>
+            <td>08/15/2020</td>
+            <td>12/01/2020</td>
+            <td><input type="button" class="hor-center-element" value="View" /></td>
+        </tr>
+    </table>
+</div>

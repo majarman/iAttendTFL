@@ -2,31 +2,55 @@
     box-sizing: border-box; /* Includes borders and padding when specifying element size */
 }
 
+html {
+    width: 100vw;
+    overflow-x: hidden;
+}
+
 body {
     margin: 0;
     background-color: #fafafa;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
     padding: 1% 20% 1% 20%;
+    height: 100%;
 }
 
-.hor-center {
+/* Pushes footer to the bottom of short pages. */
+#navbar-and-content {
+    flex: 1 0 auto;
+}
+
+html, body {
+    height: 100%;
+}
+
+.hor-center-text {
     text-align: center;
+}
+
+.hor-center-element {
+    display: block;
+    margin: auto;
 }
 
 .inline {
     display: inline;
 }
 
-.select-user-button,
-.edit-user-button {
-    width: 100%;
-    min-width: 80px;
-}
-
 .subtext {
     font-size: 12pt;
+}
+
+div.center-contents-on-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 div.border-div {
@@ -34,14 +58,27 @@ div.border-div {
     background-color: white;
     border: 1px solid #c9c9c9;
     border-radius: 6px;
+    padding: 75px 20px 75px 20px;
 }
 
 div.small-div {
     width: 50%;
-    padding: 75px 20px 75px 20px;
 }
 
-p, span, label, select, table tr td, input, button, ul, ol {
+div.medium-div {
+    width: 75%;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    .flex-container div {
+        margin: 15px 30px 15px 0px;
+    }
+
+p, span, label, select, table tr td, input, button, ul, ol, footer {
     font-family: 'Montserrat', sans-serif;
     font-size: 16pt;
     color: #454545;
@@ -113,6 +150,20 @@ header {
 }
 
 /* =================================
+    Footer
+==================================== */
+
+footer {
+    flex-shrink: 0;
+    background-color: #e8e8e8;
+    border-top: 1px solid #dbdbdb;
+    width: 100%;
+    font-size: 12pt;
+    padding: 1% 20% 1% 20%;
+    margin-top: 2%;
+}
+
+/* =================================
     Text Headers
 ==================================== */
 
@@ -148,6 +199,22 @@ h6 {
 }
 
 /* =================================
+    Links
+==================================== */
+
+a {
+    color: #8e18c9;
+}
+
+    a:visited {
+        color: #420a5e;
+    }
+
+    a:active {
+        color: #b94af0;
+    }
+
+/* =================================
     Select Dropdowns
 ==================================== */
 
@@ -168,7 +235,7 @@ select {
     background-repeat: no-repeat;
     border: 1px solid #9537c4;
     color: #fafafa;
-    font-size: 14pt;
+    font-size: 16pt;
     text-overflow: ellipsis;
 }
 
@@ -240,6 +307,9 @@ hr {
     border: 0;
     height: 0;
     border-top: 1px solid #dedede;
+    display: block;
+    margin: auto;
+    width: 95%;
 }
 
 /* =================================
@@ -315,7 +385,7 @@ table {
 
     table tr th,
     table tr td {
-        padding: 1%;
+        padding: 10px;
         font-size: 12pt;
     }
 
@@ -327,7 +397,7 @@ table.no-design-table tr td {
 }
 
     table.no-design-table tr:nth-child(even) td {
-        background-color: #fafafa;
+        background-color: initial;
     }
 
 /* =================================
@@ -336,6 +406,11 @@ table.no-design-table tr td {
 
 @media (max-width: 1500px) {
     .navbar {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+
+    footer {
         padding-left: 15%;
         padding-right: 15%;
     }
@@ -358,6 +433,11 @@ table.no-design-table tr td {
         padding-right: 10%;
     }
 
+    footer {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
     .navbar-links li a {
         padding-left: 10px;
     }
@@ -373,14 +453,26 @@ table.no-design-table tr td {
         padding-right: initial;
     }
 
+    div.border-div {
+        padding: 50px 15px 50px 15px;
+    }
+
     div.small-div {
         width: 75%;
-        padding: 50px 15px 50px 15px;
+    }
+
+    div.medium-div {
+        width: 85%;
     }
 }
 
 @media (max-width: 768px) {
     .navbar {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    footer {
         padding-left: 5%;
         padding-right: 5%;
     }
@@ -391,9 +483,16 @@ table.no-design-table tr td {
         font-size: 12pt;
     }
 
+    div.border-div {
+        padding: 25px 5px 25px 5px;
+    }
+
     div.small-div {
         width: 100%;
-        padding: 25px 5px 25px 5px;
+    }
+
+    div.medium-div {
+        width: 100%;
     }
 }
 

@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Events";
+}
+
+<h1 class="hor-center-text">Events</h1>
+<table>
+    <tr>
+        @if (Convert.ToChar(ViewData["AccountType"]) == 'a' || Convert.ToChar(ViewData["AccountType"]) == 'm')
+        {
+            <th style="width: 1%;">Edit</th>
+        }
+        <th>Event</th>
+        <th>Type</th>
+        <th>Attendance Points</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+    </tr>
+    <tr>
+        @if (Convert.ToChar(ViewData["AccountType"]) == 'a' || Convert.ToChar(ViewData["AccountType"]) == 'm')
+        {
+            <td><input type="button" value="Select" /></td>
+        }
+        <td>Jane Doe Recital</td>
+        <td>Music Recital</td>
+        <td class="hor-center-text">2</td>
+        <td>4/1/2020 10:00am</td>
+        <td>4/1/2020 12:00pm</td>
+    </tr>
+    <tr>
+        @if (Convert.ToChar(ViewData["AccountType"]) == 'a' || Convert.ToChar(ViewData["AccountType"]) == 'm')
+        {
+            <td><input type="button" value="Select" /></td>
+        }
+        <td>Steel Band Concert</td>
+        <td>Concert</td>
+        <td class="hor-center-text">1</td>
+        <td>4/2/2020 6:30pm</td>
+        <td>4/2/2020 7:30pm</td>
+    </tr>
+    <tr>
+        @if (Convert.ToChar(ViewData["AccountType"]) == 'a' || Convert.ToChar(ViewData["AccountType"]) == 'm')
+        {
+            <td><input type="button" value="Select" /></td>
+        }
+        <td>Hamlet</td>
+        <td>Theater Performance</td>
+        <td class="hor-center-text">1</td>
+        <td>4/2/2020 4:30pm</td>
+        <td>4/2/2020 6:00pm</td>
+    </tr>
+    <tr>
+        @if (Convert.ToChar(ViewData["AccountType"]) == 'a' || Convert.ToChar(ViewData["AccountType"]) == 'm')
+        {
+            <td><input type="button" value="Select" /></td>
+        }
+        <td>Steel Band Concert 2: Electric Boogaloo</td>
+        <td>Concert</td>
+        <td class="hor-center-text">1</td>
+        <td>4/3/2020 6:30pm</td>
+        <td>4/3/2020 7:30pm</td>
+    </tr>
+</table>

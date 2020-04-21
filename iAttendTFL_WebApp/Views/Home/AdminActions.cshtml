@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Admin Actions";
+}
+
+<div class="medium-div hor-center-element">
+    <h1 class="hor-center-text">Admin Actions</h1>
+    <h3 class="hor-center-text">Education Tracks</h3>
+    <p>
+        Education tracks contain a list of requirements for students to complete in a time frame. Education tracks could be majors, minors,
+        or graduate degrees. By clicking the button below, you can view, edit, and create education tracks.
+    </p>
+    <input type="button" class="hor-center-element" onclick="location.href='@Url.Action("ManageTracks", "Home")'" value="Manage Education Tracks" />
+    <br />
+    <hr />
+    <h3 class="hor-center-text">Manage Accounts</h3>
+    <p>
+        You are able to edit some information for user accounts, such as a user's name, account type, education track, and graduation date.
+        Users are not able to edit this information on their own and must request changes from an administrator. Requiring administrators
+        to change user account settings is meant to avoid users trying to cheat the system or give themselves elevated permissions.
+        By clicking the button below, you can view and edit user accounts.
+    </p>
+    <input type="button" class="hor-center-element" onclick="location.href='@Url.Action("ManageAccounts", "Home")'" value="Manage Accounts" />
+    <br />
+    <hr />
+    <h3 class="hor-center-text">Requirements</h3>
+    <p>
+        Requirements are the type of events that students must attend to receive credit. Every event should fulfill a requirement, and education tracks
+        specify how many requirements a student needs to complete. Requirements could be attending a concert, recital, etc.
+        By clicking the button below, you can view, edit, and create requirements.
+    </p>
+    <input type="button" class="hor-center-element" onclick="location.href='@Url.Action("ManageRequirements", "Home")'" value="Manage Requirements" />
+    <br />
+    <hr />
+    <h3 class="hor-center-text">Time Frames</h3>
+    <p>
+        Time frames specify how long students have to complete their education track requirements. Time frames could be quarters,
+        semesters, or school years. Each time frame has a start and end date, and multiple education tracks can be active during a time frame.
+        By clicking the button below, you can view, edit, and create time frames.
+    </p>
+    <input type="button" class="hor-center-element" onclick="location.href='@Url.Action("ManageTimeFrames", "Home")'" value="Manage Time Frames" />
+</div>

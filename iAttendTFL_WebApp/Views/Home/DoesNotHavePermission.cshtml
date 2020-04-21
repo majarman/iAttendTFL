@@ -2,15 +2,19 @@
     ViewData["Title"] = "Permission Error";
 }
 
-<div class="border-div small-div">
-    <h4 class="hor-center">You Do Not Have Permission To Access This Page</h4>
-    <p>Only the following account types can access this page:</p>
-    <ul>
-        <li>Administrator</li>
-        @if ((bool)ViewData["RequiresMod"])
-        {
-            <li>Moderator</li>
-        }
-    </ul>
-    <p>If you feel that this is a mistake, please make sure that you are using an account with elevated permissions or contact your administrator about updating your permissions.</p>
+<div class="center-contents-on-screen">
+    <div class="center-contents-on-screen">
+        <div class="border-div small-div">
+            <h4 class="hor-center-text">You Do Not Have Permission To Access This Page</h4>
+            <p>Only the following account types can access this page:</p>
+            <ul>
+                <li>Administrator</li>
+                @if ((bool)ViewData["RequiresMod"])
+                {
+                    <li>Moderator</li>
+                }
+            </ul>
+            <p>If you feel that this is a mistake, please make sure that you are using an account with elevated permissions or contact your administrator about updating your permissions.</p>
+        </div>
+    </div>
 </div>

@@ -16,18 +16,18 @@ namespace iAttendTFL_WebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Account()
+        public IActionResult AdminActions()
         {
             if (HttpContext.Session.GetString("Email") == null)
             {
                 return RedirectToAction("NotLoggedIn");
             }
-            else if (Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
+            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
             {
-                return RedirectToAction("MyAdminAccount");
+                return RedirectToAction("DoesNotHavePermission", new { requiresMod = false });
             }
 
-            return RedirectToAction("MyAccount");
+            return View();
         }
 
         public IActionResult AlreadyLoggedIn()
@@ -101,25 +101,23 @@ namespace iAttendTFL_WebApp.Controllers
 
             return View();
         }
-        
-        public IActionResult EditMyAdminAccount()
-        {
-            if (HttpContext.Session.GetString("Email") == null)
-            {
-                return RedirectToAction("NotLoggedIn");
-            }
-            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
-            {
-                return RedirectToAction("DoesNotHavePermission", new { requiresMod = false });
-            }
-
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Events()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+
+            ViewData["AccountType"] = HttpContext.Session.GetString("AccountType");
+
+            return View();
         }
 
         public IActionResult FacultyAttendance()
@@ -188,17 +186,7 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
 
-        public IActionResult MyAccount()
-        {
-            if (HttpContext.Session.GetString("Email") == null)
-            {
-                return RedirectToAction("NotLoggedIn");
-            }
-
-            return View();
-        }
-
-        public IActionResult MyAdminAccount()
+        public IActionResult ManageRequirements()
         {
             if (HttpContext.Session.GetString("Email") == null)
             {
@@ -208,6 +196,46 @@ namespace iAttendTFL_WebApp.Controllers
             {
                 return RedirectToAction("DoesNotHavePermission", new { requiresMod = false });
             }
+
+            return View();
+        }
+
+        public IActionResult ManageTimeFrames()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
+            {
+                return RedirectToAction("DoesNotHavePermission", new { requiresMod = false });
+            }
+
+            return View();
+        }
+
+        public IActionResult ManageTracks()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
+            {
+                return RedirectToAction("DoesNotHavePermission", new { requiresMod = false });
+            }
+
+            return View();
+        }
+
+        public IActionResult MyAccount()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+
+            ViewData["AccountType"] = HttpContext.Session.GetString("AccountType");
 
             return View();
         }
@@ -253,7 +281,21 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
 
-        public IActionResult TransferAdmin()
+        public IActionResult TimeFrameTracks()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
+            {
+                return RedirectToAction("DoesNotHavePermission", new { requiresMod = false });
+            }
+
+            return View();
+        }
+
+        public IActionResult TrackRequirements()
         {
             if (HttpContext.Session.GetString("Email") == null)
             {

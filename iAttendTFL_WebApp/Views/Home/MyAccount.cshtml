@@ -1,22 +1,44 @@
 ﻿@{
-    ViewData["Title"] = "MyAccount";
+    ViewData["Title"] = "My Account";
 }
-<div style="text-align:center">
-    <h2>My Account</h2>
+
+<div class="small-div" style="margin: auto;">
+    <h1 class="hor-center-text">My Account</h1>
+    <table class="no-design-table">
+        <tr>
+            <td>TFL Code:</td>
+            <td><img id="tfl-code" style="vertical-align: middle; height: 50px; width: 100%;" src="~/resources/images/TFL-Code.PNG" /></td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td>John Doe</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>johndoe@email.com</td>
+        </tr>
+        <tr>
+            <td>Account Type:</td>
+            <td>Student</td>
+        </tr>
+        <tr>
+            <td>Education Track:</td>
+            <td>Music Major</td>
+        </tr>
+        <tr>
+            <td>Expected Graduation:</td>
+            <td>May 2020</td>
+        </tr>
+    </table>
     <br />
-    <br />
-    <label id="labelAccountPermissionLevel">Student</label>
-    <br />
-    <br />
-    <label id="labelMyAccountTFLCode">TFL Code: <img id="tfl-code" style="vertical-align: middle; height: 20%; width: 20%;" src="~/resources/images/TFL-Code.PNG" /></label><br />
-    <!--This is the barcode, wanted to give it a catchy name. A professor saying "we will scan your barcodes" isn't catchy. Students aren't groceries.-->
-    <label id="labelMyAccountFirstName">First Name: John</label><br />
-    <label id="labelMyAccountLastName">Last Name: Doe</label><br />
-    <label id="labelMyAccountExpectedGraduationDate">Expected Graduation Date: 2020</label><br />
-    <label id="labelMyAccountTrack">Track: Music Major (BA)</label><br />
-    <label id="labelMyAccountEmail">Email: doejj@mountunion.edu</label><br />
-    <br />
-    <br />
-    <p>To change your password, <a asp-controller="Home" asp-action="RequestNewPassword">click here</a>.</p>
-    <p>To make other changes to your account, please contact yoour administrator.</p>
+    <input type="button" class="hor-center-element" value="Reset My Password" onclick="location.href='@Url.Action("RequestNewPassword", "Home")'" />
+    <p class="subtext">Clicking the link above will sign you out of your account.</p>
+    @if (Convert.ToChar(ViewData["AccountType"]) == 'a')
+    {
+        <p class="subtext">To make changes to your account or another account, please visit the <a asp-controller="Home" asp-action="ManageAccounts">Manage Accounts</a> page.</p>
+    }
+    else
+    {
+        <p class="subtext">To make other changes to your account, please contact an administrator.</p>
+    }
 </div>

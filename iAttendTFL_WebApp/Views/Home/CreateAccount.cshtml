@@ -1,59 +1,79 @@
 ﻿@{
-    ViewData["Title"] = "CreateAccount";
+    ViewData["Title"] = "Create An Account";
 }
-<div>
-    <h2 class="hor-center">Create An Account</h2>
-    <p>Enter the following infromation to create your iAttend account. Once you submit the information, you will receive a confirmation email.</p>
-    <form id="formCreateAccount">
-        <table class="no-design-table">
-            <tr>
-                <td>Email:</td>
-                <td><input id="inputEmail" style="width: 100%;" placeholder="Example: someone@email.edu" required /></td>
-            </tr>
-            <tr>
-                <td>First Name:</td>
-                <td><input id="inputFirstName" style="width: 100%;" placeholder="Example: Matthew" required /></td>
-            </tr>
-            <tr>
-                <td>Last Name:</td>
-                <td><input id="inputLastName" style="width: 100%;" placeholder="Example: Dutt" required /></td>
-            </tr>
-            <tr>
-                <td>Expected Graduation Date:</td>
-                <td><input id="inputExpectedGraduationDate" style="width: 100%;" placeholder="Example: 2020" required /></td>
-            </tr>
-            <tr>
-                <td width="50%">
-                    Password:
-                    <br />
-                    <span class="subtext">Passwords must be at least 8 characters, with one captial, one special character, and one number.</span>
-                </td>
-                <td><input id="inputPassword" style="width: 100%;" type="password" required /></td>
-            </tr>
-            <tr>
-                <td width="50%">
-                    Confirm Password
-                    <br />
-                    <span class="subtext">Make sure to type out your new password the exact same way as in the "Confirm Password" box.</span>
-                </td>
-                <td><input id="inputConfirmPassword" style="width: 100%;" type="password" required /></td>
-            </tr>
-        </table>
-        <label for="selectTrack">Select your track:</label>
-        <select id="selectTrack" required>
-            <option value="musicEducation">Music Education</option>
-            <option value="musicBA">Music BA</option>
-            <option value="musicMinor">Music Minor</option>
-        </select>
-        <br />
-        <br />
-        <input id="submitCreateAccount" type="submit" value="Create Account" />
-        <!--<button onclick="createAccount();">Create Account</button>-->
-    </form>
-    
-    <!--After the account verification link is clicked, this page will be reloaded, with this message unhidden and the form hidden.-->
-    <h4 hidden>Account Creation Successful</h4>
-    
-    <br />
-    <br />
+
+<div class="center-contents-on-screen">
+    <div class="border-div medium-div">
+        <h2 class="hor-center-text">Create An Account</h2>
+        <p>Please enter the following information to create your iAttend account. Once you click "Submit", you will receive a verification email.</p>
+        <form id="formCreateAccount">
+            <table class="no-design-table">
+                <tr>
+                    <td>Email:</td>
+                    <td><input id="inputEmail" style="width: 100%;" required /></td>
+                </tr>
+                <tr>
+                    <td>First Name:</td>
+                    <td><input id="inputFirstName" style="width: 100%;" required /></td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td><input id="inputLastName" style="width: 100%;" required /></td>
+                </tr>
+                <tr>
+                    <td>Expected Graduation Date:</td>
+                    <td>
+                        <select class="hor-center-text" id="selectMonth" style="width: 48%;" required>
+                            <option selected style="display: none;">-- Select Month --</option>
+                            <option value="january">January</option>
+                            <option value="february">February</option>
+                            <option value="march">March</option>
+                            <option value="june">June</option>
+                            <option value="july">July</option>
+                            <option value="august">August</option>
+                            <option value="september">September</option>
+                            <option value="october">October</option>
+                            <option value="november">November</option>
+                            <option value="december">December</option>
+                        </select>
+                        <select class="hor-center-text" id="selectYear" style="width: 48%; float: right;" required>
+                            <option selected style="display: none;">-- Select Year --</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input id="inputPassword" style="width: 100%;" type="password" required /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="subtext">Passwords must be at least 8 characters, with one capital, one special character, and one number.</span></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input id="inputConfirmPassword" style="width: 100%;" type="password" required /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="subtext">Passwords must match.</span></td>
+                </tr>
+                <tr>
+                    <td>Select Education Track:</td>
+                    <td>
+                        <select class="hor-center-text" id="selectTrack" style="width: 48%;" required>
+                            <option selected style="display: none;">-- Select Track --</option>
+                            <option value="musicEducation">Music Education</option>
+                            <option value="musicBA">Music BA</option>
+                            <option value="musicMinor">Music Minor</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <input class="hor-center-element" id="submitCreateAccount" type="submit" value="Create Account" />
+        </form>
+    </div>
 </div>
