@@ -14,6 +14,8 @@ namespace iAttendTFL_WebApp.Data
         {
         }
         public DbSet<iAttendTFL_WebApp.Models.account> account { get; set; }
+        public DbSet<iAttendTFL_WebApp.Models.requirements> requirements { get; set; }
+        public DbSet<iAttendTFL_WebApp.Models.timeFrame> timeFrame { get; set; }
 
         
     }
