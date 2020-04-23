@@ -10,85 +10,90 @@ using iAttendTFL_WebApp.Models;
 
 namespace iAttendTFL_WebApp.Controllers
 {
-    public class TimeFrameController : Controller
+    public class TokensController : Controller
     {
         private readonly iAttendTFL_WebAppContext _context;
 
-        public TimeFrameController(iAttendTFL_WebAppContext context)
+        public TokensController(iAttendTFL_WebAppContext context)
         {
             _context = context;
         }
 
-        // GET: TimeFrame
+        // GET: Tokens
         public async Task<IActionResult> Index()
         {
-            return View(await _context.timeFrame.ToListAsync());
+            var iAttendTFL_WebAppContext = _context.token.Include(t => t.account);
+            return View(await iAttendTFL_WebAppContext.ToListAsync());
         }
 
-        // GET: TimeFrame/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Tokens/Details/5
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var timeFrame = await _context.timeFrame
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (timeFrame == null)
+            var token = await _context.token
+                .Include(t => t.account)
+                .FirstOrDefaultAsync(m => m.token_hash == id);
+            if (token == null)
             {
                 return NotFound();
             }
 
-            return View(timeFrame);
+            return View(token);
         }
 
-        // GET: TimeFrame/Create
+        // GET: Tokens/Create
         public IActionResult Create()
         {
+            ViewData["account_id"] = new SelectList(_context.account, "id", "id");
             return View();
         }
 
-        // POST: TimeFrame/Create
+        // POST: Tokens/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name,start_date,end_date")] timeFrame timeFrame)
+        public async Task<IActionResult> Create([Bind("token_hash,salt,expiration_time,is_valid,type,account_id")] token token)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(timeFrame);
+                _context.Add(token);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(timeFrame);
+            ViewData["account_id"] = new SelectList(_context.account, "id", "id", token.account_id);
+            return View(token);
         }
 
-        // GET: TimeFrame/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Tokens/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var timeFrame = await _context.timeFrame.FindAsync(id);
-            if (timeFrame == null)
+            var token = await _context.token.FindAsync(id);
+            if (token == null)
             {
                 return NotFound();
             }
-            return View(timeFrame);
+            ViewData["account_id"] = new SelectList(_context.account, "id", "id", token.account_id);
+            return View(token);
         }
 
-        // POST: TimeFrame/Edit/5
+        // POST: Tokens/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name,start_date,end_date")] timeFrame timeFrame)
+        public async Task<IActionResult> Edit(string id, [Bind("token_hash,salt,expiration_time,is_valid,type,account_id")] token token)
         {
-            if (id != timeFrame.id)
+            if (id != token.token_hash)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace iAttendTFL_WebApp.Controllers
             {
                 try
                 {
-                    _context.Update(timeFrame);
+                    _context.Update(token);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!timeFrameExists(timeFrame.id))
+                    if (!tokenExists(token.token_hash))
                     {
                         return NotFound();
                     }
@@ -113,41 +118,43 @@ namespace iAttendTFL_WebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(timeFrame);
+            ViewData["account_id"] = new SelectList(_context.account, "id", "id", token.account_id);
+            return View(token);
         }
 
-        // GET: TimeFrame/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Tokens/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var timeFrame = await _context.timeFrame
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (timeFrame == null)
+            var token = await _context.token
+                .Include(t => t.account)
+                .FirstOrDefaultAsync(m => m.token_hash == id);
+            if (token == null)
             {
                 return NotFound();
             }
 
-            return View(timeFrame);
+            return View(token);
         }
 
-        // POST: TimeFrame/Delete/5
+        // POST: Tokens/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var timeFrame = await _context.timeFrame.FindAsync(id);
-            _context.timeFrame.Remove(timeFrame);
+            var token = await _context.token.FindAsync(id);
+            _context.token.Remove(token);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool timeFrameExists(int id)
+        private bool tokenExists(string id)
         {
-            return _context.timeFrame.Any(e => e.id == id);
+            return _context.token.Any(e => e.token_hash == id);
         }
     }
 }

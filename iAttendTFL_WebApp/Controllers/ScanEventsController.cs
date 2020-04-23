@@ -10,22 +10,22 @@ using iAttendTFL_WebApp.Models;
 
 namespace iAttendTFL_WebApp.Controllers
 {
-    public class RequirementsController : Controller
+    public class ScanEventsController : Controller
     {
         private readonly iAttendTFL_WebAppContext _context;
 
-        public RequirementsController(iAttendTFL_WebAppContext context)
+        public ScanEventsController(iAttendTFL_WebAppContext context)
         {
             _context = context;
         }
 
-        // GET: Requirements
+        // GET: ScanEvents
         public async Task<IActionResult> Index()
         {
-            return View(await _context.requirement.ToListAsync());
+            return View(await _context.scan_event.ToListAsync());
         }
 
-        // GET: Requirements/Details/5
+        // GET: ScanEvents/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace iAttendTFL_WebApp.Controllers
                 return NotFound();
             }
 
-            var requirement = await _context.requirement
+            var scan_event = await _context.scan_event
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (requirement == null)
+            if (scan_event == null)
             {
                 return NotFound();
             }
 
-            return View(requirement);
+            return View(scan_event);
         }
 
-        // GET: Requirements/Create
+        // GET: ScanEvents/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Requirements/Create
+        // POST: ScanEvents/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name")] requirement requirement)
+        public async Task<IActionResult> Create([Bind("id,name,start_time,end_time")] scan_event scan_event)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(requirement);
+                _context.Add(scan_event);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(requirement);
+            return View(scan_event);
         }
 
-        // GET: Requirements/Edit/5
+        // GET: ScanEvents/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace iAttendTFL_WebApp.Controllers
                 return NotFound();
             }
 
-            var requirement = await _context.requirement.FindAsync(id);
-            if (requirement == null)
+            var scan_event = await _context.scan_event.FindAsync(id);
+            if (scan_event == null)
             {
                 return NotFound();
             }
-            return View(requirement);
+            return View(scan_event);
         }
 
-        // POST: Requirements/Edit/5
+        // POST: ScanEvents/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name")] requirement requirement)
+        public async Task<IActionResult> Edit(int id, [Bind("id,name,start_time,end_time")] scan_event scan_event)
         {
-            if (id != requirement.id)
+            if (id != scan_event.id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace iAttendTFL_WebApp.Controllers
             {
                 try
                 {
-                    _context.Update(requirement);
+                    _context.Update(scan_event);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!requirementExists(requirement.id))
+                    if (!scan_eventExists(scan_event.id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace iAttendTFL_WebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(requirement);
+            return View(scan_event);
         }
 
-        // GET: Requirements/Delete/5
+        // GET: ScanEvents/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace iAttendTFL_WebApp.Controllers
                 return NotFound();
             }
 
-            var requirement = await _context.requirement
+            var scan_event = await _context.scan_event
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (requirement == null)
+            if (scan_event == null)
             {
                 return NotFound();
             }
 
-            return View(requirement);
+            return View(scan_event);
         }
 
-        // POST: Requirements/Delete/5
+        // POST: ScanEvents/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var requirement = await _context.requirement.FindAsync(id);
-            _context.requirement.Remove(requirement);
+            var scan_event = await _context.scan_event.FindAsync(id);
+            _context.scan_event.Remove(scan_event);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool requirementExists(int id)
+        private bool scan_eventExists(int id)
         {
-            return _context.requirement.Any(e => e.id == id);
+            return _context.scan_event.Any(e => e.id == id);
         }
     }
 }

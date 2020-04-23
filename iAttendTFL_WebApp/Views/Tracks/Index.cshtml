@@ -1,4 +1,4 @@
-﻿@model IEnumerable<iAttendTFL_WebApp.Models.requirement>
+﻿@model IEnumerable<iAttendTFL_WebApp.Models.track>
 
 @{
     ViewData["Title"] = "Index";
@@ -15,6 +15,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.name)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.last_updated_date)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -23,6 +26,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.last_updated_date)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |

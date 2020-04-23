@@ -10,22 +10,22 @@ using iAttendTFL_WebApp.Models;
 
 namespace iAttendTFL_WebApp.Controllers
 {
-    public class RequirementsController : Controller
+    public class TracksController : Controller
     {
         private readonly iAttendTFL_WebAppContext _context;
 
-        public RequirementsController(iAttendTFL_WebAppContext context)
+        public TracksController(iAttendTFL_WebAppContext context)
         {
             _context = context;
         }
 
-        // GET: Requirements
+        // GET: Tracks
         public async Task<IActionResult> Index()
         {
-            return View(await _context.requirement.ToListAsync());
+            return View(await _context.track.ToListAsync());
         }
 
-        // GET: Requirements/Details/5
+        // GET: Tracks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace iAttendTFL_WebApp.Controllers
                 return NotFound();
             }
 
-            var requirement = await _context.requirement
+            var track = await _context.track
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (requirement == null)
+            if (track == null)
             {
                 return NotFound();
             }
 
-            return View(requirement);
+            return View(track);
         }
 
-        // GET: Requirements/Create
+        // GET: Tracks/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Requirements/Create
+        // POST: Tracks/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name")] requirement requirement)
+        public async Task<IActionResult> Create([Bind("id,name,last_updated_date")] track track)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(requirement);
+                _context.Add(track);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(requirement);
+            return View(track);
         }
 
-        // GET: Requirements/Edit/5
+        // GET: Tracks/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace iAttendTFL_WebApp.Controllers
                 return NotFound();
             }
 
-            var requirement = await _context.requirement.FindAsync(id);
-            if (requirement == null)
+            var track = await _context.track.FindAsync(id);
+            if (track == null)
             {
                 return NotFound();
             }
-            return View(requirement);
+            return View(track);
         }
 
-        // POST: Requirements/Edit/5
+        // POST: Tracks/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name")] requirement requirement)
+        public async Task<IActionResult> Edit(int id, [Bind("id,name,last_updated_date")] track track)
         {
-            if (id != requirement.id)
+            if (id != track.id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace iAttendTFL_WebApp.Controllers
             {
                 try
                 {
-                    _context.Update(requirement);
+                    _context.Update(track);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!requirementExists(requirement.id))
+                    if (!trackExists(track.id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace iAttendTFL_WebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(requirement);
+            return View(track);
         }
 
-        // GET: Requirements/Delete/5
+        // GET: Tracks/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace iAttendTFL_WebApp.Controllers
                 return NotFound();
             }
 
-            var requirement = await _context.requirement
+            var track = await _context.track
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (requirement == null)
+            if (track == null)
             {
                 return NotFound();
             }
 
-            return View(requirement);
+            return View(track);
         }
 
-        // POST: Requirements/Delete/5
+        // POST: Tracks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var requirement = await _context.requirement.FindAsync(id);
-            _context.requirement.Remove(requirement);
+            var track = await _context.track.FindAsync(id);
+            _context.track.Remove(track);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool requirementExists(int id)
+        private bool trackExists(int id)
         {
-            return _context.requirement.Any(e => e.id == id);
+            return _context.track.Any(e => e.id == id);
         }
     }
 }

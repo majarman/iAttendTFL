@@ -1,0 +1,36 @@
+﻿@model iAttendTFL_WebApp.Models.event_requirement
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>event_requirement</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.num_fulfilled)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.num_fulfilled)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.requirement)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.requirement.id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.scan_event)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.scan_event.id)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* parameters */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

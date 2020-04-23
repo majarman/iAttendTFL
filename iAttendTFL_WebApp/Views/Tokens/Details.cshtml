@@ -1,0 +1,48 @@
+﻿@model iAttendTFL_WebApp.Models.token
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>token</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.salt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.salt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.expiration_time)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.expiration_time)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.is_valid)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.is_valid)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.type)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.type)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.account)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.account.id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.token_hash">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

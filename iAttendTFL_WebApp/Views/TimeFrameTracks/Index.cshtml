@@ -1,0 +1,41 @@
+﻿@model IEnumerable<iAttendTFL_WebApp.Models.time_frame_track>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.track)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.time_frame)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.track.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.time_frame.id)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { time_frame_id=item.time_frame_id, track_id=item.track_id }) |
+                @Html.ActionLink("Details", "Details", new { time_frame_id = item.time_frame_id, track_id = item.track_id }) |
+                @Html.ActionLink("Delete", "Delete", new { time_frame_id = item.time_frame_id, track_id = item.track_id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
