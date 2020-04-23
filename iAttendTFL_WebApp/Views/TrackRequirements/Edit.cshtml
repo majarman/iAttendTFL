@@ -1,0 +1,35 @@
+﻿@model iAttendTFL_WebApp.Models.track_requirement
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>track_requirement</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="track_id" />
+            <input type="hidden" asp-for="requirement_id" />
+            <div class="form-group">
+                <label asp-for="num_required" class="control-label"></label>
+                <input asp-for="num_required" class="form-control" />
+                <span asp-validation-for="num_required" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

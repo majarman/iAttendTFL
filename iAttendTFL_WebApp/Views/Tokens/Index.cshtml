@@ -1,0 +1,59 @@
+﻿@model IEnumerable<iAttendTFL_WebApp.Models.token>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.salt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.expiration_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.is_valid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.account)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.salt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.expiration_time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.is_valid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.account.id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.token_hash">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.token_hash">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.token_hash">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

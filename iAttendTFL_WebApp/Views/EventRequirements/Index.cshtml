@@ -1,0 +1,47 @@
+﻿@model IEnumerable<iAttendTFL_WebApp.Models.event_requirement>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.num_fulfilled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.requirement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.scan_event)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.num_fulfilled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.requirement.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.scan_event.id)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { requirement_id = item.requirement_id, scan_event_id = item.scan_event_id }) |
+                @Html.ActionLink("Details", "Details", new { requirement_id = item.requirement_id, scan_event_id = item.scan_event_id }) |
+                @Html.ActionLink("Delete", "Delete", new { requirement_id = item.requirement_id, scan_event_id = item.scan_event_id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

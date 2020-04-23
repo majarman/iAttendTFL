@@ -1,0 +1,65 @@
+﻿@model IEnumerable<iAttendTFL_WebApp.Models.account_attendance>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.account.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.scan_event.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.is_valid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.attendance_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.account)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.scan_event)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.account.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.scan_event.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.is_valid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.attendance_time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.account.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.scan_event.id)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { account_id=item.account_id, scan_event_id=item.scan_event_id }) |
+                @Html.ActionLink("Details", "Details", new { account_id = item.account_id, scan_event_id = item.scan_event_id }) |
+                @Html.ActionLink("Delete", "Delete", new { account_id = item.account_id, scan_event_id = item.scan_event_id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 
 namespace iAttendTFL_WebApp.Models
 {
-    public class track
+    public class requirement
     {
         public int id { get; set; }
-        public String name { get; set; }
-        public DateTime last_updated_date { get; set; }
+        public string name { get; set; }
 
         public virtual ICollection<track_requirement> track_requirements { get; set; }
-        public virtual ICollection<time_frame_track> time_frame_tracks { get; set; }
+        public virtual ICollection<event_requirement> event_requirements { get; set; }
     }
 }

@@ -17,5 +17,8 @@ namespace iAttendTFL_WebApp.Models
         public bool email_verified { get; set; } = false;
         public DateTime expected_graduation_date { get; set; }
         public int track_id { get; set; }
+
+        public virtual ICollection<account_attendance> account_attendances { get; set; }
+        public virtual ICollection<token> tokens { get; set; }
     }
 }
