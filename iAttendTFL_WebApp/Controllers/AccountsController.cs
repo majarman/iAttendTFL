@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Text;
+using System.Drawing;
+using System.IO;
 
 namespace iAttendTFL_WebApp.Controllers
 {
@@ -62,6 +64,24 @@ namespace iAttendTFL_WebApp.Controllers
 
             return RedirectToAction("Login", "Home", new { error = true });
         }
+
+        public Image StringToBarcodeImage(String input)
+        {
+            var barcodeMaker = new BarcodeLib.Barcode();
+            Image myBarcode = barcodeMaker.Encode(BarcodeLib.TYPE.UPCA, input);
+            return myBarcode;
+        }
+
+        public byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, imageIn.RawFormat);
+                return ms.ToArray();
+            }
+        }
+
+
 
         // GET: accounts
         public async Task<IActionResult> Index()
