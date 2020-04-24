@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Attendance";
+}
+
+<h1 class="hor-center-text">@ViewData["FullName"]</h1>
+<br />
+<form id="time-frame-form">
+    <label for="time-frame-dropdown">Time Frame:&nbsp;&nbsp;</label>
+    <select id="time-frame-dropdown">
+        <option value="0">Spring 2020</option>
+        <option value="1">Fall 2019</option>
+        <option value="2">Spring 2019</option>
+    </select>
+</form>
+<br />
+<h5 class="inline">Track:&nbsp;&nbsp;</h5>
+<span class="inline">Music Major</span>
+<table class="student-requirements-table">
+    <tr>
+        <th>Requirement Type</th>
+        <th>Attendance Points Needed</th>
+        <th>Attendance Points Fulfilled</th>
+        <th>Progress</th>
+    </tr>
+    @foreach (var item in ViewBag.AccountRequirements)
+    {
+        <tr>
+            <td>@item.requirement.name</td>
+            <td class="hor-center-text">@item.track_requirement.num_required</td>
+            <td class="hor-center-text"></td>
+            <td class="hor-center-text"></td>
+        </tr>
+    }
+</table>
+<br />
+<h5>Attended Events:</h5>
+<table class="student-attendance-table">
+    <tr>
+        <th>Event Name</th>
+        <th>Requirement Type</th>
+        <th>Attendance Points</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Time of Attendance</th>
+    </tr>
+@foreach (var item in ViewBag.AttendedEvents)
+{
+        <tr>
+            <td>@item.scan_event.name</td>
+            <td>@item.requirement.name</td>
+            <td class="hor-center-text">@item.event_requirement.num_fulfilled</td>
+            <td>@item.scan_event.start_time</td>
+            <td>@item.scan_event.end_time</td>
+            <td>@item.account_attendance.attendance_time</td>
+         </tr>
+}
+</table>

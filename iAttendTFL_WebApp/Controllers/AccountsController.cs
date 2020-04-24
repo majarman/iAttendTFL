@@ -14,11 +14,11 @@ using System.Text;
 
 namespace iAttendTFL_WebApp.Controllers
 {
-    public class accountsController : Controller
+    public class AccountsController : Controller
     {
         private readonly iAttendTFL_WebAppContext _context;
 
-        public accountsController(iAttendTFL_WebAppContext context)
+        public AccountsController(iAttendTFL_WebAppContext context)
         {
             _context = context;
         }
@@ -56,11 +56,45 @@ namespace iAttendTFL_WebApp.Controllers
                     HttpContext.Session.SetString("Email", email);
                     HttpContext.Session.SetString("AccountType", Convert.ToString(accountType));
 
-                    return RedirectToAction("Attendance", "Home");
+                    return RedirectToAction("Attendance", "AccountAttendances");
                 }
             }
 
             return RedirectToAction("Login", "Home", new { error = true });
+        }
+
+        public string FullName(int? id = null, string email = null, bool lastThenFirst = false)
+        {
+            IQueryable<account> account;
+            if (id == null && string.IsNullOrEmpty(email))
+            {
+                return null;
+            }
+            else if (id != null)
+            {
+                account = from a in _context.account
+                    where a.id == id
+                    select a;
+            }
+            else
+            {
+                account = from a in _context.account
+                    where a.email.ToLower() == email.ToLower()
+                    select a;
+            }
+
+            string fullName;
+
+            if (lastThenFirst)
+            {
+                fullName = account.First().last_name + ", " + account.First().first_name;
+            }
+            else
+            {
+                fullName = account.First().first_name + " " + account.First().last_name;
+            }
+
+            return fullName;
         }
 
         // GET: accounts
