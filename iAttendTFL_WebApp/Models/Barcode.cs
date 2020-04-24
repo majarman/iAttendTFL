@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace iAttendTFL_WebApp.Models
 {
     public class barcode
     {
-        
+        //[System.ComponentModel.DataAnnotations.Schema.ForeignKey]
         public int id1 { get; set; }
         public byte[] v { get; set; }
 
