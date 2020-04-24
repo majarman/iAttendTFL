@@ -14,6 +14,7 @@ using System.Text;
 using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
+using BarcodeLib;
 
 namespace iAttendTFL_WebApp.Controllers
 {
@@ -66,39 +67,10 @@ namespace iAttendTFL_WebApp.Controllers
             return RedirectToAction("Login", "Home", new { error = true });
         }
 
-        // BARCODE GENERATION METHODS
-        private Image StringToBarcodeImage(String input)
-        {
-            var barcodeMaker = new BarcodeLib.Barcode();
-            Image myBarcode = barcodeMaker.Encode(BarcodeLib.TYPE.CODE39, input);
-            return myBarcode;
-        }
-
-        private byte[] ImageToByteArray(Image img)
-        {
-            ImageConverter imgCon = new ImageConverter();
-            return (byte[])imgCon.ConvertTo(img, typeof(byte[]));
-        }
-
-        public byte[] makeTheBarcode(int id)
-        {
-            String idString = id.ToString();
-            //TODO: validation?
-            byte[] myBarcode = ImageToByteArray(StringToBarcodeImage(idString));
-            return myBarcode;
-        }
-
-        public async Task<IActionResult> pushBarcode(int id)
-        {
-            _context.Add(new barcode(id, makeTheBarcode(id)));
-            await _context.SaveChangesAsync();
-            return View();
-
-        }
-
         // GET: accounts
         public async Task<IActionResult> Index()
         {
+            
             return View(await _context.account.ToListAsync());
         }
 
@@ -137,9 +109,11 @@ namespace iAttendTFL_WebApp.Controllers
             {
                 _context.Add(account);
                 await _context.SaveChangesAsync();
-                await pushBarcode(account.id);
+                account.pushBarcode(123456);
+                
                 return RedirectToAction(nameof(Index));
             }
+            
             return View(account);
         }
 

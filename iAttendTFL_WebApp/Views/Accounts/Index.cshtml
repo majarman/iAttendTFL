@@ -27,8 +27,8 @@
                 Email
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.salt)
-            </th>*@
+            @Html.DisplayNameFor(model => model.salt)
+        </th>*@
             <th>
                 @*@Html.DisplayNameFor(model => model.password_hash)*@
                 Password Hash (lol not really)
@@ -47,6 +47,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.track_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.barcode)
             </th>
             <th></th>
         </tr>
@@ -80,6 +83,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.track_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.barcode)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
