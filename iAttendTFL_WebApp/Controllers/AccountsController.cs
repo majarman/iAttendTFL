@@ -66,13 +66,13 @@ namespace iAttendTFL_WebApp.Controllers
             return RedirectToAction("Login", "Home", new { error = true });
         }
 
+        // BARCODE GENERATION METHODS
         private Image StringToBarcodeImage(String input)
         {
             var barcodeMaker = new BarcodeLib.Barcode();
             Image myBarcode = barcodeMaker.Encode(BarcodeLib.TYPE.CODE39, input);
             return myBarcode;
         }
-
 
         private byte[] ImageToByteArray(Image img)
         {
@@ -83,29 +83,8 @@ namespace iAttendTFL_WebApp.Controllers
         public byte[] makeTheBarcode(int id)
         {
             String idString = id.ToString();
-            if (idString.Length != 12)
-            {
-                return null;
-            }
             byte[] myBarcode = ImageToByteArray(StringToBarcodeImage(idString));
             return myBarcode;
-        }
-
-        // POST: accounts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> addBarcode(int id)
-        {
-            barcode barcode = new barcode(id, makeTheBarcode(id));
-            if (ModelState.IsValid)
-            {
-                _context.Add(barcode);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(barcode);
         }
 
         
@@ -131,8 +110,6 @@ namespace iAttendTFL_WebApp.Controllers
                 return NotFound();
             }
 
-
-
             return View(account);
         }
 
@@ -153,7 +130,7 @@ namespace iAttendTFL_WebApp.Controllers
             {
                 _context.Add(account);
                 await _context.SaveChangesAsync();
-                await this.addBarcode(account.id);
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(account);
