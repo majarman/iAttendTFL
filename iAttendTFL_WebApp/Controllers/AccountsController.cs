@@ -69,7 +69,7 @@ namespace iAttendTFL_WebApp.Controllers
         private Image StringToBarcodeImage(String input)
         {
             var barcodeMaker = new BarcodeLib.Barcode();
-            Image myBarcode = barcodeMaker.Encode(BarcodeLib.TYPE.UPCA, input);
+            Image myBarcode = barcodeMaker.Encode(BarcodeLib.TYPE.CODE39, input);
             return myBarcode;
         }
 
@@ -108,6 +108,8 @@ namespace iAttendTFL_WebApp.Controllers
             return View(barcode);
         }
 
+        
+
         // GET: accounts
         public async Task<IActionResult> Index()
         {
@@ -128,6 +130,8 @@ namespace iAttendTFL_WebApp.Controllers
             {
                 return NotFound();
             }
+
+
 
             return View(account);
         }
