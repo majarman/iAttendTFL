@@ -83,11 +83,18 @@ namespace iAttendTFL_WebApp.Controllers
         public byte[] makeTheBarcode(int id)
         {
             String idString = id.ToString();
+            //TODO: validation?
             byte[] myBarcode = ImageToByteArray(StringToBarcodeImage(idString));
             return myBarcode;
         }
 
-        
+        public async Task<IActionResult> pushBarcode(int id)
+        {
+            _context.Add(new barcode(id, makeTheBarcode(id)));
+            await _context.SaveChangesAsync();
+            return View();
+
+        }
 
         // GET: accounts
         public async Task<IActionResult> Index()
@@ -130,7 +137,7 @@ namespace iAttendTFL_WebApp.Controllers
             {
                 _context.Add(account);
                 await _context.SaveChangesAsync();
-                
+                await pushBarcode(account.id);
                 return RedirectToAction(nameof(Index));
             }
             return View(account);

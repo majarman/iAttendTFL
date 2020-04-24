@@ -8,8 +8,9 @@ namespace iAttendTFL_WebApp.Models
 {
     public class barcode
     {
-        private int id1;
-        private byte[] v;
+        
+        public int id1 { get; set; }
+        public byte[] v { get; set; }
 
         public barcode(int id1, byte[] v)
         {
@@ -17,7 +18,5 @@ namespace iAttendTFL_WebApp.Models
             this.v = v;
         }
 
-        public static int id { get; set; }
-        public static Image barcodebytea { get; set; }
     }
 }
