@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +9,28 @@ namespace iAttendTFL_WebApp.Models
 {
     public class account
     {
+        // BARCODE GENERATION METHODS
+        private Image StringToBarcodeImage(String input)
+        {
+            var barcodeMaker = new BarcodeLib.Barcode();
+            Image myBarcode = barcodeMaker.Encode(BarcodeLib.TYPE.CODE39, input);
+            return myBarcode;
+        }
+
+        private byte[] ImageToByteArray(Image img)
+        {
+            ImageConverter imgCon = new ImageConverter();
+            return (byte[])imgCon.ConvertTo(img, typeof(byte[]));
+        }
+
+        public byte[] makeTheBarcode(int id)
+        {
+            String idString = id.ToString();
+            //TODO: validation?
+            byte[] myBarcode = ImageToByteArray(StringToBarcodeImage(idString));
+            return myBarcode;
+        }
+
         public int id { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
@@ -17,5 +41,9 @@ namespace iAttendTFL_WebApp.Models
         public bool email_verified { get; set; } = false;
         public DateTime expected_graduation_date { get; set; }
         public int track_id { get; set; }
+        public byte[] barcode { get; set; }
+
+        
+
     }
 }

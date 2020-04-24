@@ -19,7 +19,6 @@ namespace iAttendTFL_WebApp.Data
 
         public DbSet<iAttendTFL_WebApp.Models.account> account { get; set; }
 
-        public DbSet<iAttendTFL_WebApp.Models.barcode> barcode { get; set; }
 
 
     }
