@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using iAttendTFL_WebApp.Models;
 using Microsoft.AspNetCore.Http;
+using BarcodeLib;
+using System.Drawing;
+using System.IO;
+using Glimpse.AspNet.Tab;
 
 namespace iAttendTFL_WebApp.Controllers
 {

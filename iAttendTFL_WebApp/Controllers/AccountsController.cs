@@ -11,6 +11,10 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Text;
+using System.Drawing;
+using System.IO;
+using System.Drawing.Imaging;
+using BarcodeLib;
 
 namespace iAttendTFL_WebApp.Controllers
 {
@@ -66,6 +70,7 @@ namespace iAttendTFL_WebApp.Controllers
         // GET: accounts
         public async Task<IActionResult> Index()
         {
+            
             return View(await _context.account.ToListAsync());
         }
 
@@ -83,7 +88,26 @@ namespace iAttendTFL_WebApp.Controllers
             {
                 return NotFound();
             }
-
+            if (account.barcode == null)
+            {
+                account.pushBarcode(account.id);
+                try
+                {
+                    _context.Update(account);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!accountExists(account.id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
             return View(account);
         }
 
@@ -102,10 +126,14 @@ namespace iAttendTFL_WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                //account.pushBarcode(123456);
                 _context.Add(account);
                 await _context.SaveChangesAsync();
+                
+                
                 return RedirectToAction(nameof(Index));
             }
+            
             return View(account);
         }
 
