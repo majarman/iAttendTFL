@@ -88,7 +88,26 @@ namespace iAttendTFL_WebApp.Controllers
             {
                 return NotFound();
             }
-
+            if (account.barcode == null)
+            {
+                account.pushBarcode(account.id);
+                try
+                {
+                    _context.Update(account);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!accountExists(account.id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
             return View(account);
         }
 
@@ -107,9 +126,10 @@ namespace iAttendTFL_WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                //account.pushBarcode(123456);
                 _context.Add(account);
                 await _context.SaveChangesAsync();
-                account.pushBarcode(123456);
+                
                 
                 return RedirectToAction(nameof(Index));
             }
