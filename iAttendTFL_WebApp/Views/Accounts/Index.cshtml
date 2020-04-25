@@ -48,9 +48,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.track_id)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.barcode)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -84,9 +84,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.track_id)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.barcode)
-            </td>
+            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.id">Details</a> |
