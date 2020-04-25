@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using BarcodeLib;
 
 namespace iAttendTFL_WebApp.Models
 {
@@ -22,6 +23,8 @@ namespace iAttendTFL_WebApp.Models
         public DateTime expected_graduation_date { get; set; }
         public int track_id { get; set; }
         public byte[] barcode { get; set; }
+        public virtual ICollection<account_attendance> account_attendances { get; set; }
+        public virtual ICollection<token> tokens { get; set; }
 
         // BARCODE GENERATION METHODS
         private Image StringToBarcodeImage(String input)
@@ -51,7 +54,6 @@ namespace iAttendTFL_WebApp.Models
             this.barcode = makeTheBarcode(id);
         }
 
-        // BARCODE DECODING
 
 
 
