@@ -6,38 +6,41 @@
     <div class="border-div medium-div">
         <h2 class="hor-center-text">Create An Account</h2>
         <p>Please enter the following information to create your iAttend account. Once you click "Submit", you will receive a verification email.</p>
-        <form id="formCreateAccount">
+        @using (Html.BeginForm("CreateAccount", "Accounts", FormMethod.Post))
+        {
             <table class="no-design-table">
                 <tr>
                     <td>Email:</td>
-                    <td><input id="inputEmail" style="width: 100%;" required /></td>
+                    <td><input name="inputEmail" id="inputEmail" style="width: 100%;" required /></td>
                 </tr>
                 <tr>
                     <td>First Name:</td>
-                    <td><input id="inputFirstName" style="width: 100%;" required /></td>
+                    <td><input name="inputFirstName" id="inputFirstName" style="width: 100%;" placeholder="Matthew" required /></td>
                 </tr>
                 <tr>
                     <td>Last Name:</td>
-                    <td><input id="inputLastName" style="width: 100%;" required /></td>
+                    <td><input name="inputLastName" id="inputLastName" style="width: 100%;" placeholder="Dutt" required /></td>
                 </tr>
                 <tr>
                     <td>Expected Graduation Date:</td>
                     <td>
-                        <select class="hor-center-text" id="selectMonth" style="width: 48%;" required>
-                            <option selected style="display: none;">-- Select Month --</option>
-                            <option value="january">January</option>
-                            <option value="february">February</option>
-                            <option value="march">March</option>
-                            <option value="june">June</option>
-                            <option value="july">July</option>
-                            <option value="august">August</option>
-                            <option value="september">September</option>
-                            <option value="october">October</option>
-                            <option value="november">November</option>
-                            <option value="december">December</option>
+                        <select class="hor-center-text" name="selectMonth" id="selectMonth" style="width: 48%;" required>
+                            <option value="" disabled selected style="display: none;">-- Select Month --</option>
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
                         </select>
-                        <select class="hor-center-text" id="selectYear" style="width: 48%; float: right;" required>
-                            <option selected style="display: none;">-- Select Year --</option>
+                        <select class="hor-center-text" name="selectYear" id="selectYear" style="width: 48%; float: right;" required>
+                            <option value="" disabled selected style="display: none;">-- Select Year --</option>
                             <option value="2020">2020</option>
                             <option value="2021">2021</option>
                             <option value="2022">2022</option>
@@ -48,14 +51,14 @@
                 </tr>
                 <tr>
                     <td>Password:</td>
-                    <td><input id="inputPassword" style="width: 100%;" type="password" required /></td>
+                    <td><input name="inputPassword" id="inputPassword" style="width: 100%;" type="password" required /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><span class="subtext">Passwords must be at least 8 characters, with one capital, one special character, and one number.</span></td>
                 </tr>
                 <tr>
                     <td>Confirm Password</td>
-                    <td><input id="inputConfirmPassword" style="width: 100%;" type="password" required /></td>
+                    <td><input name="inputConfirmPassword" id="inputConfirmPassword" style="width: 100%;" type="password" required /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><span class="subtext">Passwords must match.</span></td>
@@ -63,17 +66,17 @@
                 <tr>
                     <td>Select Education Track:</td>
                     <td>
-                        <select class="hor-center-text" id="selectTrack" style="width: 48%;" required>
-                            <option selected style="display: none;">-- Select Track --</option>
-                            <option value="musicEducation">Music Education</option>
-                            <option value="musicBA">Music BA</option>
-                            <option value="musicMinor">Music Minor</option>
+                        <select class="hor-center-text" name="selectTrack" id="selectTrack" style="width: 48%;" required>
+                            <option value="" disabled selected style="display: none;">-- Select Track --</option>
+                            <option value="3">Music Education</option>
+                            <option value="1">Music BA</option>
+                            <option value="2">Music Minor</option>
                         </select>
                     </td>
                 </tr>
             </table>
             <br />
-            <input class="hor-center-element" id="submitCreateAccount" type="submit" value="Create Account" />
-        </form>
+            <input class="hor-center-element" id="submitCreateAccount" type="submit" value="CreateAccount" />
+        } // form
     </div>
 </div>
