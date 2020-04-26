@@ -23,6 +23,31 @@ namespace iAttendTFL_WebApp.Controllers
             _context = context;
         }
 
+        public List<AccountRequirement> AccountRequirements(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return null;
+            }
+
+            return (from a in _context.account
+                   join t in _context.track
+                        on a.track_id equals t.id
+                   join tr in _context.track_requirement
+                        on t.id equals tr.track_id
+                   join r in _context.requirement
+                        on tr.requirement_id equals r.id
+                   where a.email.ToLower() == email.ToLower()
+                   orderby r.name
+                   select new AccountRequirement
+                   {
+                        account = a,
+                        track = t,
+                        track_requirement = tr,
+                        requirement = r
+                   }).ToList();
+        }
+
         [HttpPost]
         public IActionResult AttemptLogin(string email, string password)
         {

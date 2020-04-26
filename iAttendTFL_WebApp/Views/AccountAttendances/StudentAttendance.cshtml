@@ -22,15 +22,19 @@
         <th>Attendance Points Fulfilled</th>
         <th>Progress</th>
     </tr>
-    @foreach (var item in ViewBag.AccountRequirements)
-    {
+@{
+        int i = 0;
+        foreach (var item in ViewBag.AccountRequirements)
+        {
         <tr>
             <td>@item.requirement.name</td>
             <td class="hor-center-text">@item.track_requirement.num_required</td>
-            <td class="hor-center-text"></td>
-            <td class="hor-center-text"></td>
+            <td class="hor-center-text">@ViewBag.AttendancePoints[i]</td>
+            <td class="hor-center-text">@ViewBag.Progress[i]%</td>
         </tr>
-    }
+            i++;
+        }
+}
 </table>
 <br />
 <h5>Attended Events:</h5>
@@ -45,13 +49,13 @@
     </tr>
 @foreach (var item in ViewBag.AttendedEvents)
 {
-        <tr>
-            <td>@item.scan_event.name</td>
-            <td>@item.requirement.name</td>
-            <td class="hor-center-text">@item.event_requirement.num_fulfilled</td>
-            <td>@item.scan_event.start_time</td>
-            <td>@item.scan_event.end_time</td>
-            <td>@item.account_attendance.attendance_time</td>
-         </tr>
-}
+    <tr>
+        <td>@item.scan_event.name</td>
+        <td>@item.requirement.name</td>
+        <td class="hor-center-text">@item.event_requirement.num_fulfilled</td>
+        <td>@item.scan_event.start_time</td>
+        <td>@item.scan_event.end_time</td>
+        <td>@item.account_attendance.attendance_time</td>
+    </tr>
+ }
 </table>

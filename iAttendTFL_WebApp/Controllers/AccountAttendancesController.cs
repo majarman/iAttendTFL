@@ -21,6 +21,63 @@ namespace iAttendTFL_WebApp.Controllers
             _context = context;
         }
 
+        public List<AttendedEvent> AttendedEvents(string email, DateTime time_frame_start, DateTime time_frame_end)
+        {
+            if (string.IsNullOrEmpty(email) || time_frame_start == null || time_frame_end == null)
+            {
+                return null;
+            }
+
+            return (from a in _context.account
+                   join aa in _context.account_attendance
+                       on a.id equals aa.account_id
+                   join se in _context.scan_event
+                      on aa.scan_event_id equals se.id
+                   join er in _context.event_requirement
+                      on se.id equals er.scan_event_id
+                   join r in _context.requirement
+                      on er.requirement_id equals r.id
+                   where a.email.ToLower() == email.ToLower()
+                      && aa.attendance_time >= time_frame_start
+                      && aa.attendance_time <= time_frame_end
+                   orderby aa.attendance_time, se.name, r.name
+                   select new AttendedEvent
+                   {
+                       account = a,
+                       account_attendance = aa,
+                       scan_event = se,
+                       event_requirement = er,
+                       requirement = r
+                   }).ToList();
+        }
+
+        public List<EventsFulfilled> EventsFulfilled(string email, DateTime time_frame_start, DateTime time_frame_end)
+        {
+            if (string.IsNullOrEmpty(email) || time_frame_start == null || time_frame_end == null)
+            {
+                return null;
+            }
+
+            return (from a in _context.account
+                   join aa in _context.account_attendance
+                      on a.id equals aa.account_id
+                   join se in _context.scan_event
+                     on aa.scan_event_id equals se.id
+                   join er in _context.event_requirement
+                     on se.id equals er.scan_event_id
+                   join r in _context.requirement
+                     on er.requirement_id equals r.id
+                   where a.email.ToLower() == email.ToLower()
+                     && aa.attendance_time >= time_frame_start
+                     && aa.attendance_time <= time_frame_end
+                   group er by er.requirement_id into rc
+                   select new EventsFulfilled
+                   {
+                       id = rc.Key,
+                       count = rc.Sum(x => x.num_fulfilled)
+                   }).ToList();
+        }
+
         public IActionResult Attendance()
         {
             if (HttpContext.Session.GetString("Email") == null)
@@ -206,48 +263,42 @@ namespace iAttendTFL_WebApp.Controllers
 
             AccountsController ac = new AccountsController(_context);
             ViewData["FullName"] = ac.FullName(email: email);
+            var accountRequirements = ac.AccountRequirements(email);
 
-            var accountRequirements = from a in _context.account
-                                      join t in _context.track
-                                        on a.track_id equals t.id
-                                      join tr in _context.track_requirement
-                                        on t.id equals tr.track_id
-                                      join r in _context.requirement
-                                        on tr.requirement_id equals r.id
-                                      where a.email.ToLower() == email.ToLower()
-                                      orderby r.name
-                                      select new AccountRequirement
-                                      {
-                                          account = a,
-                                          track = t,
-                                          track_requirement = tr,
-                                          requirement = r
-                                      };
+            var attendedEvents = AttendedEvents(email, time_frame_start, time_frame_end);
+            var eventsFulfilled = EventsFulfilled(email, time_frame_start, time_frame_end);
+            
+            List<int> attendancePoints = new List<int>();
+            List<int> progress = new List<int>();
 
-            var attendedEvents = from a in _context.account
-                                 join aa in _context.account_attendance
-                                     on a.id equals aa.account_id
-                                 join se in _context.scan_event
-                                    on aa.scan_event_id equals se.id
-                                 join er in _context.event_requirement
-                                    on se.id equals er.scan_event_id
-                                 join r in _context.requirement
-                                    on er.requirement_id equals r.id
-                                 where a.email.ToLower() == email.ToLower()
-                                    && aa.attendance_time >= time_frame_start
-                                    && aa.attendance_time <= time_frame_end
-                                 orderby aa.attendance_time, se.name, r.name
-                                 select new AttendedEvent
-                                 {
-                                     account = a,
-                                     account_attendance = aa,
-                                     scan_event = se,
-                                     event_requirement = er,
-                                     requirement = r
-                                 };
+            foreach (var ar in accountRequirements)
+            {
+                bool hasValue = false;
+                
+                foreach (var ef in eventsFulfilled)
+                {
+                    if (ar.requirement.id == ef.id)
+                    {
+                        attendancePoints.Add(ef.count);
+                        progress.Add(Convert.ToInt32(
+                            Decimal.Round((ef.count / ar.track_requirement.num_required) * 100,
+                            MidpointRounding.AwayFromZero)));
+                        hasValue = true;
+                        break;
+                    }
+                }
+
+                if(hasValue == false)
+                {
+                    attendancePoints.Add(0);
+                    progress.Add(0);
+                }
+            }
 
             ViewBag.AttendedEvents = attendedEvents;
             ViewBag.AccountRequirements = accountRequirements;
+            ViewBag.AttendancePoints = attendancePoints;
+            ViewBag.Progress = progress;
 
             return View();
         }
