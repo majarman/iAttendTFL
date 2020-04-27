@@ -333,7 +333,7 @@ namespace iAttendTFL_WebApp.Controllers
                     {
                         attendancePoints.Add(ef.count);
                         progress.Add(Convert.ToInt32(
-                            Decimal.Round((ef.count / ar.track_requirement.num_required) * 100,
+                            Decimal.Round((Convert.ToDecimal(ef.count) / Convert.ToDecimal(ar.track_requirement.num_required)) * 100,
                             MidpointRounding.AwayFromZero)));
                         hasValue = true;
                         break;
