@@ -1,71 +1,114 @@
 ﻿@model iAttendTFL_WebApp.Models.account
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create An Account";
 }
 
-<h1>Create Account</h1>
+<div class="center-contents-on-screen">
+    <div class="border-div medium-div">
+        <h2 class="hor-center-text">Create An Account</h2>
 
-<hr />
-<p>Enter the following infromation to create your iAttend account. Once you submit the information, you will receive a confirmation email.</p>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="first_name" class="control-label">First Name</label>
-                <input asp-for="first_name" class="form-control" />
-                <span asp-validation-for="first_name" class="text-danger">Example: Matthew</span>
-            </div>
-            <div class="form-group">
-                <label asp-for="last_name" class="control-label">Last Name</label>
-                <input asp-for="last_name" class="form-control" />
-                <span asp-validation-for="last_name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="email" class="control-label">Email</label>
-                <input asp-for="email" class="form-control" />
-                <span asp-validation-for="email" class="text-danger"></span>
-            </div>
+        <hr />
+        <p>Enter the following infromation to create your iAttend account. Once you submit the information, you will receive a verification email.</p>
+        <!--<div class="row">-->
+            <!--<div class="col-md-4">-->
+                <form asp-action="Create">
+                    <table class="no-design-table">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <tr>
+                            <div class="form-group">
+                                <td><label asp-for="email" class="control-label">Email: </label></td>
+                                <td><input asp-for="email" class="form-control" style="width: 100%;" required /></td>
+                                <span asp-validation-for="email" class="text-danger"></span>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="form-group">
+                                <td><label asp-for="first_name" class="control-label">First Name: </label></td>
+                                <td><input asp-for="first_name" class="form-control" style="width: 100%;" required /></td>
+                                <span asp-validation-for="first_name" class="text-danger"></span>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="form-group">
+                                <td><label asp-for="last_name" class="control-label">Last Name: </label></td>
+                                <td><input asp-for="last_name" class="form-control" style="width: 100%;" required /></td>
+                                <span asp-validation-for="last_name" class="text-danger"></span>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="form-group">
+                                <td><label asp-for="expected_graduation_date"  class="control-label">Expected Graduation Date: </label></td>
+                                <td>
+                                    <select asp-for="gradMonth" class="form-control" required>
+                                        <option value="" disabled selected style="display: none;">-- Select Month --</option>
+                                        <option value="01">January</option>
+                                        <option value="02">February</option>
+                                        <option value="03">March</option>
+                                        <option value="04">April</option>
+                                        <option value="05">May</option>
+                                        <option value="06">June</option>
+                                        <option value="07">July</option>
+                                        <option value="08">August</option>
+                                        <option value="09">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                    <select asp-for="gradYear"   class="form-control" required>
+                                        <option value="" disabled selected style="display: none;">-- Select Year --</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                    </select>
+                                </td>
+                                <span asp-validation-for="gradMonth" class="text-danger"></span>
+                                <span asp-validation-for="gradYear" class="text-danger"></span>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="form-group">
+                                <td><label asp-for="track_id" class="control-label">Select Education Track: </label></td>
+                                <td>
+                                    <select asp-for="track_id" class="form-control" required>
+                                        <option value="" disabled selected style="display: none;">-- Select Track --</option>
+                                        <option value=3>Music Education</option>
+                                        <option value=1>Music BA</option>
+                                        <option value=2>Music Minor</option>
+                                    </select>
+                                </td>
+                                <span asp-validation-for="track_id" class="text-danger"></span>
+                            </div>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><span class="subtext">Passwords must be at least 8 characters, with one capital, one special character, and one number.</span></td>
+                        </tr>
+                        <tr>
+                            <div class="form-group">
+                                <td><label asp-for="password_hash" class="control-label">Password: </label></td>
+                                <td><input asp-for="password_hash" class="form-control" type="password" style="width: 100%;" required /></td>
+                                <span asp-validation-for="password_hash" class="text-danger"></span>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="form-group">
+                                <td><label asp-for="password_confirm" class="control-label">Confirm Password: </label></td>
+                                <td><input asp-for="password_confirm" class="form-control" type="password" style="width: 100%;" required /></td>
+                                <span asp-validation-for="password_confirm" class="text-danger"></span>
+                            </div>
+                        </tr>
+                    </table>
+                    <br />
+                    <div class="form-group">
 
-            @* <div class="form-group">
-                    <label asp-for="salt" class="control-label"></label>
-                    <input asp-for="salt" class="form-control" />
-                    <span asp-validation-for="salt" class="text-danger"></span>
-                </div> *@
-
-            <div class="form-group">
-                <label asp-for="password_hash" class="control-label">Password</label>
-                <input asp-for="password_hash" class="form-control" />
-                <span asp-validation-for="password_hash" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="account_type" class="control-label">Account Type</label>
-                <input asp-for="account_type" class="form-control" />
-                <span asp-validation-for="account_type" class="text-danger"></span>
-            </div>
-            @*<div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="email_verified" /> @Html.DisplayNameFor(model => model.email_verified)
-                    </label>
-                </div>*@
-            <div class="form-group">
-                <label asp-for="expected_graduation_date" class="control-label">Expected Graduation Date (dd-mm-yyyy):</label>
-                <input asp-for="expected_graduation_date" class="form-control" />
-                <span asp-validation-for="expected_graduation_date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="track_id" class="control-label"></label>
-                <input asp-for="track_id" class="form-control" />
-                <span asp-validation-for="track_id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                        <input class="hor-center-element" type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </div>
-
-<div>
     <a asp-action="Index">Back to List</a>
 </div>
 
