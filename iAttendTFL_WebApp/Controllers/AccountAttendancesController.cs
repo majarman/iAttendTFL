@@ -40,7 +40,7 @@ namespace iAttendTFL_WebApp.Controllers
                    where a.email.ToLower() == email.ToLower()
                       && aa.attendance_time >= time_frame_start
                       && aa.attendance_time <= time_frame_end
-                   orderby aa.attendance_time, se.name, r.name
+                   orderby aa.attendance_time descending, se.name, r.name
                    select new AttendedEvent
                    {
                        account = a,
@@ -241,25 +241,75 @@ namespace iAttendTFL_WebApp.Controllers
             else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a') &&
                      !Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('m'))
             {
-                return RedirectToAction("DoesNotHavePermission", new { requiresMod = true });
+                return RedirectToAction("DoesNotHavePermission", "Home", new { requiresMod = true });
             }
 
             return View();
         }
 
-        public IActionResult StudentAttendance(string email)
+        public IActionResult StudentAttendance(string email, int? time_frame_id)
         {
             if (HttpContext.Session.GetString("Email") == null)
             {
-                return RedirectToAction("NotLoggedIn");
+                return RedirectToAction("NotLoggedIn", "Home");
+            }
+            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a')
+                && !Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('m')
+                && HttpContext.Session.GetString("Email") != email)
+            {
+                return NotFound();
             }
             else if (string.IsNullOrEmpty(email))
             {
                 return NotFound();
             }
 
-            DateTime time_frame_start = new DateTime(2020, 01, 01);
-            DateTime time_frame_end = new DateTime(2020, 05, 15);
+            time_frame time_frame;
+            TimeFramesController tfc = new TimeFramesController(_context);
+            if (time_frame_id == null)
+            {
+                int id = tfc.CurrentTimeFrameID();
+                if (id != int.MinValue)
+                {
+                    time_frame = _context.time_frame
+                                 .FirstOrDefault(m => m.id == id);
+                }
+
+                id = tfc.NewestTimeFrameID();
+                if (id != int.MinValue)
+                {
+                    time_frame = _context.time_frame
+                                 .FirstOrDefault(m => m.id == id);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            else
+            {
+                try
+                {
+                    time_frame = _context.time_frame
+                             .FirstOrDefault(m => m.id == time_frame_id);
+                }
+                catch
+                {
+                    int id = tfc.NewestTimeFrameID();
+                    if (id != int.MinValue)
+                    {
+                        time_frame = _context.time_frame
+                                     .FirstOrDefault(m => m.id == id);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+            }
+
+            DateTime time_frame_start = time_frame.start_date;
+            DateTime time_frame_end = time_frame.end_date;
 
             AccountsController ac = new AccountsController(_context);
             ViewData["FullName"] = ac.FullName(email: email);
@@ -267,6 +317,8 @@ namespace iAttendTFL_WebApp.Controllers
 
             var attendedEvents = AttendedEvents(email, time_frame_start, time_frame_end);
             var eventsFulfilled = EventsFulfilled(email, time_frame_start, time_frame_end);
+
+            List<time_frame> timeFrames = _context.time_frame.OrderByDescending(c => c.start_date).ToList();
             
             List<int> attendancePoints = new List<int>();
             List<int> progress = new List<int>();
@@ -295,6 +347,7 @@ namespace iAttendTFL_WebApp.Controllers
                 }
             }
 
+            ViewBag.TimeFrames = timeFrames;
             ViewBag.AttendedEvents = attendedEvents;
             ViewBag.AccountRequirements = accountRequirements;
             ViewBag.AttendancePoints = attendancePoints;

@@ -6,26 +6,26 @@
     <div class="border-div small-div">
         <h2 class="hor-center-text">Log In</h2>
         <br />
-        @using (Html.BeginForm("AttemptLogin", "Accounts", FormMethod.Post))
-        {
-            <table class="no-design-table">
-                <tr>
-                    <td>Email:</td>
-                    <td><input type="text" style="width: 100%;" name="email" id="email" required /></td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><input type="password" style="width: 100%;" name="password" id="password" required /></td>
-                </tr>
-            </table>
-            <input type="submit" value="Login" class="hor-center-element" />
-        }
+@using (Html.BeginForm("AttemptLogin", "Accounts", FormMethod.Post))
+{
+        <table class="no-design-table">
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" style="width: 100%;" name="email" id="email" required /></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" style="width: 100%;" name="password" id="password" required /></td>
+            </tr>
+        </table>
+        <input type="submit" value="Login" class="hor-center-element" />
+}
         <br />
-        @if (ViewData["Error"] != null)
-        {
-            <span class="subtext" style="color: darkred; text-align: center; display: block;">@ViewData["Error"]</span>
-            <br />
-        }
+@if (ViewData["Error"] != null)
+{
+        <span class="subtext" style="color: darkred; text-align: center; display: block;">@ViewData["Error"]</span>
+        <br />
+}
         <span class="subtext"><a asp-controller="Home" asp-action="RequestNewPassword">Forgot your password?</a></span>
         <br />
         <br />

@@ -1,15 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Attendance";
+    ViewData["Title"] = ViewData["FullName"] + "'s Attendance";
 }
 
 <h1 class="hor-center-text">@ViewData["FullName"]</h1>
 <br />
 <form id="time-frame-form">
     <label for="time-frame-dropdown">Time Frame:&nbsp;&nbsp;</label>
-    <select id="time-frame-dropdown">
-        <option value="0">Spring 2020</option>
-        <option value="1">Fall 2019</option>
-        <option value="2">Spring 2019</option>
+    <select id="time-frame-dropdown" onchange="">
+@foreach (var item in ViewBag.TimeFrames)
+{
+        <option value=@item.id>@item.name</option>
+}
     </select>
 </form>
 <br />
@@ -57,5 +58,5 @@
         <td>@item.scan_event.end_time</td>
         <td>@item.account_attendance.attendance_time</td>
     </tr>
- }
+}
 </table>
