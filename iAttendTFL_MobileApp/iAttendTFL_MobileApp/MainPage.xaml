@@ -7,9 +7,19 @@
              x:Class="iAttendTFL_MobileApp.MainPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Attendance tracker"
+               HorizontalOptions="Center"
+               FontAttributes="Bold" />
+            <Editor x:Name="idEditor" 
+                Keyboard="Numeric"
+                Placeholder="Enter student id:"
+                HeightRequest="100" />
+            <Editor x:Name="nameEditor"
+                Placeholder="Enter event name:"
+                HeightRequest="100" />
+            <Button Text="Submit"
+                Clicked="OnSubmitButtonClicked" />
+                
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

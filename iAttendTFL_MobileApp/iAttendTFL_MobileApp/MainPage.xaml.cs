@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iAttendTFL_MobileApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,12 @@ namespace iAttendTFL_MobileApp
         public MainPage()
         {
             InitializeComponent();
+        }
+        void OnSubmitButtonClicked(object sender, EventArgs eventArgs)
+        {
+
+            Submission sendme = new Submission(int.Parse(idEditor.Text), nameEditor.Text);
+
         }
     }
 }
