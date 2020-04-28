@@ -61,12 +61,28 @@ div.border-div {
     padding: 75px 20px 75px 20px;
 }
 
+div.barcode-div {
+    background-color: white;
+    border: 1px solid #c9c9c9;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%
+}
+
 div.small-div {
     width: 50%;
 }
 
 div.medium-div {
     width: 75%;
+}
+
+img.barcode-img {
+    height: 50px;
+    width: 100%;
+    padding: 3px;
 }
 
 .flex-container {

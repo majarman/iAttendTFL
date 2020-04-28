@@ -202,18 +202,6 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
 
-        public IActionResult MyAccount()
-        {
-            if (HttpContext.Session.GetString("Email") == null)
-            {
-                return RedirectToAction("NotLoggedIn");
-            }
-
-            ViewData["AccountType"] = HttpContext.Session.GetString("AccountType");
-
-            return View();
-        }
-
         public IActionResult NotLoggedIn()
         {
             if (HttpContext.Session.GetString("Email") != null)
