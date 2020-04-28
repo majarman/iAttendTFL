@@ -14,7 +14,7 @@ namespace iAttendTFL_MobileApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-        private Button buttonScan;
+        //private Button buttonScan;
 
         public MainPage()
         {

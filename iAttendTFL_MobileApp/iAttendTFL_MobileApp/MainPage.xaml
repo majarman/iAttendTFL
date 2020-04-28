@@ -31,16 +31,17 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <BoxView Grid.Row="0" BackgroundColor="Chocolate"/>
+        <BoxView Grid.Row="0" BackgroundColor="#5F0087"/>
+        
         <zxing:ZXingScannerView Grid.Row="1"
                                 x:Name="_scanView"
                                 OnScanResult="Handle_OnScanResult"
                                 IsScanning="true"
                                 WidthRequest="200"
-                                HeightRequest="200" />
+                                HeightRequest="400" />
 
         <BoxView Grid.Row="2"
-                 BackgroundColor="Blue" />
+                 BackgroundColor="#5F0087" />
     </Grid>
 
 </ContentPage>
