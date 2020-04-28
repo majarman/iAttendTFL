@@ -40,13 +40,8 @@ namespace iAttendTFL_WebApp.Controllers
                     where a.email.ToLower() == email.ToLower()
                     select new AccountInfo
                     {
-                        id = a.id,
-                        first_name = a.first_name,
-                        last_name = a.last_name,
-                        email = a.email,
-                        account_type = a.account_type,
-                        expected_graduation_date = a.expected_graduation_date,
-                        track = t.name
+                        account = a,
+                        track = t
                     }).FirstOrDefault();
         }
 
@@ -141,7 +136,7 @@ namespace iAttendTFL_WebApp.Controllers
                     HttpContext.Session.SetString("Email", email);
                     HttpContext.Session.SetString("AccountType", Convert.ToString(accountType));
 
-                    return RedirectToAction("Attendance", "AccountAttendances");
+                    return RedirectToAction("MyAccount", "Accounts");
                 }
             }
 
@@ -374,6 +369,35 @@ namespace iAttendTFL_WebApp.Controllers
             _context.account.Remove(account);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult MyAccount()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+
+            AccountInfo accountInfo = AccountInfo(HttpContext.Session.GetString("Email"));
+            account a = accountInfo.account;
+
+            Image barcodeImg = a.StringToBarcodeImage(a.id.ToString());
+            byte[] barcodeByteA = a.ImageToByteArray(barcodeImg);
+
+            ViewBag.Barcode = barcodeByteA;
+            ViewData["FullName"] = FullName(email: accountInfo.account.email);
+            ViewData["Email"] = accountInfo.account.email;
+            ViewData["AccountTypeString"] = accountInfo.account.account_type switch
+            {
+                'a' => "Administrator",
+                'm' => "Moderator",
+                _ => "Student"
+            };
+            ViewData["TrackName"] = accountInfo.track.name;
+            ViewData["ExpectedGraduation"] = String.Format("{0:MMMM yyyy}", accountInfo.account.expected_graduation_date);
+            ViewData["AccountType"] = HttpContext.Session.GetString("AccountType");
+
+            return View();
         }
 
         //==========================

@@ -10,13 +10,11 @@ namespace iAttendTFL_WebApp.Models
 {
     public class account
     {
-        
-
         public int id { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
         public string email { get; set; }
-        public string salt { get; set; } = "DEMOSALT";
+        public string salt { get; set; }
         public string password_hash { get; set; }
         public char account_type { get; set; }
         public bool email_verified { get; set; } = false;
@@ -27,14 +25,14 @@ namespace iAttendTFL_WebApp.Models
         public virtual ICollection<token> tokens { get; set; }
 
         // BARCODE GENERATION METHODS
-        private Image StringToBarcodeImage(String input)
+        public Image StringToBarcodeImage(String input)
         {
             var barcodeMaker = new BarcodeLib.Barcode();
             Image myBarcode = barcodeMaker.Encode(BarcodeLib.TYPE.CODE39, input);
             return myBarcode;
         }
 
-        private byte[] ImageToByteArray(Image img)
+        public byte[] ImageToByteArray(Image img)
         {
             ImageConverter imgCon = new ImageConverter();
             byte[] myByteArray = (byte[])imgCon.ConvertTo(img, typeof(byte[]));

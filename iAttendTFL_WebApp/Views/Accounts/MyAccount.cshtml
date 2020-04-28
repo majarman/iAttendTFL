@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "My Account";
+}
+<div class="center-contents-on-screen">
+    <div class="small-div" style="margin: auto;">
+        <h1 class="hor-center-text">My Account</h1>
+        <table class="no-design-table">
+            <tr>
+                <td>TFL Code:</td>
+                <td>
+                    @{
+                        var base64 = Convert.ToBase64String(ViewBag.Barcode);
+                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    }
+                    <div class="barcode-div">
+                        <img src="@imgSrc" class="barcode-img" />
+                    </div>
+                    <div class="hor-center-text">
+                        <span class="subtext"><a href="@imgSrc">Click here</a> to view larger image.</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td>@ViewData["FullName"]</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>@ViewData["Email"]</td>
+            </tr>
+            <tr>
+                <td>Account Type:</td>
+                <td>@ViewData["AccountTypeString"]</td>
+            </tr>
+            @if (Convert.ToChar(ViewData["AccountType"]) != 'a' && Convert.ToChar(ViewData["AccountType"]) != 'm')
+            {
+                <tr>
+                    <td>Education Track:</td>
+                    <td>@ViewData["TrackName"]</td>
+                </tr>
+                <tr>
+                    <td>Expected Graduation:</td>
+                    <td>@ViewData["ExpectedGraduation"]</td>
+                </tr>
+            }
+        </table>
+        <br />
+        <input type="button" class="hor-center-element" value="Reset My Password" onclick="location.href='@Url.Action("RequestNewPassword", "Home")'" />
+        <p class="subtext">Clicking the link above will sign you out of your account.</p>
+        @if (Convert.ToChar(ViewData["AccountType"]) == 'a')
+        {
+            <p class="subtext">To make changes to your account or another account, please visit the <a asp-controller="Home" asp-action="ManageAccounts">Manage Accounts</a> page.</p>
+        }
+        else
+        {
+            <p class="subtext">To make other changes to your account, please contact an administrator.</p>
+        }
+    </div>
+</div>
