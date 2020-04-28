@@ -58,7 +58,7 @@
                             {
                                 <a asp-controller="Home" asp-action="AdminActions">Admin Actions</a>
                             }
-                            <a asp-controller="Home" asp-action="Attendance">Attendance</a>
+                            <a asp-controller="AccountAttendances" asp-action="Attendance">Attendance</a>
                             <a asp-controller="Home" asp-action="Events">Events</a>
                             <a asp-controller="Home" asp-action="MyAccount">My Account</a>
                         }
@@ -101,7 +101,7 @@
                 <div>
                     <strong>Records</strong>
                     <br />
-                    <a asp-controller="Home" asp-action="Attendance">Attendance</a>
+                    <a asp-controller="AccountAttendances" asp-action="Attendance">Attendance</a>
                     <br />
                     <a asp-controller="Home" asp-action="Events">Events</a>
                 </div>
@@ -123,7 +123,7 @@
         </div>
         <a href="mailto:threefuriouslocomotives@gmail.com">threefuriouslocomotives@gmail.com</a>
         <br />
-        Copyright &copy; 2020 Three Furious Locomotives. All Rights Reserved.
+        Copyright &copy; @DateTime.Now.Year Three Furious Locomotives. All Rights Reserved.
     </footer>
     @if (IsSectionDefined("scripts"))
     {
