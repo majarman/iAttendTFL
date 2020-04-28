@@ -19,6 +19,34 @@ namespace iAttendTFL_WebApp.Controllers
             _context = context;
         }
 
+        public int NewestTimeFrameID()
+        {
+            var id = _context.time_frame
+                     .OrderByDescending(c => c.start_date)
+                     .FirstOrDefault();
+            
+            if (id != null)
+            {
+                return id.id;
+            }
+
+            return int.MinValue;
+        }
+
+        public int CurrentTimeFrameID()
+        {
+            var id = _context.time_frame
+                     .Where(c => c.start_date <= DateTime.Now && c.end_date >= DateTime.Now)
+                     .FirstOrDefault();
+            
+            if (id != null)
+            {
+                return id.id;
+            }
+
+            return int.MinValue;
+        }
+
         // GET: TimeFrames
         public async Task<IActionResult> Index()
         {
@@ -54,7 +82,7 @@ namespace iAttendTFL_WebApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name,start_date,end_date")] time_frame time_frame)
+        public async Task<IActionResult> Create([Bind("name,start_date,end_date")] time_frame time_frame)
         {
             if (ModelState.IsValid)
             {

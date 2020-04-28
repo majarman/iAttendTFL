@@ -18,13 +18,89 @@ using BarcodeLib;
 
 namespace iAttendTFL_WebApp.Controllers
 {
-    public class accountsController : Controller
+    public class AccountsController : Controller
     {
         private readonly iAttendTFL_WebAppContext _context;
 
-        public accountsController(iAttendTFL_WebAppContext context)
+        public AccountsController(iAttendTFL_WebAppContext context)
         {
             _context = context;
+        }
+
+        public AccountInfo AccountInfo(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return null;
+            }
+
+            return (from a in _context.account
+                    join t in _context.track
+                        on a.track_id equals t.id
+                    where a.email.ToLower() == email.ToLower()
+                    select new AccountInfo
+                    {
+                        account = a,
+                        track = t
+                    }).FirstOrDefault();
+        }
+
+        public List<string> CurrentAccountsEmails(DateTime timeFrameStart)
+        {
+            if (timeFrameStart == null)
+            {
+                return null;
+            }
+
+            return (from a in _context.account
+                    join t in _context.track
+                        on a.track_id equals t.id
+                    where a.expected_graduation_date >= timeFrameStart
+                    orderby a.last_name
+                    select a.email).ToList();
+        }
+
+        public List<AccountRequirement> AccountRequirements(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return null;
+            }
+
+            return (from a in _context.account
+                    join t in _context.track
+                        on a.track_id equals t.id
+                    join tr in _context.track_requirement
+                        on t.id equals tr.track_id
+                    join r in _context.requirement
+                        on tr.requirement_id equals r.id
+                    where a.email.ToLower() == email.ToLower()
+                    orderby r.name
+                    select new AccountRequirement
+                    {
+                        account = a,
+                        track = t,
+                        track_requirement = tr,
+                        requirement = r
+                    }).ToList();
+        }
+
+        public List<int> AccountRequirementIDs(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return null;
+            }
+
+            return (from a in _context.account
+                    join t in _context.track
+                        on a.track_id equals t.id
+                    join tr in _context.track_requirement
+                        on t.id equals tr.track_id
+                    join r in _context.requirement
+                        on tr.requirement_id equals r.id
+                    where a.email.ToLower() == email.ToLower()
+                    select r.id).ToList();
         }
 
         [HttpPost]
@@ -60,11 +136,45 @@ namespace iAttendTFL_WebApp.Controllers
                     HttpContext.Session.SetString("Email", email);
                     HttpContext.Session.SetString("AccountType", Convert.ToString(accountType));
 
-                    return RedirectToAction("Attendance", "Home");
+                    return RedirectToAction("MyAccount", "Accounts");
                 }
             }
 
             return RedirectToAction("Login", "Home", new { error = true });
+        }
+
+        public string FullName(int? id = null, string email = null, bool lastThenFirst = false)
+        {
+            IQueryable<account> account;
+            if (id == null && string.IsNullOrEmpty(email))
+            {
+                return null;
+            }
+            else if (id != null)
+            {
+                account = from a in _context.account
+                    where a.id == id
+                    select a;
+            }
+            else
+            {
+                account = from a in _context.account
+                    where a.email.ToLower() == email.ToLower()
+                    select a;
+            }
+
+            string fullName;
+
+            if (lastThenFirst)
+            {
+                fullName = account.First().last_name + ", " + account.First().first_name;
+            }
+            else
+            {
+                fullName = account.First().first_name + " " + account.First().last_name;
+            }
+
+            return fullName;
         }
 
         // GET: accounts
@@ -257,6 +367,35 @@ namespace iAttendTFL_WebApp.Controllers
             _context.account.Remove(account);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult MyAccount()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn");
+            }
+
+            AccountInfo accountInfo = AccountInfo(HttpContext.Session.GetString("Email"));
+            account a = accountInfo.account;
+
+            Image barcodeImg = a.StringToBarcodeImage(a.id.ToString());
+            byte[] barcodeByteA = a.ImageToByteArray(barcodeImg);
+
+            ViewBag.Barcode = barcodeByteA;
+            ViewData["FullName"] = FullName(email: accountInfo.account.email);
+            ViewData["Email"] = accountInfo.account.email;
+            ViewData["AccountTypeString"] = accountInfo.account.account_type switch
+            {
+                'a' => "Administrator",
+                'm' => "Moderator",
+                _ => "Student"
+            };
+            ViewData["TrackName"] = accountInfo.track.name;
+            ViewData["ExpectedGraduation"] = String.Format("{0:MMMM yyyy}", accountInfo.account.expected_graduation_date);
+            ViewData["AccountType"] = HttpContext.Session.GetString("AccountType");
+
+            return View();
         }
 
         //==========================

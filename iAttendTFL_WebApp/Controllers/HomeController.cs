@@ -44,21 +44,6 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
 
-        public IActionResult Attendance()
-        {
-            if (HttpContext.Session.GetString("Email") == null)
-            {
-                return RedirectToAction("NotLoggedIn");
-            }
-            else if (Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('m') ||
-                     Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
-            {
-                return RedirectToAction("FacultyAttendance");
-            }
-
-            return RedirectToAction("StudentAttendance");
-        }
-
         public IActionResult ChangePassword()
         {
             if (HttpContext.Session.GetString("Email") != null)
@@ -120,21 +105,6 @@ namespace iAttendTFL_WebApp.Controllers
             }
 
             ViewData["AccountType"] = HttpContext.Session.GetString("AccountType");
-
-            return View();
-        }
-
-        public IActionResult FacultyAttendance()
-        {
-            if (HttpContext.Session.GetString("Email") == null)
-            {
-                return RedirectToAction("NotLoggedIn");
-            }
-            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a') &&
-                     !Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('m'))
-            {
-                return RedirectToAction("DoesNotHavePermission", new { requiresMod = true });
-            }
 
             return View();
         }
@@ -232,18 +202,6 @@ namespace iAttendTFL_WebApp.Controllers
             return View();
         }
 
-        public IActionResult MyAccount()
-        {
-            if (HttpContext.Session.GetString("Email") == null)
-            {
-                return RedirectToAction("NotLoggedIn");
-            }
-
-            ViewData["AccountType"] = HttpContext.Session.GetString("AccountType");
-
-            return View();
-        }
-
         public IActionResult NotLoggedIn()
         {
             if (HttpContext.Session.GetString("Email") != null)
@@ -258,7 +216,7 @@ namespace iAttendTFL_WebApp.Controllers
         {
             return View();
         }
-        
+
         public IActionResult RequestNewPassword()
         {
             if (HttpContext.Session.GetString("Email") != null)
@@ -270,16 +228,6 @@ namespace iAttendTFL_WebApp.Controllers
                         Response.Cookies.Delete(cookie);
                     }
                 }
-            }
-
-            return View();
-        }
-
-        public IActionResult StudentAttendance()
-        {
-            if (HttpContext.Session.GetString("Email") == null)
-            {
-                return RedirectToAction("NotLoggedIn");
             }
 
             return View();

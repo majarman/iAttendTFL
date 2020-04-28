@@ -58,9 +58,9 @@
                             {
                                 <a asp-controller="Home" asp-action="AdminActions">Admin Actions</a>
                             }
-                            <a asp-controller="Home" asp-action="Attendance">Attendance</a>
+                            <a asp-controller="AccountAttendances" asp-action="Attendance">Attendance</a>
                             <a asp-controller="Home" asp-action="Events">Events</a>
-                            <a asp-controller="Home" asp-action="MyAccount">My Account</a>
+                            <a asp-controller="Accounts" asp-action="MyAccount">My Account</a>
                         }
                     }
                 </div>
@@ -84,7 +84,7 @@
                     <br />
                     <a asp-controller="Home" asp-action="Logout">Log Out</a>
                     <br />
-                    <a asp-controller="Home" asp-action="MyAccount">My Account</a>
+                    <a asp-controller="Accounts" asp-action="MyAccount">My Account</a>
                 }
                 else
                 {
@@ -101,7 +101,7 @@
                 <div>
                     <strong>Records</strong>
                     <br />
-                    <a asp-controller="Home" asp-action="Attendance">Attendance</a>
+                    <a asp-controller="AccountAttendances" asp-action="Attendance">Attendance</a>
                     <br />
                     <a asp-controller="Home" asp-action="Events">Events</a>
                 </div>
@@ -117,13 +117,15 @@
                 <br />
                 <a asp-controller="Home" asp-action="ManageAccounts">Manage Accounts</a>
                 <br />
+                <a asp-controller="Home" asp-action="ManageRequirements">Requirements</a>
+                <br />
                 <a asp-controller="Home" asp-action="ManageTimeFrames">Time Frames</a>
             </div>
             }
         </div>
         <a href="mailto:threefuriouslocomotives@gmail.com">threefuriouslocomotives@gmail.com</a>
         <br />
-        Copyright &copy; 2020 Three Furious Locomotives. All Rights Reserved.
+        Copyright &copy; @DateTime.Now.Year Three Furious Locomotives. All Rights Reserved.
     </footer>
     @if (IsSectionDefined("scripts"))
     {

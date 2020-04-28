@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Attendance Records";
+}
+
+<h2 class="hor-center-text">Attendance Records</h2>
+<br />
+<form id="time-frame-form">
+    <label for="time-frame-dropdown">Time Frame:&nbsp;&nbsp;</label>
+    <select id="time-frame-dropdown">
+@foreach (var item in ViewBag.TimeFrames)
+{
+    @if (item.id == ViewBag.CurrentTimeFrameID)
+    {
+        <option selected value=@item.id>@item.name</option>
+    }
+    else
+    {
+        <option value=@item.id>@item.name</option>
+    }
+}
+    </select>
+</form>
+<br />
+<table>
+    <tr>
+        <th style="width: 1%;">More Info</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Attendance Points Needed</th>
+        <th>Attendance Points Fulfilled</th>
+        <th>Progress</th>
+    </tr>
+@for (int i = 0; i < Enumerable.Count(ViewBag.Emails); i++)
+{
+    <tr>
+        <td><input type="button" value="Select" onclick="location.href='@Url.Action("StudentAttendance", "AccountAttendances", new { email = ViewBag.Emails[i] })'" /></td>
+        <td>@ViewBag.FullNames[i]</td>
+        <td>@ViewBag.Emails[i]</td>
+        <td class="hor-center-text">@ViewBag.NeededAttendancePoints[i]</td>
+        <td class="hor-center-text">@ViewBag.AttendancePoints[i]</td>
+        <td class="hor-center-text">@ViewBag.Progress[i]%</td>
+    </tr>
+}
+</table>

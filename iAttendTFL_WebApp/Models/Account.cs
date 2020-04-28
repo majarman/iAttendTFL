@@ -12,14 +12,12 @@ namespace iAttendTFL_WebApp.Models
 {
     public class account
     {
-        
-
         public int id { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
         public string email { get; set; }
         public string salt { get; set; }
-
+        
         [StringLength(200, ErrorMessage = "The password must be at least 8 characters long.", MinimumLength = 8)]
         [RegularExpression("^((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^a-zA-Z0-9])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])).{8,}$", ErrorMessage = "Passwords must be at least 8 characters and contain at least 3 of 4 of the following: upper case (A-Z), lower case (a-z), number (0-9) and special character (e.g. !@#$%^&*)")]
         public string password_hash { get; set; }
@@ -37,14 +35,14 @@ namespace iAttendTFL_WebApp.Models
         public virtual ICollection<token> tokens { get; set; }
 
         // BARCODE GENERATION METHODS
-        private Image StringToBarcodeImage(String input)
+        public Image StringToBarcodeImage(String input)
         {
             var barcodeMaker = new BarcodeLib.Barcode();
             Image myBarcode = barcodeMaker.Encode(BarcodeLib.TYPE.CODE39, input);
             return myBarcode;
         }
 
-        private byte[] ImageToByteArray(Image img)
+        public byte[] ImageToByteArray(Image img)
         {
             ImageConverter imgCon = new ImageConverter();
             byte[] myByteArray = (byte[])imgCon.ConvertTo(img, typeof(byte[]));

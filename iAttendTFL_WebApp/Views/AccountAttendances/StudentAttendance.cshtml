@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = ViewData["FullName"] + "'s Attendance";
+}
+
+<h1 class="hor-center-text">@ViewData["FullName"]</h1>
+<h3 class="hor-center-text">@ViewData["Email"]</h3>
+<br />
+<form id="time-frame-form">
+    <label for="time-frame-dropdown">Time Frame:&nbsp;&nbsp;</label>
+    <select id="time-frame-dropdown" onchange="location.href='@Url.Action("StudentAttendance", "AccountAttendances", new { email = ViewData["Email"] })'">
+@foreach (var item in ViewBag.TimeFrames)
+{
+    @if (item.id == ViewBag.CurrentTimeFrameID)
+    {
+        <option selected value=@item.id>@item.name</option>
+    }
+    else
+    {
+        <option value=@item.id>@item.name</option>
+    }
+}
+    </select>
+</form>
+<br />
+<h5 class="inline">Track:&nbsp;&nbsp;</h5>
+<span class="inline">Music Major</span>
+<table class="student-requirements-table">
+    <tr>
+        <th>Requirement Type</th>
+        <th>Attendance Points Needed</th>
+        <th>Attendance Points Fulfilled</th>
+        <th>Progress</th>
+    </tr>
+@for (int i = 0; i < Enumerable.Count(ViewBag.AccountRequirements); i++)
+{
+    <tr>
+        <td>@ViewBag.AccountRequirements[i].requirement.name</td>
+        <td class="hor-center-text">@ViewBag.AccountRequirements[i].track_requirement.num_required</td>
+        <td class="hor-center-text">@ViewBag.AttendancePoints[i]</td>
+        <td class="hor-center-text">@ViewBag.Progress[i]%</td>
+    </tr>
+}
+</table>
+<br />
+<h5>Attended Events:</h5>
+<table class="student-attendance-table">
+    <tr>
+        <th>Event Name</th>
+        <th>Requirement Type</th>
+        <th>Attendance Points</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Time of Attendance</th>
+    </tr>
+@foreach (var item in ViewBag.AttendedEvents)
+{
+    <tr>
+        <td>@item.scan_event.name</td>
+        <td>@item.requirement.name</td>
+        <td class="hor-center-text">@item.event_requirement.num_fulfilled</td>
+        <td>@item.scan_event.start_time</td>
+        <td>@item.scan_event.end_time</td>
+        <td>@item.account_attendance.attendance_time</td>
+    </tr>
+}
+</table>
