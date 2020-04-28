@@ -50,7 +50,7 @@
                         if (isLoggedIn == false)
                         {
                             <a asp-controller="Home" asp-action="Login">Log In</a>
-                            <a asp-controller="Home" asp-action="CreateAccount">Register</a>
+                            <a asp-controller="Accounts" asp-action="Create">Register</a>
                         }
                         else
                         {
@@ -91,7 +91,7 @@
                     <br />
                     <a asp-controller="Home" asp-action="Login">Log In</a>
                     <br />
-                    <a asp-controller="Home" asp-action="CreateAccount">Register</a>
+                    <a asp-controller="Accounts" asp-action="Create">Register</a>
                 }
                 <br />
                 <a asp-controller="Home" asp-action="RequestNewPassword">Reset Password</a>

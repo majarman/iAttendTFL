@@ -224,6 +224,19 @@ namespace iAttendTFL_WebApp.Controllers
         // GET: accounts/Create
         public IActionResult Create()
         {
+            List<int> selectionYears = new List<int>();
+            int currentYear = DateTime.Now.Year;
+            
+            for (int i = currentYear; i < currentYear + 7; i++)
+            {
+                selectionYears.Add(i);
+            }
+
+            List<track> tracks = _context.track.OrderBy(t => t.name).ToList();
+
+            ViewBag.Years = selectionYears;
+            ViewBag.Tracks = tracks;
+
             return View();
         }
 
@@ -232,64 +245,49 @@ namespace iAttendTFL_WebApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,first_name,last_name,email,salt,password_hash,account_type,email_verified,expected_graduation_date,track_id")] account account)
+        public async Task<IActionResult> Create([Bind("first_name,last_name,email,salt,password_hash,password_confirm,gradMonth,gradYear,account_type,track_id")] account account)
         {
+                
             if (ModelState.IsValid)
             {
-                //account.pushBarcode(123456);
-                _context.Add(account);
-                await _context.SaveChangesAsync();
-                
-                
-                return RedirectToAction(nameof(Index));
+                //if (account.email.EndsWith("@mountunion.edu"))
+                //{
+                    if (!emailExists(account.email))
+                    {
+                        //if (meetsComplexityRequirement(account.password_hash))
+                        //{
+                            if (account.password_hash == account.password_confirm)
+                            {
+                                account.account_type = 's';
+                                account.salt = "ab";
+                                account.email_verified = true;
+                                account.barcode = Encoding.UTF8.GetBytes("TEST");
+                                account.expected_graduation_date = formatDate(account.gradMonth, account.gradYear);
+                                //account.expected_graduation_date = new DateTime(2020, 05, 16);
+                                //account.pushBarcode(123456);
+                                _context.Add(account);
+                                await _context.SaveChangesAsync();
+                                return RedirectToAction("Index", "Home");
+                            
+                            } // passwords match
+                            else { return RedirectToAction(nameof(Create)); }
+                        
+                        //} //complexity requirement
+                        //else { return RedirectToAction(nameof(Create)); }
+                    
+                        //return RedirectToAction(nameof(Index));
+
+                    } // email does not already exist in database
+                    else { return RedirectToAction(nameof(Create)); }
+
+                //return RedirectToAction(nameof(Index));
+                //}
             }
+
             
             return View(account);
         }
 
-        // POST: accounts/CreateAccount    --Matthew Dutt Version--
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAccount( string inputFirstName, string inputLastName, string inputEmail, string inputPassword, string inputConfirmPassword, string selectMonth, string selectYear, int selectTrack)
-        {
-
-            System.Diagnostics.Debug.WriteLine("Hello world");
-            if (inputEmail.EndsWith("@mountunion.edu"))
-            {
-                if (!emailExists(inputEmail))
-                {
-                    if (meetsComplexityRequirement(inputPassword))
-                    {
-                        if (inputPassword == inputConfirmPassword)
-                        {
-                            DateTime gradDate = formatDate(selectMonth, selectYear); //takes string values from dropdown list selections, combines them, and creates a DateTime variable with that data.
-                            account tempAccount = new account();
-                            //add id increment handling stuff in web app in the future instead of db
-                            tempAccount.id = 3001;
-                            tempAccount.first_name = inputFirstName;
-                            tempAccount.last_name = inputLastName;
-                            tempAccount.email = inputEmail;
-                            tempAccount.password_hash = inputPassword;
-                            tempAccount.expected_graduation_date = gradDate;
-                            tempAccount.track_id = selectTrack;
-                            tempAccount.salt = "DefaultSalt";
-                                if (ModelState.IsValid)
-                                {
-                                    _context.Add(tempAccount);
-                                    _context.SaveChangesAsync();
-                                    return RedirectToAction(nameof(Index));
-                                }
-                                return View(tempAccount);
-                                //return view();
-                            
-                        } return NotFound(); //password match
-                    } return NotFound(); //password meets complexity requirements
-                } return NotFound(); //email does not exist
-            } return NotFound(); //email suffix is @mountunion.edu
-
-        } //
 
         // GET: accounts/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -416,16 +414,16 @@ namespace iAttendTFL_WebApp.Controllers
 
         private bool meetsComplexityRequirement(string userPassword)
         {
-            if ( userPassword.Length > 7 && userPassword.Any(char.IsDigit) && userPassword.Any(char.IsUpper) && userPassword.Any(char.IsSymbol) )
+            if (userPassword.Length > 7 && userPassword.Any(c => char.IsDigit(c)) && userPassword.Any(c => char.IsUpper(c)) && userPassword.Any(c => char.IsSymbol(c)))
             {
                 return true;
-            } else { return false; }
+            }
+            else { return false; }
         }
         
         private DateTime formatDate(string userMonth, string userYear)
         {
-            string format = "yyyyMMdd";
-            string dateString = userYear + userMonth + "28";
+            string dateString = userYear + "-" + userMonth + "-28";
             
             DateTime formattedEGD;
             formattedEGD = DateTime.Parse(dateString);
@@ -436,7 +434,7 @@ namespace iAttendTFL_WebApp.Controllers
             System.Diagnostics.Debug.WriteLine("====formattedEGD====");
             System.Diagnostics.Debug.WriteLine(formattedEGD.ToString());
             System.Diagnostics.Debug.WriteLine("====formattedEGD====");
-            return formattedEGD;
+            return formattedEGD.Date;
         }
 
     }
