@@ -6,9 +6,7 @@
 <div class="center-contents-on-screen">
     <div class="border-div medium-div">
         <h2 class="hor-center-text">Create An Account</h2>
-
-        <hr />
-        <p>Enter the following infromation to create your iAttend account. Once you submit the information, you will receive a verification email.</p>
+        <p>Enter the following information to create your iAttend account. Once you submit the information, you will receive a verification email.</p>
         <!--<div class="row">-->
             <!--<div class="col-md-4">-->
                 <form asp-action="Create">
@@ -37,9 +35,9 @@
                         </tr>
                         <tr>
                             <div class="form-group">
-                                <td><label asp-for="expected_graduation_date"  class="control-label">Expected Graduation Date: </label></td>
+                                <td><label asp-for="expected_graduation_date" class="control-label">Expected Graduation Date: </label></td>
                                 <td>
-                                    <select asp-for="gradMonth" class="form-control" required>
+                                    <select class="form-control hor-center-text" style="width: 48%;" asp-for="gradMonth" required>
                                         <option value="" disabled selected style="display: none;">-- Select Month --</option>
                                         <option value="01">January</option>
                                         <option value="02">February</option>
@@ -54,13 +52,12 @@
                                         <option value="11">November</option>
                                         <option value="12">December</option>
                                     </select>
-                                    <select asp-for="gradYear"   class="form-control" required>
+                                    <select class="form-control hor-center-text" style="width: 48%; float: right;" asp-for="gradYear" required>
                                         <option value="" disabled selected style="display: none;">-- Select Year --</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
-                                        <option value="2024">2024</option>
+@foreach (var year in ViewBag.Years)
+{
+                                        <option value="@year">@year.ToString()</option>
+}
                                     </select>
                                 </td>
                                 <span asp-validation-for="gradMonth" class="text-danger"></span>
@@ -71,18 +68,16 @@
                             <div class="form-group">
                                 <td><label asp-for="track_id" class="control-label">Select Education Track: </label></td>
                                 <td>
-                                    <select asp-for="track_id" class="form-control" required>
+                                    <select class="form-control hor-center-text" style="width: 48%;" asp-for="track_id" required>
                                         <option value="" disabled selected style="display: none;">-- Select Track --</option>
-                                        <option value=3>Music Education</option>
-                                        <option value=1>Music BA</option>
-                                        <option value=2>Music Minor</option>
+@foreach (var track in ViewBag.Tracks)
+{
+                                        <option value=@track.id>@track.name</option>
+}
                                     </select>
                                 </td>
                                 <span asp-validation-for="track_id" class="text-danger"></span>
                             </div>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><span class="subtext">Passwords must be at least 8 characters, with one capital, one special character, and one number.</span></td>
                         </tr>
                         <tr>
                             <div class="form-group">
@@ -90,6 +85,9 @@
                                 <td><input asp-for="password_hash" class="form-control" type="password" style="width: 100%;" required /></td>
                                 <span asp-validation-for="password_hash" class="text-danger"></span>
                             </div>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><span class="subtext">Passwords must be at least 8 characters, with one capital, one special character, and one number.</span></td>
                         </tr>
                         <tr>
                             <div class="form-group">
@@ -101,7 +99,6 @@
                     </table>
                     <br />
                     <div class="form-group">
-
                         <input class="hor-center-element" type="submit" value="Create" class="btn btn-primary" />
                     </div>
                 </form>

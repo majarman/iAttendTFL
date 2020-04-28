@@ -114,6 +114,19 @@ namespace iAttendTFL_WebApp.Controllers
         // GET: accounts/Create
         public IActionResult Create()
         {
+            List<int> selectionYears = new List<int>();
+            int currentYear = DateTime.Now.Year;
+            
+            for (int i = currentYear; i < currentYear + 7; i++)
+            {
+                selectionYears.Add(i);
+            }
+
+            List<track> tracks = _context.track.OrderBy(t => t.name).ToList();
+
+            ViewBag.Years = selectionYears;
+            ViewBag.Tracks = tracks;
+
             return View();
         }
 
@@ -144,7 +157,7 @@ namespace iAttendTFL_WebApp.Controllers
                                 //account.pushBarcode(123456);
                                 _context.Add(account);
                                 await _context.SaveChangesAsync();
-                                return RedirectToAction(nameof(Index));
+                                return RedirectToAction("Index", "Home");
                             
                             } // passwords match
                             else { return RedirectToAction(nameof(Create)); }
