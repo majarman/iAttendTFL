@@ -29,53 +29,53 @@ namespace iAttendTFL_WebApp.Controllers
             }
 
             return (from a in _context.account
-                   join aa in _context.account_attendance
-                       on a.id equals aa.account_id
-                   join se in _context.scan_event
-                      on aa.scan_event_id equals se.id
-                   join er in _context.event_requirement
-                      on se.id equals er.scan_event_id
-                   join r in _context.requirement
-                      on er.requirement_id equals r.id
-                   where a.email.ToLower() == email.ToLower()
-                      && aa.attendance_time >= time_frame_start
-                      && aa.attendance_time <= time_frame_end
-                   orderby aa.attendance_time descending, se.name, r.name
-                   select new AttendedEvent
-                   {
-                       account = a,
-                       account_attendance = aa,
-                       scan_event = se,
-                       event_requirement = er,
-                       requirement = r
-                   }).ToList();
+                    join aa in _context.account_attendance
+                        on a.id equals aa.account_id
+                    join se in _context.scan_event
+                        on aa.scan_event_id equals se.id
+                    join er in _context.event_requirement
+                        on se.id equals er.scan_event_id
+                    join r in _context.requirement
+                        on er.requirement_id equals r.id
+                    where a.email.ToLower() == email.ToLower()
+                        && aa.attendance_time >= time_frame_start
+                         && aa.attendance_time <= time_frame_end
+                    orderby aa.attendance_time descending, se.name, r.name
+                    select new AttendedEvent
+                    {
+                        account = a,
+                        account_attendance = aa,
+                        scan_event = se,
+                        event_requirement = er,
+                        requirement = r
+                    }).ToList();
         }
 
-        public List<EventsFulfilled> EventsFulfilled(string email, DateTime time_frame_start, DateTime time_frame_end)
+        public List<EventsFulfilled> EventsFulfilled(string email, DateTime timeFrameStart, DateTime timeFrameEnd)
         {
-            if (string.IsNullOrEmpty(email) || time_frame_start == null || time_frame_end == null)
+            if (string.IsNullOrEmpty(email) || timeFrameStart == null || timeFrameEnd == null)
             {
                 return null;
             }
 
             return (from a in _context.account
-                   join aa in _context.account_attendance
-                      on a.id equals aa.account_id
-                   join se in _context.scan_event
-                     on aa.scan_event_id equals se.id
-                   join er in _context.event_requirement
-                     on se.id equals er.scan_event_id
-                   join r in _context.requirement
-                     on er.requirement_id equals r.id
-                   where a.email.ToLower() == email.ToLower()
-                     && aa.attendance_time >= time_frame_start
-                     && aa.attendance_time <= time_frame_end
-                   group er by er.requirement_id into rc
-                   select new EventsFulfilled
-                   {
-                       id = rc.Key,
-                       count = rc.Sum(x => x.num_fulfilled)
-                   }).ToList();
+                    join aa in _context.account_attendance
+                        on a.id equals aa.account_id
+                    join se in _context.scan_event
+                        on aa.scan_event_id equals se.id
+                    join er in _context.event_requirement
+                        on se.id equals er.scan_event_id
+                    join r in _context.requirement
+                        on er.requirement_id equals r.id
+                    where a.email.ToLower() == email.ToLower()
+                        && aa.attendance_time >= timeFrameStart
+                        && aa.attendance_time <= timeFrameEnd
+                    group er by er.requirement_id into rc
+                    select new EventsFulfilled
+                    {
+                        id = rc.Key,
+                        count = rc.Sum(x => x.num_fulfilled)
+                    }).ToList();
         }
 
         public IActionResult Attendance()
@@ -232,7 +232,7 @@ namespace iAttendTFL_WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult FacultyAttendance()
+        public IActionResult FacultyAttendance(int? time_frame_id)
         {
             if (HttpContext.Session.GetString("Email") == null)
             {
@@ -242,26 +242,6 @@ namespace iAttendTFL_WebApp.Controllers
                      !Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('m'))
             {
                 return RedirectToAction("DoesNotHavePermission", "Home", new { requiresMod = true });
-            }
-
-            return View();
-        }
-
-        public IActionResult StudentAttendance(string email, int? time_frame_id)
-        {
-            if (HttpContext.Session.GetString("Email") == null)
-            {
-                return RedirectToAction("NotLoggedIn", "Home");
-            }
-            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a')
-                && !Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('m')
-                && HttpContext.Session.GetString("Email") != email)
-            {
-                return NotFound();
-            }
-            else if (string.IsNullOrEmpty(email))
-            {
-                return NotFound();
             }
 
             time_frame time_frame;
@@ -274,16 +254,18 @@ namespace iAttendTFL_WebApp.Controllers
                     time_frame = _context.time_frame
                                  .FirstOrDefault(m => m.id == id);
                 }
-
-                id = tfc.NewestTimeFrameID();
-                if (id != int.MinValue)
-                {
-                    time_frame = _context.time_frame
-                                 .FirstOrDefault(m => m.id == id);
-                }
                 else
                 {
-                    return NotFound();
+                    id = tfc.NewestTimeFrameID();
+                    if (id != int.MinValue)
+                    {
+                        time_frame = _context.time_frame
+                                     .FirstOrDefault(m => m.id == id);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
                 }
             }
             else
@@ -308,15 +290,138 @@ namespace iAttendTFL_WebApp.Controllers
                 }
             }
 
-            DateTime time_frame_start = time_frame.start_date;
-            DateTime time_frame_end = time_frame.end_date;
+            DateTime timeFrameStart = time_frame.start_date;
+            DateTime timeFrameEnd = time_frame.end_date;
+
+            List<time_frame> timeFrames = _context.time_frame.OrderByDescending(c => c.start_date).ToList();
+
+            AccountsController ac = new AccountsController(_context);
+            List<string> emails = ac.CurrentAccountsEmails(timeFrameStart);
+
+            TrackRequirementsController trc = new TrackRequirementsController(_context);
+
+            List<int> attendancePoints = new List<int>();
+            List<int> neededAttendancePoints = new List<int>();
+            List<int> progress = new List<int>();
+            List<string> fullNames = new List<string>();
+
+            foreach (var email in emails)
+            {
+                fullNames.Add(ac.FullName(email: email, lastThenFirst: true));
+                List<int> accountRequirementIDs = ac.AccountRequirementIDs(email);
+                var eventsFulfilled = EventsFulfilled(email, timeFrameStart, timeFrameEnd);
+
+                int requirementsNeeded = trc.TrackRequirementCount(_context.account
+                                 .FirstOrDefault(m => m.email == email).track_id);
+                int requirementsFulfilled = 0;
+
+                foreach (var ef in eventsFulfilled)
+                {
+                    if (accountRequirementIDs.Contains(ef.id))
+                    {
+                        requirementsFulfilled += ef.count;
+                    }
+                }
+
+                attendancePoints.Add(requirementsFulfilled);
+                neededAttendancePoints.Add(requirementsNeeded);
+
+                if (requirementsFulfilled == 0 && requirementsNeeded == 0)
+                {
+                    progress.Add(0);
+                }
+                else
+                {
+                    progress.Add(Convert.ToInt32(
+                            Decimal.Round((Convert.ToDecimal(requirementsFulfilled) /
+                            Convert.ToDecimal(requirementsNeeded)) * 100,
+                            MidpointRounding.AwayFromZero)));
+                }
+            }
+
+            ViewBag.TimeFrames = timeFrames;
+            ViewBag.CurrentTimeFrameID = time_frame.id;
+            ViewBag.Emails = emails;
+            ViewBag.FullNames = fullNames;
+            ViewBag.AttendancePoints = attendancePoints;
+            ViewBag.NeededAttendancePoints = neededAttendancePoints;
+            ViewBag.Progress = progress;
+
+            return View();
+        }
+
+        public IActionResult StudentAttendance(string email, int? timeFrameID)
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("NotLoggedIn", "Home");
+            }
+            else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a')
+                && !Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('m')
+                && HttpContext.Session.GetString("Email") != email)
+            {
+                return NotFound();
+            }
+            else if (string.IsNullOrEmpty(email))
+            {
+                return NotFound();
+            }
+
+            time_frame time_frame;
+            TimeFramesController tfc = new TimeFramesController(_context);
+            if (timeFrameID == null)
+            {
+                int id = tfc.CurrentTimeFrameID();
+                if (id != int.MinValue)
+                {
+                    time_frame = _context.time_frame
+                                 .FirstOrDefault(m => m.id == id);
+                }
+                else
+                {
+                    id = tfc.NewestTimeFrameID();
+                    if (id != int.MinValue)
+                    {
+                        time_frame = _context.time_frame
+                                     .FirstOrDefault(m => m.id == id);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+            }
+            else
+            {
+                try
+                {
+                    time_frame = _context.time_frame
+                             .FirstOrDefault(m => m.id == timeFrameID);
+                }
+                catch
+                {
+                    int id = tfc.NewestTimeFrameID();
+                    if (id != int.MinValue)
+                    {
+                        time_frame = _context.time_frame
+                                     .FirstOrDefault(m => m.id == id);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+            }
+
+            DateTime timeFrameStart = time_frame.start_date;
+            DateTime timeFrameEnd = time_frame.end_date;
 
             AccountsController ac = new AccountsController(_context);
             ViewData["FullName"] = ac.FullName(email: email);
             var accountRequirements = ac.AccountRequirements(email);
 
-            var attendedEvents = AttendedEvents(email, time_frame_start, time_frame_end);
-            var eventsFulfilled = EventsFulfilled(email, time_frame_start, time_frame_end);
+            var attendedEvents = AttendedEvents(email, timeFrameStart, timeFrameEnd);
+            var eventsFulfilled = EventsFulfilled(email, timeFrameStart, timeFrameEnd);
 
             List<time_frame> timeFrames = _context.time_frame.OrderByDescending(c => c.start_date).ToList();
             
@@ -348,10 +453,12 @@ namespace iAttendTFL_WebApp.Controllers
             }
 
             ViewBag.TimeFrames = timeFrames;
+            ViewBag.CurrentTimeFrameID = time_frame.id;
             ViewBag.AttendedEvents = attendedEvents;
             ViewBag.AccountRequirements = accountRequirements;
             ViewBag.AttendancePoints = attendancePoints;
             ViewBag.Progress = progress;
+            ViewData["Email"] = email;
 
             return View();
         }

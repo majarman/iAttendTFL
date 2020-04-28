@@ -3,13 +3,21 @@
 }
 
 <h1 class="hor-center-text">@ViewData["FullName"]</h1>
+<h3 class="hor-center-text">@ViewData["Email"]</h3>
 <br />
 <form id="time-frame-form">
     <label for="time-frame-dropdown">Time Frame:&nbsp;&nbsp;</label>
-    <select id="time-frame-dropdown" onchange="">
+    <select id="time-frame-dropdown" onchange="location.href='@Url.Action("StudentAttendance", "AccountAttendances", new { email = ViewData["Email"] })'">
 @foreach (var item in ViewBag.TimeFrames)
 {
+    @if (item.id == ViewBag.CurrentTimeFrameID)
+    {
+        <option selected value=@item.id>@item.name</option>
+    }
+    else
+    {
         <option value=@item.id>@item.name</option>
+    }
 }
     </select>
 </form>
@@ -23,18 +31,14 @@
         <th>Attendance Points Fulfilled</th>
         <th>Progress</th>
     </tr>
-@{
-        int i = 0;
-        foreach (var item in ViewBag.AccountRequirements)
-        {
-        <tr>
-            <td>@item.requirement.name</td>
-            <td class="hor-center-text">@item.track_requirement.num_required</td>
-            <td class="hor-center-text">@ViewBag.AttendancePoints[i]</td>
-            <td class="hor-center-text">@ViewBag.Progress[i]%</td>
-        </tr>
-            i++;
-        }
+@for (int i = 0; i < Enumerable.Count(ViewBag.AccountRequirements); i++)
+{
+    <tr>
+        <td>@ViewBag.AccountRequirements[i].requirement.name</td>
+        <td class="hor-center-text">@ViewBag.AccountRequirements[i].track_requirement.num_required</td>
+        <td class="hor-center-text">@ViewBag.AttendancePoints[i]</td>
+        <td class="hor-center-text">@ViewBag.Progress[i]%</td>
+    </tr>
 }
 </table>
 <br />

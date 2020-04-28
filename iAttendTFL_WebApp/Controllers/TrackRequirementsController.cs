@@ -19,6 +19,14 @@ namespace iAttendTFL_WebApp.Controllers
             _context = context;
         }
 
+        public int TrackRequirementCount(int track_id)
+        {
+            return (from tr in _context.track_requirement
+                    where tr.track_id == track_id
+                    group tr by tr.track_id into trc
+                    select trc.Sum(x => x.num_required)).FirstOrDefault();
+        }
+
         // GET: TrackRequirements
         public async Task<IActionResult> Index()
         {

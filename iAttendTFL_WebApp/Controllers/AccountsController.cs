@@ -23,6 +23,44 @@ namespace iAttendTFL_WebApp.Controllers
             _context = context;
         }
 
+        public AccountInfo AccountInfo(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return null;
+            }
+
+            return (from a in _context.account
+                    join t in _context.track
+                        on a.track_id equals t.id
+                    where a.email.ToLower() == email.ToLower()
+                    select new AccountInfo
+                    {
+                        id = a.id,
+                        first_name = a.first_name,
+                        last_name = a.last_name,
+                        email = a.email,
+                        account_type = a.account_type,
+                        expected_graduation_date = a.expected_graduation_date,
+                        track = t.name
+                    }).FirstOrDefault();
+        }
+
+        public List<string> CurrentAccountsEmails(DateTime timeFrameStart)
+        {
+            if (timeFrameStart == null)
+            {
+                return null;
+            }
+
+            return (from a in _context.account
+                    join t in _context.track
+                        on a.track_id equals t.id
+                    where a.expected_graduation_date >= timeFrameStart
+                    orderby a.last_name
+                    select a.email).ToList();
+        }
+
         public List<AccountRequirement> AccountRequirements(string email)
         {
             if (string.IsNullOrEmpty(email))
@@ -31,21 +69,39 @@ namespace iAttendTFL_WebApp.Controllers
             }
 
             return (from a in _context.account
-                   join t in _context.track
+                    join t in _context.track
                         on a.track_id equals t.id
-                   join tr in _context.track_requirement
+                    join tr in _context.track_requirement
                         on t.id equals tr.track_id
-                   join r in _context.requirement
+                    join r in _context.requirement
                         on tr.requirement_id equals r.id
-                   where a.email.ToLower() == email.ToLower()
-                   orderby r.name
-                   select new AccountRequirement
-                   {
+                    where a.email.ToLower() == email.ToLower()
+                    orderby r.name
+                    select new AccountRequirement
+                    {
                         account = a,
                         track = t,
                         track_requirement = tr,
                         requirement = r
-                   }).ToList();
+                    }).ToList();
+        }
+
+        public List<int> AccountRequirementIDs(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return null;
+            }
+
+            return (from a in _context.account
+                    join t in _context.track
+                        on a.track_id equals t.id
+                    join tr in _context.track_requirement
+                        on t.id equals tr.track_id
+                    join r in _context.requirement
+                        on tr.requirement_id equals r.id
+                    where a.email.ToLower() == email.ToLower()
+                    select r.id).ToList();
         }
 
         [HttpPost]

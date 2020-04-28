@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Attendance";
+    ViewData["Title"] = "Attendance Records";
 }
 
 <h2>Attendance Records</h2>
@@ -7,9 +7,17 @@
 <form id="time-frame-form">
     <label for="time-frame-dropdown">Time Frame:&nbsp;&nbsp;</label>
     <select id="time-frame-dropdown">
-        <option value="0">Spring 2020</option>
-        <option value="1">Fall 2019</option>
-        <option value="2">Spring 2019</option>
+@foreach (var item in ViewBag.TimeFrames)
+{
+    @if (item.id == ViewBag.CurrentTimeFrameID)
+    {
+        <option selected value=@item.id>@item.name</option>
+    }
+    else
+    {
+        <option value=@item.id>@item.name</option>
+    }
+}
     </select>
 </form>
 <br />
@@ -17,109 +25,20 @@
     <tr>
         <th style="width: 1%;">More Info</th>
         <th>Name</th>
+        <th>Email</th>
         <th>Attendance Points Needed</th>
         <th>Attendance Points Fulfilled</th>
         <th>Progress</th>
     </tr>
+@for (int i = 0; i < Enumerable.Count(ViewBag.Emails); i++)
+{
     <tr>
-        <td><button>Select</button></td>
-        <td>John Doe</td>
-        <td class="hor-center-text">7</td>
-        <td class="hor-center-text">4</td>
-        <td class="hor-center-text">57%</td>
+        <td><input type="button" value="Select" onclick="location.href='@Url.Action("StudentAttendance", "AccountAttendances", new { email = ViewBag.Emails[i] })'" /></td>
+        <td>@ViewBag.FullNames[i]</td>
+        <td>@ViewBag.Emails[i]</td>
+        <td class="hor-center-text">@ViewBag.NeededAttendancePoints[i]</td>
+        <td class="hor-center-text">@ViewBag.AttendancePoints[i]</td>
+        <td class="hor-center-text">@ViewBag.Progress[i]%</td>
     </tr>
-    <tr>
-        <td><button>Select</button></td>
-        <td>Jane Doe</td>
-        <td class="hor-center-text">5</td>
-        <td class="hor-center-text">5</td>
-        <td class="hor-center-text">100%</td>
-    </tr>
-    <tr>
-        <td><button>Select</button></td>
-        <td>Sally Student</td>
-        <td class="hor-center-text">7</td>
-        <td class="hor-center-text">6</td>
-        <td class="hor-center-text">85%</td>
-    </tr>
+}
 </table>
-<div id="selected-student-info">
-    <br />
-    <br />
-    <hr />
-    <br />
-    <h3>John Doe's Attendance Records</h3>
-    <br />
-    <h5 class="inline">Track:&nbsp;&nbsp;</h5>
-    <span class="inline">Music Major</span>
-    <table class="student-requirements-table">
-        <tr>
-            <th>Requirement Type</th>
-            <th>Attendance Points Needed</th>
-            <th>Attendance Points Fulfilled</th>
-            <th>Progress</th>
-        </tr>
-        <tr>
-            <td>Music Recital</td>
-            <td class="hor-center-text">3</td>
-            <td class="hor-center-text">1</td>
-            <td class="hor-center-text">33%</td>
-        </tr>
-        <tr>
-            <td>Theater Performance</td>
-            <td class="hor-center-text">1</td>
-            <td class="hor-center-text">1</td>
-            <td class="hor-center-text">100%</td>
-        </tr>
-        <tr>
-            <td>Concert</td>
-            <td class="hor-center-text">3</td>
-            <td class="hor-center-text">2</td>
-            <td class="hor-center-text">66%</td>
-        </tr>
-    </table>
-    <br />
-    <h5>Attended Events:</h5>
-    <table class="student-attendance-table">
-        <tr>
-            <th style="width: 1%;">Edit Event</th>
-            <th>Event Name</th>
-            <th>Requirement Type</th>
-            <th>Event Start Time</th>
-            <th>Event End Time</th>
-            <th>Time of Attendance</th>
-        </tr>
-        <tr>
-            <td><button>Select</button></td>
-            <td>Jane Doe Recital</td>
-            <td>Music Recital</td>
-            <td>4/1/2020 10:00am</td>
-            <td>4/1/2020 12:00pm</td>
-            <td>4/1/2020 9:57am</td>
-        </tr>
-        <tr>
-            <td><button>Select</button></td>
-            <td>Steel Band Concert</td>
-            <td>Concert</td>
-            <td>4/2/2020 6:30pm</td>
-            <td>4/2/2020 7:30pm</td>
-            <td>4/2/2020 6:29pm</td>
-        </tr>
-        <tr>
-            <td><button>Select</button></td>
-            <td>Hamlet</td>
-            <td>Theater Performance</td>
-            <td>4/2/2020 4:30pm</td>
-            <td>4/2/2020 6:00pm</td>
-            <td>4/2/2020 4:41pm</td>
-        </tr>
-        <tr>
-            <td><button>Select</button></td>
-            <td>Steel Band Concert 2: Electric Boogaloo</td>
-            <td>Concert</td>
-            <td>4/3/2020 6:30pm</td>
-            <td>4/3/2020 7:30pm</td>
-            <td>4/3/2020 9:12pm</td>
-        </tr>
-    </table>
-</div>
