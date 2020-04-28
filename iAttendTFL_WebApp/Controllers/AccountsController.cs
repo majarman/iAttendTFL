@@ -56,6 +56,8 @@ namespace iAttendTFL_WebApp.Controllers
                     join t in _context.track
                         on a.track_id equals t.id
                     where a.expected_graduation_date >= timeFrameStart
+                        && a.account_type != 'a'
+                        && a.account_type != 'm'
                     orderby a.last_name
                     select a.email).ToList();
         }
