@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -14,47 +15,93 @@ namespace iAttendTFL_MobileApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-        //private Button buttonScan;
 
         public MainPage()
         {
-            //ZXingScannerPage scanPage = new ZXingScannerPage();
-            //await Navigation.PushAsync(scanPage);
-
-            //buttonScan.Click += (sender, e) =>
-            //{
-
-            //        #if __ANDROID__
-	           //     // Initialize the scanner first so it can track the current context
-	           //     MobileBarcodeScanner.Initialize (Application);
-            //        #endif
-
-            //    var scanner = new ZXing.Mobile.MobileBarcodeScanner();
-
-            //    var result = await scanner.Scan();
-
-            //    if (result != null)
-            //        Console.WriteLine("Did you mean to scan " + result.Text + "?");
-            //};
-
             InitializeComponent();
         }
 
         public void Handle_OnScanResult(Result result)
         {
             //TODO: I think here or the layer below is where the code to find the user and add them into the event will go.
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                await DisplayAlert("account.first_name +sp+ account.last_name", result.Text, "OK");
-            });
+            int scanResultInt = int.Parse(result.Text);
+            //if (accountExists(scanResultInt))
+            //{
+                
+                account_attendance workingCheckin = new account_attendance();
+                //if (notYetScanned(scanResultInt))
+                //{
+
+                workingCheckin.account_id = scanResultInt; //workingAccount.id;
+                workingCheckin.scan_event_id = 2;
+                workingCheckin.is_valid = true;
+                workingCheckin.attendance_time = DateTime.Now; //Is this right? DateTime.Now is local, not UTC.
+                enterEvent(workingCheckin);
+                Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await DisplayAlert("Scanned User: ", getNameFromIdAsync(scanResultInt).Result, "OK");
+                    });
+
+
+
+                //} //notYetScanned
+                //else { return RedirectToAction(nameof(Create)); }
+                //return RedirectToAction(nameof(Index));
+
+            //} // account does not already exist in database
+              //else { return RedirectToAction(nameof(Create)); }
+
+            //return RedirectToAction(nameof(Index));
+            //}
+
+
         }
-        //void OnSubmitButtonClicked(object sender, EventArgs eventArgs)
+
+
+        //==========================
+        //ustilized custom functions
+        //==========================
+
+        public static async Task<string> getNameFromIdAsync(int id)
+        {
+            var client = new HttpClient();
+            string uri = "http://iattendapi.eastus.cloudapp.azure.com:3000/account?id=eq." + id.ToString() + "&select=first_name,last_name";
+
+            String response = await client.GetStringAsync(uri);
+            return response;
+        }
+
+        public static async Task<string> enterEvent(account_attendance workingModel)
+        {
+            var client = new HttpClient();
+            Uri uri = new Uri("http://iattendapi.eastus.cloudapp.azure.com:3000");
+            client.BaseAddress = uri;
+
+            string jsonData = "{\"account_id\" : \"" + workingModel.account_id.ToString() + "\", \"scan_event_id\" : \"" + workingModel.scan_event_id.ToString() + "\", \"is_valid\" : \"" + workingModel.is_valid.ToString() + "\", \"attendance_time\" : \"" + workingModel.attendance_time.ToString() + "\"}";
+
+            System.Diagnostics.Debug.WriteLine(jsonData);
+            
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            
+            HttpResponseMessage response = await client.PostAsync("/account_attendance", content);
+            var result = await response.Content.ReadAsStringAsync();
+            
+            return result;
+        }
+
+        //private bool accountExists(int id)
         //{
-
-        //    Submission sendme = new Submission(int.Parse(idEditor.Text), nameEditor.Text);
-
+        //    return _context.account.Any(e => e.id == id);
         //}
 
+        //private bool notYetScanned(int resultInt, account_attendance )
+        //{
+        //    if (account_attendance.scan_event_id == 2) 
+        //    { 
+        //        return _context.account_attendance.Any(e => e.account_id == resultInt);
+        //    }
+        //    else { return false; }
+        //}
 
     }
 }

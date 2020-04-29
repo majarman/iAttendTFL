@@ -1,11 +1,5 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using BarcodeLib;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace iAttendTFL_MobileApp.Models
 {
@@ -26,6 +20,8 @@ namespace iAttendTFL_MobileApp.Models
         public byte[] barcode { get; set; }
         public virtual ICollection<account_attendance> account_attendances { get; set; }
         //public virtual ICollection<token> tokens { get; set; }
+
+        
 
     }
 }

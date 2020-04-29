@@ -14,5 +14,7 @@ namespace iAttendTFL_MobileApp.Models
 
         public virtual account account { get; set; }
         public virtual scan_event scan_event { get; set; }
+
+        //public POST REQUEST(this.account_id, this.lkdjlfkjsd)
     }
 }
