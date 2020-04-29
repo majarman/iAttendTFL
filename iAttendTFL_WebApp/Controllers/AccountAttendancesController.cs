@@ -82,7 +82,7 @@ namespace iAttendTFL_WebApp.Controllers
         {
             if (HttpContext.Session.GetString("Email") == null)
             {
-                return RedirectToAction("NotLoggedIn");
+                return RedirectToAction("NotLoggedIn", "Home");
             }
             else if (Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('m') ||
                      Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a'))
@@ -236,7 +236,7 @@ namespace iAttendTFL_WebApp.Controllers
         {
             if (HttpContext.Session.GetString("Email") == null)
             {
-                return RedirectToAction("NotLoggedIn");
+                return RedirectToAction("NotLoggedIn", "Home");
             }
             else if (!Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('a') &&
                      !Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))).Equals('m'))

@@ -375,7 +375,7 @@ namespace iAttendTFL_WebApp.Controllers
         {
             if (HttpContext.Session.GetString("Email") == null)
             {
-                return RedirectToAction("NotLoggedIn");
+                return RedirectToAction("NotLoggedIn", "Home");
             }
 
             AccountInfo accountInfo = AccountInfo(HttpContext.Session.GetString("Email"));
