@@ -21,35 +21,37 @@ namespace iAttendTFL_MobileApp
             InitializeComponent();
         }
 
-        public void Handle_OnScanResult(Result result)
+        public async void Handle_OnScanResult(Result result)
         {
             //TODO: I think here or the layer below is where the code to find the user and add them into the event will go.
             int scanResultInt = int.Parse(result.Text);
             //if (accountExists(scanResultInt))
             //{
-                
-                account_attendance workingCheckin = new account_attendance();
-                //if (notYetScanned(scanResultInt))
-                //{
 
-                workingCheckin.account_id = scanResultInt; //workingAccount.id;
-                workingCheckin.scan_event_id = 2;
-                workingCheckin.is_valid = true;
-                workingCheckin.attendance_time = DateTime.Now; //Is this right? DateTime.Now is local, not UTC.
-                enterEvent(workingCheckin);
-                Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        await DisplayAlert("Scanned User: ", getNameFromIdAsync(scanResultInt).Result, "OK");
-                    });
+            account_attendance workingCheckin = new account_attendance();
+            //if (notYetScanned(scanResultInt))
+            //{
+
+            workingCheckin.account_id = scanResultInt; //workingAccount.id;
+            workingCheckin.scan_event_id = 2;
+            workingCheckin.is_valid = true;
+            workingCheckin.attendance_time = DateTime.Now;
+            await enterEvent(workingCheckin);
+            System.Diagnostics.Debug.WriteLine("Account:");
+            System.Diagnostics.Debug.WriteLine(getNameFromIdAsync(scanResultInt).Result);
+            //Device.BeginInvokeOnMainThread(async () =>
+            //    {
+            //        await DisplayAlert("Scanned User: ", getNameFromIdAsync(scanResultInt).Result, "OK");
+            //    });
 
 
 
-                //} //notYetScanned
-                //else { return RedirectToAction(nameof(Create)); }
-                //return RedirectToAction(nameof(Index));
+            //} //notYetScanned
+            //else { return RedirectToAction(nameof(Create)); }
+            //return RedirectToAction(nameof(Index));
 
             //} // account does not already exist in database
-              //else { return RedirectToAction(nameof(Create)); }
+            //else { return RedirectToAction(nameof(Create)); }
 
             //return RedirectToAction(nameof(Index));
             //}
