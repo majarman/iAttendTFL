@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             mc:Ignorable="d"
+             x:Class="iAttendTFL_MobileApp.MainPage">
+    <!--<StackLayout>
+            --><!--<Label Text="Attendance tracker"
+               HorizontalOptions="Center"
+               FontAttributes="Bold" />
+            <Editor x:Name="idEditor" 
+                Keyboard="Numeric"
+                Placeholder="Enter student id:"
+                HeightRequest="100" />
+            <Editor x:Name="nameEditor"
+                Placeholder="Enter event name:"
+                HeightRequest="100" />
+            <Button Text="Submit"
+                Clicked="OnSubmitButtonClicked" />
+            <Button Text="buttonScan"
+                Clicked="buttonScan"/>--><!--
+
+        </StackLayout>-->
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <BoxView Grid.Row="0" BackgroundColor="#5F0087"/>
+        
+        <zxing:ZXingScannerView Grid.Row="1"
+                                x:Name="_scanView"
+                                OnScanResult="Handle_OnScanResult"
+                                IsScanning="true"
+                                WidthRequest="200"
+                                HeightRequest="400" />
+
+        <BoxView Grid.Row="2"
+                 BackgroundColor="#5F0087" />
+    </Grid>
+
+</ContentPage>

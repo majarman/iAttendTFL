@@ -345,3 +345,5 @@ healthchecksdb
 # appsettings.json
 appsettings.json
 iAttendTFL_WebApp/appsettings.json
+# iAttend-pgs.cs: contains connection string
+iAttend-pgs.cs

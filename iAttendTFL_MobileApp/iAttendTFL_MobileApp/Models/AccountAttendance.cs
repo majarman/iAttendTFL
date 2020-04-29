@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace iAttendTFL_WebApp.Models
+namespace iAttendTFL_MobileApp.Models
 {
     public class account_attendance
     {
@@ -14,5 +14,7 @@ namespace iAttendTFL_WebApp.Models
 
         public virtual account account { get; set; }
         public virtual scan_event scan_event { get; set; }
+
+        //public POST REQUEST(this.account_id, this.lkdjlfkjsd)
     }
 }
