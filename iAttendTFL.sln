@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iAttendTFL_MobileApp.iOS", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iAttendTFL_MobileApp", "iAttendTFL_MobileApp\iAttendTFL_MobileApp\iAttendTFL_MobileApp.csproj", "{EC4E7113-436F-4946-AB64-BC318773603A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{25AF9490-DA96-4EEC-95E2-443A97E831FB}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B5A56D59-2DCA-41A6-8BB5-F87936D19769}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -80,18 +78,6 @@ Global
 		{EC4E7113-436F-4946-AB64-BC318773603A}.Release|iPhone.Build.0 = Release|Any CPU
 		{EC4E7113-436F-4946-AB64-BC318773603A}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{EC4E7113-436F-4946-AB64-BC318773603A}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{25AF9490-DA96-4EEC-95E2-443A97E831FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{25AF9490-DA96-4EEC-95E2-443A97E831FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{25AF9490-DA96-4EEC-95E2-443A97E831FB}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{25AF9490-DA96-4EEC-95E2-443A97E831FB}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{25AF9490-DA96-4EEC-95E2-443A97E831FB}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{25AF9490-DA96-4EEC-95E2-443A97E831FB}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{25AF9490-DA96-4EEC-95E2-443A97E831FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{25AF9490-DA96-4EEC-95E2-443A97E831FB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{25AF9490-DA96-4EEC-95E2-443A97E831FB}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{25AF9490-DA96-4EEC-95E2-443A97E831FB}.Release|iPhone.Build.0 = Release|Any CPU
-		{25AF9490-DA96-4EEC-95E2-443A97E831FB}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{25AF9490-DA96-4EEC-95E2-443A97E831FB}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
