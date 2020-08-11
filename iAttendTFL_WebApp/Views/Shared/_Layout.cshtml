@@ -37,35 +37,37 @@
 </head>
 <body>
     <div id="navbar-and-content">
-        <header>
-            <nav class="navbar">
+        <div class="menu-wrapper">
+            <header class="header">
                 <div class="navbar-logo">
                     <a class="navbar-logo-link" asp-controller="Home" asp-action="Index">
                         <img id="navbar-logo-image" src="~/resources/images/iAttend-Logo-White.svg" />
                         <span id="navbar-logo-text">iAttend</span>
                     </a>
                 </div>
-                <div class="navbar-links">
-                    @{
-                        if (isLoggedIn == false)
-                        {
-                            <a asp-controller="Home" asp-action="Login">Log In</a>
-                            <a asp-controller="Accounts" asp-action="Create">Register</a>
-                        }
-                        else
-                        {
-                            if (accountType == 'a')
-                            {
-                                <a asp-controller="Home" asp-action="AdminActions">Admin Actions</a>
-                            }
-                            <a asp-controller="AccountAttendances" asp-action="Attendance">Attendance</a>
-                            <a asp-controller="Home" asp-action="Events">Events</a>
-                            <a asp-controller="Accounts" asp-action="MyAccount">My Account</a>
-                        }
-                    }
-                </div>
-            </nav>
-        </header>
+                <input class="menu-btn" type="checkbox" id="menu-btn" />
+                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+                <ul class="menu">
+@{
+    if (isLoggedIn == false)
+    {
+                    <li><a asp-controller="Home" asp-action="Login">Log In</a></li>
+                    <li><a asp-controller="Accounts" asp-action="Create">Register</a></li>
+    }
+    else
+    {
+        if (accountType == 'a')
+        {
+                    <li><a asp-controller="Home" asp-action="AdminActions">Admin Actions</a></li>
+        }
+                    <li><a asp-controller="AccountAttendances" asp-action="Attendance">Attendance</a></li>
+                    <li><a asp-controller="Home" asp-action="Events">Events</a></li>
+                    <li><a asp-controller="Accounts" asp-action="MyAccount">My Account</a></li>
+    }
+}
+                </ul>
+            </header>
+        </div>
         <main role="main">
             @RenderBody()
         </main>

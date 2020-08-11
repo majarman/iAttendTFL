@@ -1,4 +1,6 @@
-﻿* {
+﻿$light-text-color: #fafafa;
+
+* {
     box-sizing: border-box; /* Includes borders and padding when specifying element size */
 }
 
@@ -17,6 +19,7 @@ body {
 main {
     padding: 1% 20% 1% 20%;
     height: 100%;
+    flex: 1 0 auto;
 }
 
 /* Pushes footer to the bottom of short pages. */
@@ -104,11 +107,127 @@ p, span, label, select, table tr td, input, button, ul, ol, footer {
     Navbar
 ==================================== */
 
-header {
+.header {
     position: sticky;
     position: -webkit-sticky; /* Safari */
     top: 0;
+    background-color: #2b2b2b;
 }
+
+    .header ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overflow: hidden;
+    }
+
+    .header li a {
+        display: block;
+        color: #fafafa;
+        padding: 20px 20px;
+        text-decoration: none;
+    }
+
+        .header li a:hover,
+        .header .menu-btn:hover {
+            background-color: rgba(0, 0, 0, 0.10);
+        }
+
+    .header .navbar-logo {
+        padding-top: 3px;
+        display: block;
+        float: left;
+        text-decoration: none;
+    }
+
+        .header .navbar-logo #navbar-logo-image {
+            width: 40px;
+            height: 40px;
+        }
+
+        .header .navbar-logo #navbar-logo-text {
+            padding-top: 5px;
+            padding-left: 5px;
+            font-family: 'Baloo 2', sans-serif;
+            color: #fafafa;
+            font-size: 24pt;
+            letter-spacing: -2px;
+        }
+
+        .header .navbar-logo #navbar-logo-image,
+        .header .navbar-logo #navbar-logo-text {
+            vertical-align: middle;
+        }
+
+    .header .menu {
+        clear: both;
+        max-height: 0;
+        transition: max-height .2s ease-out;
+    }
+
+    /* menu icon */
+    .header .menu-icon {
+        cursor: pointer;
+        display: inline-block;
+        float: right;
+        padding: 28px 20px;
+        position: relative;
+        user-select: none;
+    }
+
+        .header .menu-icon .navicon {
+            background: #fff;
+            display: block;
+            height: 2px;
+            position: relative;
+            transition: background .2s ease-out;
+            width: 18px;
+        }
+
+            .header .menu-icon .navicon:before,
+            .header .menu-icon .navicon:after {
+                background: #fff;
+                content: '';
+                display: block;
+                height: 100%;
+                position: absolute;
+                transition: all .2s ease-out;
+                width: 100%;
+            }
+
+            .header .menu-icon .navicon:before {
+                top: 5px;
+            }
+
+            .header .menu-icon .navicon:after {
+                top: -5px;
+            }
+
+    /* menu btn */
+    .header .menu-btn {
+        display: none;
+    }
+
+        .header .menu-btn:checked ~ .menu {
+            max-height: 340px;
+        }
+
+        .header .menu-btn:checked ~ .menu-icon .navicon {
+            background: transparent;
+        }
+
+            .header .menu-btn:checked ~ .menu-icon .navicon:before {
+                transform: rotate(-45deg);
+            }
+
+            .header .menu-btn:checked ~ .menu-icon .navicon:after {
+                transform: rotate(45deg);
+            }
+
+        .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+        .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+            top: 0;
+        }
 
 .navbar {
     background-color: #2b2b2b;
@@ -121,29 +240,6 @@ header {
     .navbar a {
         text-decoration: none;
     }
-
-    .navbar .navbar-logo {
-        padding-top: 3px;
-    }
-
-        .navbar .navbar-logo #navbar-logo-image {
-            width: 40px;
-            height: 40px;
-        }
-
-        .navbar .navbar-logo #navbar-logo-text {
-            padding-top: 5px;
-            padding-left: 5px;
-            font-family: 'Baloo 2', sans-serif;
-            color: #fafafa;
-            font-size: 24pt;
-            letter-spacing: -2px;
-        }
-
-        .navbar .navbar-logo #navbar-logo-image,
-        .navbar .navbar-logo #navbar-logo-text {
-            vertical-align: middle;
-        }
 
     .navbar .navbar-links {
         align-items: center;
@@ -509,6 +605,34 @@ table.no-design-table tr td {
 
     div.medium-div {
         width: 100%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .menu-wrapper {
+        background: #2b2b2b;
+        height: 55px;
+        line-height: 55px;
+        width: 100%;
+    }
+
+    .header li {
+        float: left;
+    }
+
+    .header li a {
+        padding: 0px 30px;
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .header .menu {
+        clear: none;
+        float: right;
+        max-height: none;
+    }
+
+    .header .menu-icon {
+        display: none;
     }
 }
 
