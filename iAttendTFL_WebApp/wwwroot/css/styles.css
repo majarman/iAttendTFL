@@ -1,6 +1,4 @@
-﻿$light-text-color: #fafafa;
-
-* {
+﻿* {
     box-sizing: border-box; /* Includes borders and padding when specifying element size */
 }
 
@@ -107,38 +105,48 @@ p, span, label, select, table tr td, input, button, ul, ol, footer {
     Navbar
 ==================================== */
 
-.header {
+.menu-wrapper {
+    background-color: #2b2b2b;
+    height: 55px;
+    line-height: 50px;
+    width: 100%;
     position: sticky;
     position: -webkit-sticky; /* Safari */
     top: 0;
+}
+
+.header {
     background-color: #2b2b2b;
 }
 
     .header ul {
         margin: 0;
-        padding: 0;
         list-style: none;
-        overflow: hidden;
     }
 
-    .header li a {
-        display: block;
-        color: #fafafa;
-        padding: 20px 20px;
-        text-decoration: none;
+    .header li {
+        float: left;
     }
 
-        .header li a:hover,
-        .header .menu-btn:hover {
-            background-color: rgba(0, 0, 0, 0.10);
+        .header li a {
+            display: block;
+            color: #fafafa;
+            text-decoration: none;
+            padding: 0px 30px;
         }
 
+            .header li a:hover,
+            .header .menu-btn:hover {
+                background-color: rgba(0, 0, 0, 0.10);
+            }
+
     .header .navbar-logo {
-        padding-top: 3px;
-        display: block;
         float: left;
-        text-decoration: none;
     }
+
+        .header .navbar-logo a {
+            text-decoration: none;
+        }
 
         .header .navbar-logo #navbar-logo-image {
             width: 40px;
@@ -146,7 +154,7 @@ p, span, label, select, table tr td, input, button, ul, ol, footer {
         }
 
         .header .navbar-logo #navbar-logo-text {
-            padding-top: 5px;
+            padding-top: 3px;
             padding-left: 5px;
             font-family: 'Baloo 2', sans-serif;
             color: #fafafa;
@@ -159,75 +167,19 @@ p, span, label, select, table tr td, input, button, ul, ol, footer {
             vertical-align: middle;
         }
 
-    .header .menu {
-        clear: both;
-        max-height: 0;
-        transition: max-height .2s ease-out;
-    }
-
-    /* menu icon */
-    .header .menu-icon {
-        cursor: pointer;
-        display: inline-block;
-        float: right;
-        padding: 28px 20px;
-        position: relative;
-        user-select: none;
-    }
-
-        .header .menu-icon .navicon {
-            background: #fff;
-            display: block;
-            height: 2px;
-            position: relative;
-            transition: background .2s ease-out;
-            width: 18px;
-        }
-
-            .header .menu-icon .navicon:before,
-            .header .menu-icon .navicon:after {
-                background: #fff;
-                content: '';
-                display: block;
-                height: 100%;
-                position: absolute;
-                transition: all .2s ease-out;
-                width: 100%;
-            }
-
-            .header .menu-icon .navicon:before {
-                top: 5px;
-            }
-
-            .header .menu-icon .navicon:after {
-                top: -5px;
-            }
-
-    /* menu btn */
     .header .menu-btn {
         display: none;
     }
 
-        .header .menu-btn:checked ~ .menu {
-            max-height: 340px;
-        }
+    .header .menu-icon {
+        display: none;
+    }
 
-        .header .menu-btn:checked ~ .menu-icon .navicon {
-            background: transparent;
-        }
-
-            .header .menu-btn:checked ~ .menu-icon .navicon:before {
-                transform: rotate(-45deg);
-            }
-
-            .header .menu-btn:checked ~ .menu-icon .navicon:after {
-                transform: rotate(45deg);
-            }
-
-        .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-        .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
-            top: 0;
-        }
+    .header .menu {
+        clear: none;
+        float: right;
+        max-height: none;
+    }
 
 .navbar {
     background-color: #2b2b2b;
@@ -256,10 +208,10 @@ p, span, label, select, table tr td, input, button, ul, ol, footer {
                 color: #c9c9c9;
             }
 
-.navbar,
-.navbar .navbar-links {
-    display: flex;
-}
+    .navbar,
+    .navbar .navbar-links {
+        display: flex;
+    }
 
 /* =================================
     Footer
@@ -501,12 +453,12 @@ table {
         font-size: 12pt;
     }
 
-table.no-design-table tr td {
-    font-size: 16pt;
-    border: none;
-    padding-left: 0;
-    padding-right: 0;
-}
+    table.no-design-table tr td {
+        font-size: 16pt;
+        border: none;
+        padding-left: 0;
+        padding-right: 0;
+    }
 
     table.no-design-table tr:nth-child(even) td {
         background-color: initial;
@@ -540,6 +492,95 @@ table.no-design-table tr td {
 }
 
 @media (max-width: 1024px) {
+    .header ul {
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .header li {
+        float: initial;
+    }
+
+        .header li a {
+            padding: 5px 20px;
+        }
+
+    .header .navbar-logo {
+        display: block;
+        text-decoration: none;
+    }
+
+    .header .menu {
+        clear: both;
+        max-height: 0;
+        transition: max-height .2s ease-out;
+        float: initial;
+    }
+
+    /* hamburger menu/X icon */
+    .header .menu-icon {
+        cursor: pointer;
+        display: inline-block;
+        float: right;
+        padding: 28px 20px;
+        position: relative;
+        user-select: none;
+    }
+
+        .header .menu-icon .navicon {
+            background: #fff;
+            display: block;
+            height: 2px;
+            position: relative;
+            transition: background .2s ease-out;
+            width: 18px;
+        }
+
+            .header .menu-icon .navicon:before,
+            .header .menu-icon .navicon:after {
+                background: #fff;
+                content: '';
+                display: block;
+                height: 100%;
+                position: absolute;
+                transition: all .2s ease-out;
+                width: 100%;
+            }
+
+            .header .menu-icon .navicon:before {
+                top: 5px;
+            }
+
+            .header .menu-icon .navicon:after {
+                top: -5px;
+            }
+
+    /* clickable button for hamburger menu/X icon */
+    .header .menu-btn:checked ~ .menu {
+        max-height: 340px;
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon {
+        background: transparent;
+    }
+
+        .header .menu-btn:checked ~ .menu-icon .navicon:before {
+            transform: rotate(-45deg);
+        }
+
+        .header .menu-btn:checked ~ .menu-icon .navicon:after {
+            transform: rotate(45deg);
+        }
+
+    .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+    .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+        top: 0;
+    }
+
+
+
+
+
     .navbar {
         padding-left: 10%;
         padding-right: 10%;
@@ -605,34 +646,6 @@ table.no-design-table tr td {
 
     div.medium-div {
         width: 100%;
-    }
-}
-
-@media only screen and (min-width: 768px) {
-    .menu-wrapper {
-        background: #2b2b2b;
-        height: 55px;
-        line-height: 55px;
-        width: 100%;
-    }
-
-    .header li {
-        float: left;
-    }
-
-    .header li a {
-        padding: 0px 30px;
-        border-right: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .header .menu {
-        clear: none;
-        float: right;
-        max-height: none;
-    }
-
-    .header .menu-icon {
-        display: none;
     }
 }
 
