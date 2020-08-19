@@ -15,7 +15,7 @@ body {
 }
 
 main {
-    padding: 1% 20% 1% 20%;
+    padding: 5px 20% 5px 20%;
     height: 100%;
     flex: 1 0 auto;
 }
@@ -132,16 +132,16 @@ p, span, label, select, table tr td, input, button, ul, ol, footer {
             display: block;
             color: #fafafa;
             text-decoration: none;
-            padding: 0px 30px;
+            padding: 0px 25px;
         }
 
-            .header li a:hover,
-            .header .menu-btn:hover {
-                background-color: rgba(0, 0, 0, 0.10);
+            .header li a:hover {
+                color: #bfbfbf;
             }
 
     .header .navbar-logo {
         float: left;
+        padding-left: 20%;
     }
 
         .header .navbar-logo a {
@@ -179,6 +179,7 @@ p, span, label, select, table tr td, input, button, ul, ol, footer {
         clear: none;
         float: right;
         max-height: none;
+        padding-right: 20%;
     }
 
 /* =================================
@@ -191,7 +192,7 @@ footer {
     border-top: 1px solid #dbdbdb;
     width: 100%;
     font-size: 12pt;
-    padding: 1% 20% 1% 20%;
+    padding: 5px 20% 5px 20%;
     margin-top: 2%;
 }
 
@@ -437,11 +438,18 @@ table {
 ==================================== */
 
 @media (max-width: 1500px) {
-    .navbar {
+    .header .navbar-logo {
         padding-left: 15%;
+    }
+
+    .header .menu {
         padding-right: 15%;
     }
 
+    .header li a {
+        padding: 0px 15px;
+    }
+    
     footer {
         padding-left: 15%;
         padding-right: 15%;
@@ -473,17 +481,24 @@ table {
             padding: 5px 20px;
         }
 
+            .header li a:hover,
+            .header .menu-btn:hover {
+                color: #fafafa;
+                background-color: rgba(0, 0, 0, 0.10);
+            }
+
     .header .navbar-logo {
         display: block;
         text-decoration: none;
+        padding-left: 10%;
     }
 
     .header .menu {
         clear: both;
         max-height: 0;
-        transition: max-height .2s ease-out;
         float: initial;
         background-color: #363636;
+        padding-right: initial;
     }
 
     /* hamburger menu/X icon */
@@ -491,9 +506,10 @@ table {
         cursor: pointer;
         display: inline-block;
         float: right;
-        padding: 28px 20px;
+        padding: 28px 0px;
         position: relative;
         user-select: none;
+        padding-right: 10%;
     }
 
         .header .menu-icon .navicon {
@@ -546,22 +562,9 @@ table {
         top: 0;
     }
 
-
-
-
-
-    .navbar {
-        padding-left: 10%;
-        padding-right: 10%;
-    }
-
     footer {
         padding-left: 10%;
         padding-right: 10%;
-    }
-
-    .navbar-links li a {
-        padding-left: 10px;
     }
 
     main {
@@ -589,8 +592,11 @@ table {
 }
 
 @media (max-width: 768px) {
-    .navbar {
+    .header .navbar-logo {
         padding-left: 5%;
+    }
+
+    .header .menu-icon {
         padding-right: 5%;
     }
 

@@ -132,6 +132,14 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            if ($('.header').width() <= 1024) {
+                $('#menu').hide();
+            }
+
+            if (document.getElementById('menu-btn').checked) {
+                $('#menu-btn').prop('checked', false);
+            }
+
             $(window).resize(function () {
                 if ($('.header').width() <= 1024) {
                     $('#menu').hide();
