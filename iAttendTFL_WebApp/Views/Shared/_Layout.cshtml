@@ -45,9 +45,9 @@
                         <span id="navbar-logo-text">iAttend</span>
                     </a>
                 </div>
-                <input class="menu-btn" type="checkbox" id="menu-btn" />
+                <input id="menu-btn" class="menu-btn" type="checkbox" />
                 <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-                <ul class="menu">
+                <ul id="menu" class="menu">
                     @{
                         if (isLoggedIn == false)
                         {
@@ -131,8 +131,22 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript">
-        $('#menu-btn').click(function () {
-            $("#menu").toggle(this.checked);
+        $(document).ready(function () {
+            $(window).resize(function () {
+                if ($('.header').width() <= 1024) {
+                    $('#menu').hide();
+                } else {
+                    $('#menu').show();
+                }
+
+                if (document.getElementById('menu-btn').checked) {
+                    $('#menu-btn').prop('checked', false);
+                }
+            });
+
+            $('#menu-btn').click(function () {
+                $("#menu").toggle(this.checked);
+            });
         });
     </script>
     @RenderSection("Scripts", required: false)
