@@ -37,35 +37,37 @@
 </head>
 <body>
     <div id="navbar-and-content">
-        <header>
-            <nav class="navbar">
+        <div class="menu-wrapper">
+            <header class="header">
                 <div class="navbar-logo">
                     <a class="navbar-logo-link" asp-controller="Home" asp-action="Index">
                         <img id="navbar-logo-image" src="~/resources/images/iAttend-Logo-White.svg" />
                         <span id="navbar-logo-text">iAttend</span>
                     </a>
                 </div>
-                <div class="navbar-links">
+                <input id="menu-btn" class="menu-btn" type="checkbox" />
+                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+                <ul id="menu" class="menu">
                     @{
                         if (isLoggedIn == false)
                         {
-                            <a asp-controller="Home" asp-action="Login">Log In</a>
-                            <a asp-controller="Accounts" asp-action="Create">Register</a>
+                            <li><a asp-controller="Home" asp-action="Login">Log In</a></li>
+                            <li><a asp-controller="Accounts" asp-action="Create">Register</a></li>
                         }
                         else
                         {
                             if (accountType == 'a')
                             {
-                                <a asp-controller="Home" asp-action="AdminActions">Admin Actions</a>
+                                <li><a asp-controller="Home" asp-action="AdminActions">Admin Actions</a></li>
                             }
-                            <a asp-controller="AccountAttendances" asp-action="Attendance">Attendance</a>
-                            <a asp-controller="Home" asp-action="Events">Events</a>
-                            <a asp-controller="Accounts" asp-action="MyAccount">My Account</a>
+                            <li><a asp-controller="AccountAttendances" asp-action="Attendance">Attendance</a></li>
+                            <li><a asp-controller="Home" asp-action="Events">Events</a></li>
+                            <li><a asp-controller="Accounts" asp-action="MyAccount">My Account</a></li>
                         }
                     }
-                </div>
-            </nav>
-        </header>
+                </ul>
+            </header>
+        </div>
         <main role="main">
             @RenderBody()
         </main>
@@ -108,28 +110,53 @@
             }
             @if (isLoggedIn && accountType == 'a')
             {
-            <div>
-                <strong>Admin</strong>
-                <br />
-                <a asp-controller="Home" asp-action="AdminActions">Admin Actions</a>
-                <br />
-                <a asp-controller="Home" asp-action="ManageTracks">Education Tracks</a>
-                <br />
-                <a asp-controller="Home" asp-action="ManageAccounts">Manage Accounts</a>
-                <br />
-                <a asp-controller="Home" asp-action="ManageRequirements">Requirements</a>
-                <br />
-                <a asp-controller="Home" asp-action="ManageTimeFrames">Time Frames</a>
-            </div>
+                <div>
+                    <strong>Admin</strong>
+                    <br />
+                    <a asp-controller="Home" asp-action="AdminActions">Admin Actions</a>
+                    <br />
+                    <a asp-controller="Home" asp-action="ManageTracks">Education Tracks</a>
+                    <br />
+                    <a asp-controller="Home" asp-action="ManageAccounts">Manage Accounts</a>
+                    <br />
+                    <a asp-controller="Home" asp-action="ManageRequirements">Requirements</a>
+                    <br />
+                    <a asp-controller="Home" asp-action="ManageTimeFrames">Time Frames</a>
+                </div>
             }
         </div>
         <a href="mailto:threefuriouslocomotives@gmail.com">threefuriouslocomotives@gmail.com</a>
         <br />
         Copyright &copy; @DateTime.Now.Year Three Furious Locomotives. All Rights Reserved.
     </footer>
-    @if (IsSectionDefined("scripts"))
-    {
-        RenderSection("scripts");
-    }
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ($('.header').width() <= 1024) {
+                $('#menu').hide();
+            }
+
+            if (document.getElementById('menu-btn').checked) {
+                $('#menu-btn').prop('checked', false);
+            }
+
+            $(window).resize(function () {
+                if ($('.header').width() <= 1024) {
+                    $('#menu').hide();
+                } else {
+                    $('#menu').show();
+                }
+
+                if (document.getElementById('menu-btn').checked) {
+                    $('#menu-btn').prop('checked', false);
+                }
+            });
+
+            $('#menu-btn').click(function () {
+                $("#menu").toggle(this.checked);
+            });
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
