@@ -181,8 +181,7 @@ namespace iAttendTFL_WebApp.Controllers
 
         // GET: accounts
         public async Task<IActionResult> Index()
-        {
-            
+        {            
             return View(await _context.account.ToListAsync());
         }
 

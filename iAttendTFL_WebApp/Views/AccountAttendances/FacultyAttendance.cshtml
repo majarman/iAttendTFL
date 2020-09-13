@@ -1,4 +1,5 @@
-﻿@{
+﻿@model iAttendTFL_WebApp.ViewModels.AccountAttendances.FacultyAttendanceViewModel
+@{
     ViewData["Title"] = "Attendance Records";
 }
 
@@ -7,9 +8,9 @@
 <form id="time-frame-form">
     <label for="time-frame-dropdown">Time Frame:&nbsp;&nbsp;</label>
     <select id="time-frame-dropdown">
-@foreach (var item in ViewBag.TimeFrames)
+@foreach (var item in Model.TimeFrames)
 {
-    @if (item.id == ViewBag.CurrentTimeFrameID)
+    @if (item.id == Model.CurrentTimeFrameId)
     {
         <option selected value=@item.id>@item.name</option>
     }
@@ -30,15 +31,15 @@
         <th>Attendance Points Fulfilled</th>
         <th>Progress</th>
     </tr>
-@for (int i = 0; i < Enumerable.Count(ViewBag.Emails); i++)
+@for (int i = 0; i < Enumerable.Count(Model.Emails); i++)
 {
     <tr>
-        <td><input type="button" value="Select" onclick="location.href='@Url.Action("StudentAttendance", "AccountAttendances", new { email = ViewBag.Emails[i] })'" /></td>
-        <td>@ViewBag.FullNames[i]</td>
-        <td>@ViewBag.Emails[i]</td>
-        <td class="hor-center-text">@ViewBag.NeededAttendancePoints[i]</td>
-        <td class="hor-center-text">@ViewBag.AttendancePoints[i]</td>
-        <td class="hor-center-text">@ViewBag.Progress[i]%</td>
+        <td><input type="button" value="Select" onclick="location.href='@Url.Action("StudentAttendance", "AccountAttendances", new { email = Model.Emails[i] })'" /></td>
+        <td>@Model.FullNames[i]</td>
+        <td>@Model.Emails[i]</td>
+        <td class="hor-center-text">@Model.NeededAttendancePoints[i]</td>
+        <td class="hor-center-text">@Model.AttendancePoints[i]</td>
+        <td class="hor-center-text">@Model.Progress[i]%</td>
     </tr>
 }
 </table>

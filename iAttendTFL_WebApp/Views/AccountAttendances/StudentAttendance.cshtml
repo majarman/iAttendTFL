@@ -1,4 +1,5 @@
-﻿@{
+﻿@model iAttendTFL_WebApp.ViewModels.AccountAttendances.StudentAttendanceViewModel
+@{
     ViewData["Title"] = ViewData["FullName"] + "'s Attendance";
 }
 
@@ -7,10 +8,10 @@
 <br />
 <form id="time-frame-form">
     <label for="time-frame-dropdown">Time Frame:&nbsp;&nbsp;</label>
-    <select id="time-frame-dropdown" onchange="location.href='@Url.Action("StudentAttendance", "AccountAttendances", new { email = ViewData["Email"] })'">
-@foreach (var item in ViewBag.TimeFrames)
+    <select id="time-frame-dropdown" onchange="location.href='@Url.Action("StudentAttendance", "AccountAttendances", new { email = Model.Email })'">
+@foreach (var item in Model.TimeFrames)
 {
-    @if (item.id == ViewBag.CurrentTimeFrameID)
+    @if (item.id == Model.CurrentTimeFrameId)
     {
         <option selected value=@item.id>@item.name</option>
     }
@@ -31,13 +32,13 @@
         <th>Attendance Points Fulfilled</th>
         <th>Progress</th>
     </tr>
-@for (int i = 0; i < Enumerable.Count(ViewBag.AccountRequirements); i++)
+@for (int i = 0; i < Enumerable.Count(Model.AccountRequirements); i++)
 {
     <tr>
-        <td>@ViewBag.AccountRequirements[i].requirement.name</td>
-        <td class="hor-center-text">@ViewBag.AccountRequirements[i].track_requirement.num_required</td>
-        <td class="hor-center-text">@ViewBag.AttendancePoints[i]</td>
-        <td class="hor-center-text">@ViewBag.Progress[i]%</td>
+        <td>@Model.AccountRequirements[i].requirement.name</td>
+        <td class="hor-center-text">@Model.AccountRequirements[i].track_requirement.num_required</td>
+        <td class="hor-center-text">@Model.AttendancePoints[i]</td>
+        <td class="hor-center-text">@Model.Progress[i]%</td>
     </tr>
 }
 </table>
@@ -52,7 +53,7 @@
         <th>End Time</th>
         <th>Time of Attendance</th>
     </tr>
-@foreach (var item in ViewBag.AttendedEvents)
+@foreach (var item in Model.AttendedEvents)
 {
     <tr>
         <td>@item.scan_event.name</td>
