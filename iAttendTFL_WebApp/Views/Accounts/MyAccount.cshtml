@@ -1,4 +1,5 @@
-﻿@{
+﻿@model iAttendTFL_WebApp.ViewModels.Accounts.MyAccountViewModel
+@{
     ViewData["Title"] = "My Account";
 }
 <div class="center-contents-on-screen">
@@ -9,7 +10,7 @@
                 <td>TFL Code:</td>
                 <td>
                     @{
-                        var base64 = Convert.ToBase64String(ViewBag.Barcode);
+                        var base64 = Convert.ToBase64String(Model.Barcode);
                         var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
                     }
                     <div class="barcode-div">
@@ -22,32 +23,32 @@
             </tr>
             <tr>
                 <td>Name:</td>
-                <td>@ViewData["FullName"]</td>
+                <td>@Model.FullName</td>
             </tr>
             <tr>
                 <td>Email:</td>
-                <td>@ViewData["Email"]</td>
+                <td>@Model.Email</td>
             </tr>
             <tr>
                 <td>Account Type:</td>
-                <td>@ViewData["AccountTypeString"]</td>
+                <td>@Model.AccountTypeString</td>
             </tr>
-            @if (Convert.ToChar(ViewData["AccountType"]) != 'a' && Convert.ToChar(ViewData["AccountType"]) != 'm')
+            @if (Model.AccountType != 'a' && Model.AccountType != 'm')
             {
                 <tr>
                     <td>Education Track:</td>
-                    <td>@ViewData["TrackName"]</td>
+                    <td>@Model.Track</td>
                 </tr>
                 <tr>
                     <td>Expected Graduation:</td>
-                    <td>@ViewData["ExpectedGraduation"]</td>
+                    <td>@Model.ExpectedGraduationDate</td>
                 </tr>
             }
         </table>
         <br />
         <input type="button" class="hor-center-element" value="Reset My Password" onclick="location.href='@Url.Action("RequestNewPassword", "Home")'" />
         <p class="subtext">Clicking the link above will sign you out of your account.</p>
-        @if (Convert.ToChar(ViewData["AccountType"]) == 'a')
+        @if (Model.AccountType == 'a')
         {
             <p class="subtext">To make changes to your account or another account, please visit the <a asp-controller="Home" asp-action="ManageAccounts">Manage Accounts</a> page.</p>
         }

@@ -15,6 +15,7 @@ using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
 using BarcodeLib;
+using iAttendTFL_WebApp.ViewModels.Accounts;
 
 namespace iAttendTFL_WebApp.Controllers
 {
@@ -383,18 +384,20 @@ namespace iAttendTFL_WebApp.Controllers
             Image barcodeImg = a.StringToBarcodeImage(a.id.ToString());
             byte[] barcodeByteA = a.ImageToByteArray(barcodeImg);
 
-            ViewBag.Barcode = barcodeByteA;
-            ViewData["FullName"] = FullName(email: accountInfo.account.email);
-            ViewData["Email"] = accountInfo.account.email;
-            ViewData["AccountTypeString"] = accountInfo.account.account_type switch
+            MyAccountViewModel model = new MyAccountViewModel();
+
+            model.Barcode = barcodeByteA;
+            model.FullName = FullName(email: accountInfo.account.email);
+            model.Email = accountInfo.account.email;
+            model.AccountTypeString = accountInfo.account.account_type switch
             {
                 'a' => "Administrator",
                 'm' => "Moderator",
                 _ => "Student"
             };
-            ViewData["TrackName"] = accountInfo.track.name;
-            ViewData["ExpectedGraduation"] = String.Format("{0:MMMM yyyy}", accountInfo.account.expected_graduation_date);
-            ViewData["AccountType"] = HttpContext.Session.GetString("AccountType");
+            model.Track = accountInfo.track.name;
+            model.ExpectedGraduationDate = String.Format("{0:MMMM yyyy}", accountInfo.account.expected_graduation_date);
+            model.AccountType = Convert.ToChar(HttpContext.Session.GetString("AccountType"));
 
             return View();
         }
