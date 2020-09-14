@@ -22,7 +22,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - iAttend</title>
-    <link rel="stylesheet" href="~/css/styles.css" />
+
+    <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="~/resources/images/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="~/resources/images/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="~/resources/images/icons/android-chrome-192x192.png">
@@ -34,6 +35,22 @@
     <meta name="msapplication-TileImage" content="~/resources/images/icons/mstile-144x144.png">
     <meta name="msapplication-config" content="~/resources/images/icons/browserconfig.xml">
     <meta name="theme-color" content="#333333">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/css/styles.css" />
+
+    <!-- Toastr: https://codeseven.github.io/toastr/-->
+    <link href="~/css/toastr.min.css" rel="stylesheet" />
+    <script src="~/js/toastr.min.js"></script>
+
+    <!-- jQuery DataTables: https://www.datatables.net/ -->
+    <link rel="stylesheet" type="text/css" href="~/css/datatables.min.css" />
+    <script type="text/javascript" src="~/js/datatables.min.js"></script>
+
+    <!-- Select2: https://select2.org/ -->
+    <link href="~/css/select2.min.css" rel="stylesheet" />
+    <script src="~/js/select2.min.js"></script>
 </head>
 <body>
     <div id="navbar-and-content">
@@ -129,7 +146,6 @@
         <br />
         Copyright &copy; @DateTime.Now.Year Three Furious Locomotives. All Rights Reserved.
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             if ($('.header').width() <= 1024) {
