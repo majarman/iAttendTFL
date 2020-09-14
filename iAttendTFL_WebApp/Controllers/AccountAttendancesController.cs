@@ -9,6 +9,7 @@ using iAttendTFL_WebApp.Data;
 using iAttendTFL_WebApp.Models;
 using Microsoft.AspNetCore.Http;
 using System.Dynamic;
+using iAttendTFL_WebApp.ViewModels.AccountAttendances;
 
 namespace iAttendTFL_WebApp.Controllers
 {
@@ -123,9 +124,10 @@ namespace iAttendTFL_WebApp.Controllers
         // GET: AccountAttendances/Create
         public IActionResult Create()
         {
-            ViewData["account_id"] = new SelectList(_context.account, "id", "id");
-            ViewData["scan_event_id"] = new SelectList(_context.scan_event, "id", "id");
-            return View();
+            CreateViewModel model = new CreateViewModel();
+            model.Accounts = new SelectList(_context.account, "id", "id");
+            model.Events = new SelectList(_context.scan_event, "id", "id");
+            return View(model);
         }
 
         // POST: AccountAttendances/Create
@@ -133,17 +135,24 @@ namespace iAttendTFL_WebApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("account_id,scan_event_id,is_valid,attendance_time")] account_attendance account_attendance)
+        public async Task<IActionResult> Create([Bind("account_id,scan_event_id,is_valid,attendance_time")] CreateViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(account_attendance);
+                account_attendance accountAttendance = new account_attendance();
+                accountAttendance.account_id = model.AccountId;
+                accountAttendance.attendance_time = model.AttendanceTime;
+                accountAttendance.is_valid = model.IsValid;
+                accountAttendance.scan_event_id = model.ScanEventId;
+
+                _context.Add(accountAttendance);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["account_id"] = new SelectList(_context.account, "id", "id", account_attendance.account_id);
-            ViewData["scan_event_id"] = new SelectList(_context.scan_event, "id", "id", account_attendance.scan_event_id);
-            return View(account_attendance);
+            
+            model.Accounts = new SelectList(_context.account, "id", "id", model.AccountId);
+            model.Events = new SelectList(_context.scan_event, "id", "id", model.ScanEventId);
+            return View(model);
         }
 
         // GET: AccountAttendances/Edit/5
@@ -159,9 +168,8 @@ namespace iAttendTFL_WebApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["account_id"] = new SelectList(_context.account, "id", "id", account_attendance.account_id);
-            ViewData["scan_event_id"] = new SelectList(_context.scan_event, "id", "id", account_attendance.scan_event_id);
-            return View(account_attendance);
+
+            return View();
         }
 
         // POST: AccountAttendances/Edit/5
@@ -169,9 +177,9 @@ namespace iAttendTFL_WebApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int account_id, int scan_event_id, [Bind("account_id,scan_event_id,is_valid,attendance_time")] account_attendance account_attendance)
+        public async Task<IActionResult> Edit(int account_id, int scan_event_id, [Bind("account_id,scan_event_id,is_valid,attendance_time")] EditViewModel model)
         {
-            if (account_id != account_attendance.account_id || scan_event_id != account_attendance.scan_event_id)
+            if (account_id != model.AccountId || scan_event_id != model.ScanEventId)
             {
                 return NotFound();
             }
@@ -180,12 +188,18 @@ namespace iAttendTFL_WebApp.Controllers
             {
                 try
                 {
-                    _context.Update(account_attendance);
+                    account_attendance accountAttendance = new account_attendance();
+                    accountAttendance.account_id = model.AccountId;
+                    accountAttendance.attendance_time = model.AttendanceTime;
+                    accountAttendance.is_valid = model.IsValid;
+                    accountAttendance.scan_event_id = model.ScanEventId;
+
+                    _context.Update(accountAttendance);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!account_attendanceExists(account_attendance.account_id, account_attendance.scan_event_id))
+                    if (!account_attendanceExists(model.AccountId, model.ScanEventId))
                     {
                         return NotFound();
                     }
@@ -196,9 +210,8 @@ namespace iAttendTFL_WebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["account_id"] = new SelectList(_context.account, "id", "id", account_attendance.account_id);
-            ViewData["scan_event_id"] = new SelectList(_context.scan_event, "id", "id", account_attendance.scan_event_id);
-            return View(account_attendance);
+
+            return View(model);
         }
 
         // GET: AccountAttendances/Delete/5
@@ -339,13 +352,14 @@ namespace iAttendTFL_WebApp.Controllers
                 }
             }
 
-            ViewBag.TimeFrames = timeFrames;
-            ViewBag.CurrentTimeFrameID = time_frame.id;
-            ViewBag.Emails = emails;
-            ViewBag.FullNames = fullNames;
-            ViewBag.AttendancePoints = attendancePoints;
-            ViewBag.NeededAttendancePoints = neededAttendancePoints;
-            ViewBag.Progress = progress;
+            FacultyAttendanceViewModel model = new FacultyAttendanceViewModel();
+            model.TimeFrames = timeFrames;
+            model.CurrentTimeFrameId = time_frame.id;
+            model.Emails = emails;
+            model.FullNames = fullNames;
+            model.AttendancePoints = attendancePoints;
+            model.NeededAttendancePoints = neededAttendancePoints;
+            model.Progress = progress;
 
             return View();
         }
@@ -452,13 +466,14 @@ namespace iAttendTFL_WebApp.Controllers
                 }
             }
 
-            ViewBag.TimeFrames = timeFrames;
-            ViewBag.CurrentTimeFrameID = time_frame.id;
-            ViewBag.AttendedEvents = attendedEvents;
-            ViewBag.AccountRequirements = accountRequirements;
-            ViewBag.AttendancePoints = attendancePoints;
-            ViewBag.Progress = progress;
-            ViewData["Email"] = email;
+            StudentAttendanceViewModel model = new StudentAttendanceViewModel();
+            model.TimeFrames = timeFrames;
+            model.CurrentTimeFrameId = time_frame.id;
+            model.AttendedEvents = attendedEvents;
+            model.AccountRequirements = accountRequirements;
+            model.AttendancePoints = attendancePoints;
+            model.Progress = progress;
+            model.Email = email;
 
             return View();
         }

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model iAttendTFL_WebApp.ViewModels.Home.DoesNotHavePermissionViewModel
+@{
     ViewData["Title"] = "Permission Error";
 }
 
@@ -9,7 +10,7 @@
             <p>Only the following account types can access this page:</p>
             <ul>
                 <li>Administrator</li>
-                @if ((bool)ViewData["RequiresMod"])
+                @if (Model.RequiresMod)
                 {
                     <li>Moderator</li>
                 }

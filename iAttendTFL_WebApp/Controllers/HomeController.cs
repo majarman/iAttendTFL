@@ -4,10 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using iAttendTFL_WebApp.Models;
 using Microsoft.AspNetCore.Http;
-using BarcodeLib;
-using System.Drawing;
-using System.IO;
-using Glimpse.AspNet.Tab;
+using iAttendTFL_WebApp.ViewModels;
+using iAttendTFL_WebApp.ViewModels.Home;
 
 namespace iAttendTFL_WebApp.Controllers
 {
@@ -72,9 +70,7 @@ namespace iAttendTFL_WebApp.Controllers
                 return RedirectToAction("NotLoggedIn");
             }
 
-            ViewData["RequiresMod"] = requiresMod;
-
-            return View();
+            return View(new DoesNotHavePermissionViewModel { RequiresMod = requiresMod });
         }
 
         public IActionResult EditAnAccount()
@@ -104,9 +100,7 @@ namespace iAttendTFL_WebApp.Controllers
                 return RedirectToAction("NotLoggedIn");
             }
 
-            ViewData["AccountType"] = HttpContext.Session.GetString("AccountType");
-
-            return View();
+            return View(new EventsViewModel { AccountType = Char.ToLower(Convert.ToChar(HttpContext.Session.GetString("AccountType"))) });
         }
 
         public IActionResult Index()
@@ -116,16 +110,17 @@ namespace iAttendTFL_WebApp.Controllers
 
         public IActionResult Login(bool error = false)
         {
+            LoginViewModel model = new LoginViewModel();
             if (HttpContext.Session.GetString("Email") != null)
             {
                 return RedirectToAction("AlreadyLoggedIn");
             }
             else if (error)
             {
-                ViewData["Error"] = "Either the username or password was incorrect.";
+               model.Error = "Either the username or password was incorrect.";
             }
 
-            return View();
+            return View(model);
         }
 
         public IActionResult Logout()

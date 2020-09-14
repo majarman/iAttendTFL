@@ -1,11 +1,12 @@
-﻿@{
+﻿@model iAttendTFL_WebApp.ViewModels.Home.EventsViewModel
+@{
     ViewData["Title"] = "Events";
 }
 
 <h1 class="hor-center-text">Events</h1>
 <table>
     <tr>
-        @if (Convert.ToChar(ViewData["AccountType"]) == 'a' || Convert.ToChar(ViewData["AccountType"]) == 'm')
+        @if (Model.AccountType == 'a' || Model.AccountType == 'm')
         {
             <th style="width: 1%;">Edit</th>
         }
@@ -16,7 +17,7 @@
         <th>End Time</th>
     </tr>
     <tr>
-        @if (Convert.ToChar(ViewData["AccountType"]) == 'a' || Convert.ToChar(ViewData["AccountType"]) == 'm')
+        @if (Model.AccountType == 'a' || Model.AccountType == 'm')
         {
             <td><input type="button" value="Select" /></td>
         }
@@ -27,7 +28,7 @@
         <td>4/1/2020 12:00pm</td>
     </tr>
     <tr>
-        @if (Convert.ToChar(ViewData["AccountType"]) == 'a' || Convert.ToChar(ViewData["AccountType"]) == 'm')
+        @if (Model.AccountType == 'a' || Model.AccountType == 'm')
         {
             <td><input type="button" value="Select" /></td>
         }
@@ -38,7 +39,7 @@
         <td>4/2/2020 7:30pm</td>
     </tr>
     <tr>
-        @if (Convert.ToChar(ViewData["AccountType"]) == 'a' || Convert.ToChar(ViewData["AccountType"]) == 'm')
+        @if (Model.AccountType == 'a' || Model.AccountType == 'm')
         {
             <td><input type="button" value="Select" /></td>
         }
@@ -49,7 +50,7 @@
         <td>4/2/2020 6:00pm</td>
     </tr>
     <tr>
-        @if (Convert.ToChar(ViewData["AccountType"]) == 'a' || Convert.ToChar(ViewData["AccountType"]) == 'm')
+        @if (Model.AccountType == 'a' || Model.AccountType == 'm')
         {
             <td><input type="button" value="Select" /></td>
         }

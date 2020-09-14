@@ -1,4 +1,4 @@
-﻿@model iAttendTFL_WebApp.Models.account_attendance
+﻿@model iAttendTFL_WebApp.ViewModels.AccountAttendances.EditViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,17 +12,17 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="account_id" />
-            <input type="hidden" asp-for="scan_event_id" />
+            <input type="hidden" asp-for="AccountId" />
+            <input type="hidden" asp-for="ScanEventId" />
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="is_valid" /> @Html.DisplayNameFor(model => model.is_valid)
+                    <input class="form-check-input" asp-for="IsValid" /> @Html.DisplayNameFor(model => model.IsValid)
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="attendance_time" class="control-label"></label>
-                <input asp-for="attendance_time" class="form-control" />
-                <span asp-validation-for="attendance_time" class="text-danger"></span>
+                <label asp-for="AttendanceTime" class="control-label"></label>
+                <input asp-for="AttendanceTime" class="form-control" />
+                <span asp-validation-for="AttendanceTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
