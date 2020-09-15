@@ -42,6 +42,11 @@ html, body {
     display: inline;
 }
 
+.homepage-subtext {
+    margin-top: 25px;
+    width: 500px;
+}
+
 .subtext {
     font-size: 12pt;
 }
@@ -612,7 +617,7 @@ table {
     }
 
     div.border-div {
-        padding: 25px 5px 25px 5px;
+        padding: 25px 10px 25px 10px;
     }
 
     div.small-div {
@@ -621,6 +626,12 @@ table {
 
     div.medium-div {
         width: 100%;
+    }
+}
+
+@media (max-width: 560px) {
+    .homepage-subtext {
+        width: 400px;
     }
 }
 
