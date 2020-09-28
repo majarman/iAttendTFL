@@ -1,0 +1,42 @@
+﻿main {
+    padding: 5px 5% 5px 5%;
+    background: rgb(85,22,168);
+    background: linear-gradient(125deg, rgba(85,22,168,1) 25%, rgba(180,61,207,1) 100%);
+    z-index: -1;
+}
+
+h1 {
+    line-height: 0.7em;
+    text-align: center;
+}
+
+.homepage-subtext {
+    margin-top: 25px;
+    width: 500px;
+}
+
+#homepage-img {
+    width: 600px;
+}
+
+@media (max-width: 1500px) {
+    
+}
+
+@media (max-width: 1024px) {
+    #homepage-img {
+        width: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    #homepage-img {
+        width: 400px;
+    }
+}
+
+@media (max-width: 560px) {
+    .homepage-subtext {
+        width: 400px;
+    }
+}

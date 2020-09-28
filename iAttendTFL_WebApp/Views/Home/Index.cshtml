@@ -1,28 +1,20 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
-<style>
-    main {
-        padding: 5px 5% 5px 5%;
-        background: rgb(85,22,168);
-        background: linear-gradient(125deg, rgba(85,22,168,1) 25%, rgba(180,61,207,1) 100%);
-        z-index: -1;
-    }
 
-    h1 {
-        line-height: 0.7em;
-        text-align: center;
-    }
-</style>
+@section Links {
+    <link rel="stylesheet" href="~/css/homepage-styles.css" />
+}
+
 <div class="row center-contents-on-screen">
-    <div class="col-md-6">
-        <img src="~/resources/images/iAttend-Home-Design.svg" style="width: 500px;" />
+    <div class="col-md-6 hor-center-text">
+        <img id="homepage-img" src="~/resources/images/iAttend-Home-Design.svg" />
     </div>
     <div class="border-div">
         <h1>Track Your</h1>
         <h1>Attendance</h1>
         <p class="homepage-subtext">iAttend makes it easy to track attendance at any event you are attending or hosting.</p>
-        <input type="text" placeholder="Email address" style="width: 400px;"/>
+        <input type="text" placeholder="Email address" style="width: 400px;" />
         <button>Get started</button>
         <p class="subtext">Already using iAttend? <a asp-controller="Home" asp-action="Login">Sign in</a>.</p>
     </div>
